@@ -236,7 +236,11 @@ mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
 .rx select,.rx input:not([type=checkbox]),.rx textarea{font:inherit;font-size:.88rem;border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 8px;min-width:0;width:100%}
 .rx textarea{resize:vertical}
 .rv{display:flex;gap:3px;align-items:center;font-size:.8rem;white-space:nowrap;color:var(--muted)}
-.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(130px,100%),1fr));gap:8px}
+.fgrid input,.fgrid select,.fl input{min-width:0;width:100%;max-width:100%;box-sizing:border-box}
+.fgrid input[type=date]{-webkit-appearance:none;appearance:none;display:block;min-height:38px}
+.rins .insr{font-size:.8rem;font-weight:700;color:var(--hl);white-space:nowrap}
+.rrow .pl small.insi{display:block;font-size:.7rem;color:var(--muted)}
 .fgrid label,.fl{display:flex;flex-direction:column;gap:3px;font-size:.78rem;color:var(--muted)}
 .btns{display:flex;gap:8px;flex-wrap:wrap}
 .btn{font:inherit;font-size:.88rem;border:1px solid var(--accent);border-radius:999px;padding:7px 16px;cursor:pointer;background:var(--accent);color:var(--panel);font-weight:700}
@@ -377,7 +381,7 @@ html.wide .syin>*{break-inside:avoid;margin-bottom:12px}
   </nav>
 
   <section id="spr" class="rx" hidden>
-    <div class="rintro">選一個牌陣，看每個位置的意思和排法。要記錄占卜時，按下方按鈕到「塔羅個案簿」。</div>
+    <div class="rintro">選一個牌陣，把抽到的牌和心態牌選進去，填好心得就能存成一筆占卜紀錄；也可以按下方按鈕到「塔羅個案簿」記錄。</div>
     <div class="chips" id="sprChips" role="group" aria-label="選擇牌陣"></div>
     <div id="sprBody"></div>
   </section>
@@ -1635,19 +1639,24 @@ function rAuxRows(i,c){
   `<div class="auxadd"><button type="button" class="lnk" data-act="addaux" data-i="${i}">＋ 第 ${i+1} 張的輔助牌</button></div>`;
 }
 function rInsRows(dr){
-  return (dr.ins||[]).map((x,k)=>`<div class="rrow rins" data-n="${k}"><div class="pl"><b class="in">插</b><span>插牌 ${k+1}${x.from&&x.from.length===2?`<small>（${rEsc(x.from[0])}、${rEsc(x.from[1])}之間）</small>`:''}</span><button type="button" class="xb" data-act="rmins" aria-label="移除插牌">✕</button></div><select class="cs" aria-label="插牌：選牌">${rCardOpts(x.c,rUsed(RSPR.find(y=>y.id===RSP)))}</select><span></span></div>`).join('');
+  const s=RSPR.find(y=>y.id===RSP);(dr.ins||[]).forEach(x=>rOrient(s,x));
+  return (dr.ins||[]).map((x,k)=>`<div class="rrow rins" data-n="${k}"><div class="pl"><b class="in">插</b><span>插牌 ${k+1}<small class="insi">${rInsInfo(x)}</small></span><button type="button" class="xb" data-act="rmins" aria-label="移除插牌">✕</button></div><select class="cs" aria-label="插牌：選牌">${rCardOpts(x.c,rUsed(s))}</select>${x.auto?`<span class="insr">${x.r?'逆位':'正位'}</span>`:`<label class="rv"><input type="checkbox" class="rc"${x.r?' checked':''}>逆位</label>`}</div>`).join('');
 }
 function rNum(name){const i=NAMEIDX[name];if(i==null)return null;const c=CARDS[i];if(c.court)return null;return {s:c.suit,n:c.suit==='maj'?i:(c.num==='A'?1:+c.num)}}
 function rCardAt(s,n){if(s==='maj')return CARDS[n]&&CARDS[n].suit==='maj'?CARDS[n]:null;return CARDS.find(c=>c.suit===s&&!c.court&&(c.num==='A'?1:+c.num)===n)}
 function rTable(s){const dr=rDraft(s),u=[];if(!s.noMind&&dr.mind.c)u.push(dr.mind.c);dr.cards.forEach(c=>{if(c.c)u.push(c.c);(c.aux||[]).forEach(a=>a.c&&u.push(a.c))});return u}
+function rFind(s,name){const dr=rDraft(s);if(!s.noMind&&dr.mind.c===name)return dr.mind;for(const c of dr.cards){if(c.c===name)return c;for(const a of (c.aux||[]))if(a.c===name)return a}return null}
+function rOrient(s,x){if(!x.auto||!x.from||x.from.length!==2)return;const a=rFind(s,x.from[0]),b=rFind(s,x.from[1]);if(!a||!b)return;x.fromR=[!!a.r,!!b.r];x.r=!!(a.r||b.r)}
 function rSuggest(s){const dr=rDraft(s),tc=rTable(s),have=new Set(tc.concat((dr.ins||[]).map(x=>x.c).filter(Boolean))),out=[],seen=new Set();
   for(let i=0;i<tc.length;i++)for(let j=i+1;j<tc.length;j++){const a=rNum(tc[i]),b=rNum(tc[j]);if(!a||!b||a.s!==b.s||Math.abs(a.n-b.n)!==2)continue;
-    const mid=rCardAt(a.s,(a.n+b.n)/2);if(!mid||have.has(mid.name)||seen.has(mid.name))continue;seen.add(mid.name);out.push({c:mid.name,from:a.n<b.n?[tc[i],tc[j]]:[tc[j],tc[i]]})}
+    const mid=rCardAt(a.s,(a.n+b.n)/2);if(!mid||have.has(mid.name)||seen.has(mid.name))continue;seen.add(mid.name);{const x={c:mid.name,from:a.n<b.n?[tc[i],tc[j]]:[tc[j],tc[i]],auto:true};rOrient(s,x);out.push(x)}}
   return out}
 function rUsed(s){const dr=rDraft(s),u=new Set(rTable(s));(dr.ins||[]).forEach(x=>{if(x.c)u.add(x.c)});return u}
 function rCellOf(dr,row){if(!row)return null;if(row.dataset.n!=null)return dr.ins[+row.dataset.n];const i=+row.dataset.i;if(i<0)return dr.mind;const c=dr.cards[i];if(!c)return null;return row.dataset.a!=null?(c.aux||[])[+row.dataset.a]:c}
 function rRefreshOpts(s){const dr=rDraft(s),u=rUsed(s);document.querySelectorAll('#rec .rrow').forEach(r=>{const cell=rCellOf(dr,r),sel=r.querySelector('select.cs');if(!sel||!cell)return;sel.innerHTML=rCardOpts(cell.c,u);sel.value=cell.c||''});rDrawSugg(s)}
-function rDrawSugg(s){const el=document.getElementById('rsugg');if(!el)return;const g=rSuggest(s);el.innerHTML=g.length?`<span class="hint">可能的插牌（點一下加入）：</span>${g.map((x,k)=>`<button type="button" class="sg" data-act="sugg" data-k="${k}">＋ ${rEsc(x.c)}<small>（${rEsc(x.from[0])}、${rEsc(x.from[1])}）</small></button>`).join('')}`:''}
+function rInsInfo(x){if(x.auto&&x.from&&x.from.length===2)return `${rEsc(x.from[0])}${x.fromR?(x.fromR[0]?'（逆）':'（正）'):''}、${rEsc(x.from[1])}${x.fromR?(x.fromR[1]?'（逆）':'（正）'):''}之間・自動判斷`;return '手動加入'}
+function rSyncIns(s){const dr=rDraft(s);(dr.ins||[]).forEach((x,k)=>{rOrient(s,x);const row=document.querySelector(`#rec .rins[data-n="${k}"]`);if(!row)return;const i=row.querySelector('.insi');if(i)i.innerHTML=rInsInfo(x);const r=row.querySelector('.insr');if(r)r.textContent=x.r?'逆位':'正位'})}
+function rDrawSugg(s){const el=document.getElementById('rsugg');if(!el)return;const g=rSuggest(s);el.innerHTML=g.length?`<span class="hint">可能的插牌（點一下加入）：</span>${g.map((x,k)=>`<button type="button" class="sg" data-act="sugg" data-k="${k}">＋ ${rEsc(x.c)}${x.r?'（逆）':'（正）'}<small>（${rEsc(x.from[0])}、${rEsc(x.from[1])}）</small></button>`).join('')}`:''}
 function rBoard(id,ratio,w,slots){
   const el=document.getElementById(id);if(!el)return;el.style.aspectRatio=ratio;el.dataset.w=w;el.dataset.r=ratio;
   el.innerHTML=slots.map(s=>`<div class="bslot${s[3]?' x':''}" style="left:${s[1]}%;top:${s[2]}%;width:${w}%" data-n="${parseInt(s[0],10)}" data-l="${s[0]}" data-x="${s[1]}" data-y="${s[2]}"><span>${s[0]}</span></div>`).join('');
@@ -1675,7 +1684,7 @@ function rForm(s){
   return h;
 }
 function rPaint(s){
-  const dr=rDraft(s),m=document.getElementById('mindc');
+  rSyncIns(s);const dr=rDraft(s),m=document.getElementById('mindc');
   if(m)m.innerHTML=`心態牌：<b>${dr.mind.c?rEsc(dr.mind.c)+(dr.mind.r?'（逆）':''):'未選'}</b>`;
   document.querySelectorAll('#bd .bslot').forEach(sl=>{const c=dr.cards[+sl.dataset.n-1];sl.innerHTML=`<span>${rEsc(sl.dataset.l)}${c&&c.c?`<small>${rEsc(c.c)}${c.r?'↓':''}</small>`:''}</span>`});
   const bd=document.getElementById('bd2');
@@ -1692,8 +1701,8 @@ function rBind(s){
   const box=document.getElementById('rec');if(!box)return;const dr=rDraft(s);
   const cellOf=el=>rCellOf(dr,el.closest('.rrow'));
   box.addEventListener('change',e=>{const t=e.target;
-    if(t.classList.contains('cs')){const c=cellOf(t);c.c=t.value;if(t.closest('.rins'))c.from=[];rPaint(s);rRefreshOpts(s)}
-    else if(t.classList.contains('rc')){cellOf(t).r=t.checked;rPaint(s)}
+    if(t.classList.contains('cs')){const c=cellOf(t);c.c=t.value;if(t.closest('.rins')){c.from=[];c.fromR=null;if(c.auto){c.auto=false;rDrawSpr();return}}rPaint(s);rRefreshOpts(s)}
+    else if(t.classList.contains('rc')){cellOf(t).r=t.checked;rPaint(s);rDrawSugg(s)}
     else if(t.dataset.f)dr.f[t.dataset.f]=t.value});
   box.addEventListener('input',e=>{const t=e.target;if(t.dataset.f)dr.f[t.dataset.f]=t.value;else if(t.classList.contains('lb')){dr.labels[+t.closest('.rrow').dataset.i]=t.value;rPaint(s)}});
   box.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
@@ -1701,7 +1710,7 @@ function rBind(s){
     else if(a==='rm'){dr.cards.pop();dr.labels.pop();rDrawSpr()}
     else if(a==='addaux'){const c=dr.cards[+b.dataset.i];(c.aux=c.aux||[]).push({c:'',r:false});rDrawSpr()}
     else if(a==='rmaux'){const r=b.closest('.rrow');dr.cards[+r.dataset.i].aux.splice(+r.dataset.a,1);rDrawSpr()}
-    else if(a==='addins'){dr.ins.push({c:'',from:[]});rDrawSpr()}
+    else if(a==='addins'){dr.ins.push({c:'',r:false,from:[],auto:false});rDrawSpr()}
     else if(a==='rmins'){dr.ins.splice(+b.closest('.rrow').dataset.n,1);rDrawSpr()}
     else if(a==='sugg'){const g=rSuggest(s)[+b.dataset.k];if(g){dr.ins.push(g);rDrawSpr()}}
     else if(a==='clear'){delete RDRAFT[s.id];rDrawSpr()}
@@ -1709,7 +1718,7 @@ function rBind(s){
       if(!dr.mind.c&&!dr.cards.some(c=>c.c)){msg.textContent='至少選一張牌再儲存喔。';return}
       if(!RSTORE){msg.textContent='紀錄功能還在準備中，請等幾秒再按一次。';return}
       const f=dr.f;
-      const rec={id:'r'+Date.now()+Math.floor(Math.random()*1e4),date:f.date||rToday(),place:f.place.trim(),spread:s.name,qtype:f.qtype,question:f.question.trim(),mind:{c:dr.mind.c,r:dr.mind.r},cards:dr.cards.map((c,i)=>({p:rPos(s,dr,i),c:c.c,r:c.r,aux:(c.aux||[]).filter(x=>x.c).map(x=>({c:x.c,r:!!x.r}))})),ins:(dr.ins||[]).filter(x=>x.c).map(x=>({c:x.c,from:x.from||[]})),reaction:f.reaction,score:f.score?+f.score:null,reading:f.reading.trim(),stuck:f.stuck.trim(),improve:f.improve.trim(),feedback:'',created:Date.now()};
+      const rec={id:'r'+Date.now()+Math.floor(Math.random()*1e4),date:f.date||rToday(),place:f.place.trim(),spread:s.name,qtype:f.qtype,question:f.question.trim(),mind:{c:dr.mind.c,r:dr.mind.r},cards:dr.cards.map((c,i)=>({p:rPos(s,dr,i),c:c.c,r:c.r,aux:(c.aux||[]).filter(x=>x.c).map(x=>({c:x.c,r:!!x.r}))})),ins:(dr.ins||[]).filter(x=>x.c).map(x=>{rOrient(s,x);return {c:x.c,r:!!x.r,from:x.from||[],fromR:x.fromR||null,auto:!!x.auto}}),reaction:f.reaction,score:f.score?+f.score:null,reading:f.reading.trim(),stuck:f.stuck.trim(),improve:f.improve.trim(),feedback:'',created:Date.now()};
       b.disabled=true;msg.textContent='儲存中…';
       try{await RSTORE.save(rec);delete RDRAFT[s.id];rDrawSpr();const m2=document.getElementById('recMsg');if(m2)m2.textContent='已儲存！到「復盤」分頁就看得到這筆紀錄。'}
       catch(err){b.disabled=false;msg.textContent='儲存失敗：'+((err&&(err.code||err.message))||'請再試一次')}}
@@ -1724,10 +1733,11 @@ function rDrawSpr(){
   let h=`<div class="panel"><h3>${s.name}${/陣$/.test(s.name)?'':'牌陣'}</h3>`;
   if(s.pos.length)h+=`<ol class="rpos">${s.pos.map((p,i)=>`<li><b>${i+1}</b><span>${p}${s.tips&&s.tips[i]?`<small class="tip">💡 馬蹄鐵：${rEsc(s.tips[i])}</small>`:''}</span></li>`).join('')}</ol>`;
   else h+='<p class="rnote">自己決定張數和每個牌位的名稱，適合自創牌陣或課程以外的牌陣。</p>';
-  if(s.lay)h+=`<div class="pv"><h5>牌陣排法</h5>${s.noMind?'':'<div class="pvrow" style="align-self:flex-start"><div><div class="pc">心</div><span class="pvl">心態牌</span></div></div>'}<div class="rboard" id="bd2"></div></div>`;
-  h+=`<div class="golink"><a class="btn" href="case.html#rec-${s.id}">📝 用這個牌陣到個案簿記錄</a><p class="hint">會打開「塔羅個案簿」並幫你選好這個牌陣，再選記錄給我自己、快速占卜或客人。</p></div></div>`;
+  h+=rForm(s);
+  h+=`<div class="golink"><a class="btn" href="case.html#rec-${s.id}">📝 用這個牌陣到個案簿記錄</a><p class="hint">也可以到「塔羅個案簿」記錄：會幫你選好這個牌陣，再選記錄給我自己、快速占卜或客人（個案簿有客人資料、大眾占卜和復盤統計）。</p></div></div>`;
   document.getElementById('sprBody').innerHTML=h;
   if(s.lay)rBoard('bd2',s.lay[0],s.lay[1],s.lay[2]);
+  rPaint(s);rBind(s);rDrawSugg(s);
 }
 rDrawSpr();
 
@@ -1759,16 +1769,16 @@ function rLocal(){
 })();
 
 function rRecCard(r){
-  const cs=[r.mind&&r.mind.c?`<li><b>心態牌</b>：${rEsc(r.mind.c)}${r.mind.r?'（逆位）':''}</li>`:''].concat((r.cards||[]).map((c,i)=>`<li><b>${i+1}. ${rEsc(c.p)}</b>：${c.c?rEsc(c.c)+(c.r?'（逆位）':''):'—'}${(c.aux||[]).length?`<br><span class="axl">輔助：${c.aux.map(a=>rEsc(a.c)+(a.r?'（逆位）':'')).join('、')}</span>`:''}</li>`)).concat((r.ins||[]).map(x=>`<li><b>插牌</b>：${rEsc(x.c)}${x.from&&x.from.length===2?`（${rEsc(x.from[0])}、${rEsc(x.from[1])}之間）`:''}</li>`)).join('');
+  const cs=[r.mind&&r.mind.c?`<li><b>心態牌</b>：${rEsc(r.mind.c)}${r.mind.r?'（逆位）':''}</li>`:''].concat((r.cards||[]).map((c,i)=>`<li><b>${i+1}. ${rEsc(c.p)}</b>：${c.c?rEsc(c.c)+(c.r?'（逆位）':''):'—'}${(c.aux||[]).length?`<br><span class="axl">輔助：${c.aux.map(a=>rEsc(a.c)+(a.r?'（逆位）':'')).join('、')}</span>`:''}</li>`)).concat((r.ins||[]).map(x=>`<li><b>插牌</b>：${rEsc(x.c)}${x.r?'（逆位）':''}${x.from&&x.from.length===2?`（${rEsc(x.from[0])}${x.fromR?(x.fromR[0]?' 逆':' 正'):''}、${rEsc(x.from[1])}${x.fromR?(x.fromR[1]?' 逆':' 正'):''}之間）`:''}</li>`)).join('');
   const line=(k,v)=>v?`<p><b>${k}：</b>${rEsc(v)}</p>`:'';
   const imgs=[r.mind].concat(...(r.cards||[]).map(c=>[c].concat(c.aux||[])),r.ins||[]).filter(c=>c&&c.c).map(c=>`<div class="pc">${rFace(c)}</div>`).join('');
   return `<details class="card" data-id="${rEsc(r.id)}" style="--sc:var(--line)"><summary><span class="badge" title="自評">${r.score||'–'}</span><span class="ttl"><b>${rEsc(r.date)}｜${rEsc(r.spread)}</b><span class="kw">${rEsc([r.qtype,r.place,r.reaction].filter(Boolean).join('・'))}</span></span></summary><div class="cb">${line('問題',r.question)}<div class="rcimgs">${imgs}</div><ul>${cs}</ul>${line('我的解讀重點',r.reading)}${line('卡住的地方',r.stuck)}${line('下次可以改進',r.improve)}<label class="fl">後續回饋（準不準、客人後來怎麼說）<textarea rows="2" class="fb">${rEsc(r.feedback)}</textarea></label><div class="btns"><button type="button" class="btn ghost" data-act="fb">儲存回饋</button><button type="button" class="btn ghost" data-act="del">刪除這筆</button></div></div></details>`;
 }
 function rDrawReview(){
   const el=document.getElementById('rvBody');if(!el)return;
-  const GO=`<div class="panel golink"><p>📌 之後的占卜紀錄和復盤統計都改到「塔羅個案簿」，這裡只保留以前的紀錄。</p><a class="btn" href="case.html">打開塔羅個案簿</a></div>`;
+  const GO=`<div class="panel golink"><p>📌 這裡是在手冊「牌陣」分頁存的紀錄。客人資料、大眾占卜和依問題類型的復盤統計在「塔羅個案簿」。</p><a class="btn" href="case.html">打開塔羅個案簿</a></div>`;
   const R=[...RRECS].sort((a,b)=>String(b.date).localeCompare(String(a.date))||(b.created||0)-(a.created||0));
-  if(!R.length){el.innerHTML=GO;return}
+  if(!R.length){el.innerHTML=GO+'<div class="panel"><p>還沒有紀錄。到「牌陣」分頁點一個牌陣，選好抽到的牌、填好心得後，按「儲存這次占卜」。</p></div>';return}
   const avg=a=>{const v=a.filter(r=>typeof r.score==='number');return v.length?(v.reduce((x,r)=>x+r.score,0)/v.length).toFixed(1):'—'};
   const res=a=>{const v=a.filter(r=>r.reaction);return v.length?Math.round(v.filter(r=>r.reaction==='很有共鳴').length/v.length*100)+'%':'—'};
   const group=key=>{const m=new Map();R.forEach(r=>{const k=key(r)||'未填';if(!m.has(k))m.set(k,[]);m.get(k).push(r)});return m};
