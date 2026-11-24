@@ -1,9 +1,4 @@
-<!doctype html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>芝心聊癒｜塔羅牌義手冊</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@500&display=swap">
@@ -91,6 +86,34 @@ header p{margin:2px 0 0;color:var(--muted);font-size:.85rem;letter-spacing:.06em
 .tab[aria-selected="true"]{background:var(--accent);color:var(--panel);font-weight:700}
 .tab:focus-visible,.tag:focus-visible{outline:2px solid var(--line);outline-offset:2px}
 .grp{font-family:var(--display);font-size:1.05rem;color:var(--accent);margin:8px 0 0}
+.elcirc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:12px 6px;margin-top:6px}
+.elci{font:inherit;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--ink);min-width:0}
+.elimg{width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid var(--rule);background:var(--soft);display:block;flex:none}
+.elimg img{width:100%;height:100%;object-fit:cover;display:block}
+.elimg img.elfull{object-position:50% 30%}
+.elimg .elsw{display:block;width:100%;height:100%}
+.elci b{font-size:.82rem;font-weight:700;text-align:center;line-height:1.25}
+.elci small{font-size:.7rem;color:var(--muted);text-align:center;line-height:1.2}
+.elci.on .elimg{border-color:var(--accent);box-shadow:0 0 0 3px var(--hl-bg)}
+.elci:focus-visible{outline:none}.elci:focus-visible .elimg{outline:2px solid var(--line);outline-offset:2px}
+.eldet{background:var(--panel);border:1.5px solid var(--accent);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.eldh{display:flex;align-items:center;gap:12px}
+.elimg.big{width:84px;height:84px}
+.eldh b{font-family:var(--display);font-size:1.15rem;color:var(--line);display:block}
+.eldh small{color:var(--muted);font-size:.8rem}
+.elx{margin-left:auto;font:inherit;font-size:1rem;border:1px solid var(--rule);background:none;border-radius:999px;width:32px;height:32px;cursor:pointer;color:var(--muted);flex:none}
+.eldet>p{margin:0;font-size:.9rem}
+.elcards{display:flex;flex-wrap:wrap;gap:8px}
+.elcard{font:inherit;background:none;border:0;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;width:60px;color:var(--ink)}
+.elcard img{width:56px;border-radius:5px;border:1px solid var(--rule);display:block}
+.elcard span{font-size:.7rem;text-align:center;line-height:1.2}
+.elcard:focus-visible img{outline:2px solid var(--line);outline-offset:2px}
+.chips.elmode{flex-wrap:wrap;overflow:visible}
+.chipbr{flex-basis:100%;height:0}
+.chips.elmode .chip[data-set=elg]{flex:1 1 0;text-align:center;border-radius:10px;font-weight:700;padding:8px 4px}
+.chips.elmode .chip[data-set=els]{font-size:.8rem;padding:4px 11px}
+html.wide .elcirc-grid{grid-template-columns:repeat(auto-fill,minmax(92px,1fr))}
+html.wide .elimg{width:76px;height:76px}html.wide .elimg.big{width:96px;height:96px}
 .els-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .elc{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .elc b{font-family:var(--display);font-size:1.05rem;color:var(--line);display:flex;align-items:center;gap:6px}
@@ -151,25 +174,223 @@ mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
 .el{border:1px solid var(--rule);border-radius:10px;padding:8px 10px;font-size:.85rem;min-width:0}
 .el b{color:var(--sc);display:block;font-size:.95rem}
 .empty{text-align:center;color:var(--muted);padding:24px 0}
+.cimg{width:120px;align-self:center;border-radius:8px;border:1px solid var(--rule);display:block}
+
+.tabs{overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+@media (max-width:640px){.tabs{gap:1px;padding:3px}.tab{flex:1 1 auto;padding:9px 2px;font-size:.84rem;min-width:0}}
+@media (max-width:385px){.tab{font-size:.78rem;padding:9px 1px}}
+.tab{flex:1 0 auto;padding:9px 10px;white-space:nowrap}
+.rx{display:flex;flex-direction:column;gap:12px}
+.rx[hidden]{display:none}
+.rx .panel{background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rx h3{margin:0;font-family:var(--display);font-size:1.1rem;color:var(--line)}
+.rx p{margin:0}
+.rx ul{margin:0;padding-left:1.2em;font-size:.88rem}
+.rx .chips{flex-wrap:wrap;overflow:visible}
+.rintro{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:.88rem}
+.rintro a{color:var(--line);text-underline-offset:3px}
+.rnote{font-size:.82rem;color:var(--muted)}
+.rboard{position:relative;width:100%;margin:4px auto;max-width:460px}
+.bslot{position:absolute;transform:translate(-50%,-50%);aspect-ratio:5/7;border:2px solid var(--line);border-radius:6px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-family:var(--num);font-weight:700;color:var(--line);font-size:.95rem;overflow:hidden}
+.bslot.x{z-index:1;transform:translate(-50%,-50%) rotate(90deg)}
+.bslot.x>span{transform:rotate(-90deg)}
+.bslot span{display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.bslot small{font-family:var(--body);font-weight:500;font-size:.56rem;color:var(--ink);text-align:center;margin-top:2px}
+#bd2 .bslot{border-width:1px;background:var(--panel)}
+#bd2 .baux{position:absolute;transform:translate(-50%,-50%) rotate(16deg);aspect-ratio:5/7;z-index:3;border:1.5px solid var(--hl);border-radius:6px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,.3);background:var(--panel)}
+#bd2 .baux .face{position:absolute;inset:0}
+.pcw{position:relative}
+.pc.pax{position:absolute;width:56px;transform:rotate(16deg);border:1.5px solid var(--hl);z-index:2;box-shadow:0 2px 5px rgba(0,0,0,.3)}
+.pvl.in{color:var(--accent,#b0833f)}
+.raux{padding-left:18px}
+.rrow .pl b.ax{background:var(--hl);font-family:var(--body);font-size:.62rem}
+.rrow .pl b.in{background:#b0833f;font-family:var(--body);font-size:.62rem}
+.rrow .pl small{display:block;font-size:.7rem;color:var(--muted)}
+.xb{border:0;background:none;color:var(--muted);font-size:.85rem;padding:0 4px;cursor:pointer;flex:none}
+.lnk{border:0;background:none;color:var(--line);font-size:.8rem;font-weight:700;padding:2px 0;cursor:pointer;text-align:left}
+.auxadd{padding-left:28px;margin-top:-2px}
+.insbox{display:flex;flex-direction:column;gap:6px;border:1px dashed #b0833f;border-radius:10px;padding:10px}
+.insbox h5{margin:0;font-size:.85rem;color:#b0833f}
+.rsugg{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rsugg .sg{border:1.5px dashed #b0833f;background:transparent;color:inherit;border-radius:999px;padding:4px 10px;font-size:.8rem;cursor:pointer}
+.rsugg .sg small{color:var(--muted)}
+.axl{font-size:.82em;color:var(--hl)}
+.rpos{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:.88rem}
+.rpos li{display:grid;grid-template-columns:24px 1fr;gap:6px}
+.rpos .tip{display:block;font-size:.75rem;color:var(--muted);margin-top:1px}
+.golink{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:12px}
+.golink a.btn{text-decoration:none;display:inline-block}
+.golink .hint,.golink p{margin:0;font-size:.8rem;color:var(--muted)}
+.rpos li b{width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--panel);display:flex;align-items:center;justify-content:center;font-family:var(--num);font-size:.72rem;margin-top:1px}
+.mindc{align-self:center;font-size:.85rem;background:var(--hl-bg);border-radius:999px;padding:3px 12px}
+.mindc b{color:var(--hl)}
+.rec{border:1px dashed var(--accent);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.rec h4{margin:0;color:var(--accent);font-family:var(--display);font-size:1rem}
+.rec .hint{margin:0;font-size:.8rem;color:var(--muted)}
+.rrow{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto;gap:6px;align-items:center}
+.rrow .pl{display:flex;gap:6px;align-items:center;min-width:0;font-size:.82rem}
+.rrow .pl b{flex:none;width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--panel);display:flex;align-items:center;justify-content:center;font-family:var(--num);font-size:.72rem}
+.rrow .pl b.mk{background:var(--hl);font-family:var(--body)}
+.rrow .pl span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.rx select,.rx input:not([type=checkbox]),.rx textarea{font:inherit;font-size:.88rem;border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 8px;min-width:0;width:100%}
+.rx textarea{resize:vertical}
+.rv{display:flex;gap:3px;align-items:center;font-size:.8rem;white-space:nowrap;color:var(--muted)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.fgrid label,.fl{display:flex;flex-direction:column;gap:3px;font-size:.78rem;color:var(--muted)}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn{font:inherit;font-size:.88rem;border:1px solid var(--accent);border-radius:999px;padding:7px 16px;cursor:pointer;background:var(--accent);color:var(--panel);font-weight:700}
+.btn.ghost{background:transparent;color:var(--accent);font-weight:500}
+.btn:disabled{opacity:.6;cursor:default}
+.btn:focus-visible,.rx select:focus-visible,.rx input:focus-visible,.rx textarea:focus-visible{outline:2px solid var(--line);outline-offset:2px}
+.msg{margin:0;font-size:.82rem;color:var(--hl)}
+.pv{display:flex;flex-direction:column;align-items:center;gap:8px;border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);padding:10px 0}
+.pv h5{margin:0;font-size:.8rem;color:var(--muted);font-weight:700;letter-spacing:.1em}
+.pvrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pvrow>div{display:flex;flex-direction:column;align-items:center;gap:3px;max-width:80px}
+.pvl{font-size:.72rem;color:var(--hl);font-weight:700;text-align:center}
+.pc{position:relative;width:64px;aspect-ratio:5/7;border:1px solid var(--line);border-radius:6px;background:var(--panel);display:flex;align-items:center;justify-content:center;font-family:var(--num);font-weight:700;color:var(--line);overflow:hidden}
+.face{position:absolute;inset:0;background:#fff;overflow:hidden;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:var(--body);font-size:.6rem;color:var(--ink);text-align:center}
+.face.r{transform:rotate(180deg)}
+.face img{width:100%;height:100%;object-fit:cover;display:block}
+.rcimgs{display:flex;flex-wrap:wrap;gap:6px}
+.rcimgs .pc{width:46px}
+.rx .cb{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px;font-size:.9rem}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+.kpi>div{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px 12px}
+.kpi b{display:block;color:var(--accent);font-size:.82rem}
+.kpi span{font-family:var(--num);font-size:1.5rem;font-weight:700}
+.kpi span.sm{font-family:var(--display);font-size:1rem}
+.rx .tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px}
+.rx table{border-collapse:collapse;width:100%;font-size:.86rem}
+.rx th,.rx td{padding:7px 9px;border-bottom:1px solid var(--rule);text-align:left;white-space:nowrap}
+.rx th{background:var(--soft);color:var(--line);font-size:.8rem}
+.rx tr:last-child td{border-bottom:0}
+.rx .kws{display:flex;flex-wrap:wrap;gap:5px}
+.rx .kws span{font-size:.8rem;background:var(--soft);border-radius:999px;padding:1px 9px}
+.rx .hint{margin:0;font-size:.8rem;color:var(--muted)}
+.dtop{display:flex;gap:12px;align-items:flex-start}
+.pc.big{width:110px;flex:none;font-size:1.8rem}
+.dpick{flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.dmh{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dmh .btn{padding:4px 14px}
+.dcal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.dcal>b{text-align:center;font-size:.75rem;color:var(--muted);font-weight:500}
+.dday{font:inherit;border:1px solid var(--rule);background:var(--panel);border-radius:8px;padding:3px 2px;min-height:64px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;color:var(--ink);min-width:0}
+.dday span{font-size:.72rem;font-family:var(--num)}
+.dday.today{border-color:var(--accent);border-width:2px}
+.dday.sel{background:var(--hl-bg);border-color:var(--hl)}
+.dday:focus-visible{outline:2px solid var(--line);outline-offset:2px}
+.pc.mini{width:30px;border-width:1px}
+.kpi span small{font-size:.8rem;color:var(--muted);font-weight:500}
+ul.rnote{margin:0;padding-left:1.2em}
+.dq{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:start}
+.pc.qmini{width:44px;border-width:1px;margin-top:16px}
+.dgrp{margin:4px 0 0!important;font-size:.82rem;font-weight:700;color:var(--accent);letter-spacing:.05em}
+.dnum input[type=number]{width:64px;margin:0 4px;text-align:center}
+details.dold{border:1px dashed var(--rule);border-radius:10px;padding:0 10px}
+details.dold summary{cursor:pointer;padding:8px 0;font-size:.82rem;color:var(--muted)}
+details.dold[open]{padding-bottom:10px}
+.dqf{display:flex;flex-direction:column;gap:4px;min-width:0}
+.mchips{display:flex;flex-wrap:wrap;gap:4px}
+.mchip{font:inherit;font-size:.75rem;border:1px solid var(--rule);background:var(--panel);color:var(--ink);border-radius:999px;padding:2px 9px;cursor:pointer}
+.mchip[aria-pressed="true"]{background:var(--line);color:var(--panel);border-color:var(--line)}
+.mchip:focus-visible{outline:2px solid var(--line);outline-offset:2px}
+.dmdta{width:100%;font-family:ui-monospace,monospace;font-size:.78rem;margin-top:6px}
+.dsense ul{margin:0;padding-left:1.1em}
+.dsense li{font-size:.9rem}
+#dEd{display:flex;flex-direction:column;gap:12px}
+details.dold{margin-top:4px}
+.dmh2{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dmh2 .btn{padding:4px 12px;font-size:.8rem}
+.dmeans{margin:0;padding-left:1.1em;font-size:.86rem;display:flex;flex-direction:column;gap:2px}
+.mchip.ev{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rx input.dnote{font-size:.82rem;padding:4px 8px}
+.dsv{color:var(--muted)!important;font-size:.78rem!important}
+.dsv:empty{display:none}
+.dbak{border:1.5px dashed var(--accent);border-radius:10px;padding:8px 10px;margin-top:8px}
+.dbak .hint{margin:0 0 6px}
+.kws+.rnote,.kpi+.kws{margin-top:2px}
+.lay{display:inline-block;font:inherit;font-size:.8rem;border:1px solid var(--rule);background:var(--panel);color:var(--muted);border-radius:999px;padding:4px 12px;cursor:pointer;margin-top:8px}
+.lay:focus-visible{outline:2px solid var(--line);outline-offset:2px}
+html.wide .wrap{max-width:1180px}
+html.wide #list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+html.wide #list>.empty{grid-column:1/-1}
+html.wide #tips:not([hidden]),html.wide #sy:not([hidden]){display:block;columns:2;column-gap:16px}
+html.wide #tips>*,html.wide #sy>*{break-inside:avoid;margin-bottom:12px}
+html.wide #tips>.guide{column-span:all}
+html.wide #spr{max-width:860px;width:100%;margin:0 auto}
+html.wide #rvBody{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+html.wide #rvBody>.kpi,html.wide #rvBody>.panel:last-child{grid-column:1/-1}
+html.wide #rvBody .list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+html.wide #diaryBody{display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}
+html.wide #dRest{position:sticky;top:70px}
 @media (max-width:440px){.pos{grid-template-columns:1fr}.ctab .row{grid-template-columns:64px 1fr 1fr}.els{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.syfold{border:1px solid var(--rule);border-radius:14px;background:var(--panel);padding:0}
+.syfold>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.syfold>summary::-webkit-details-marker{display:none}
+.syfold>summary span{font-weight:700;font-size:1.05rem}
+.syfold>summary span::after{content:' ▾';font-size:.8em;opacity:.7}
+.syfold[open]>summary span::after{content:' ▴'}
+.syfold>summary small{color:var(--muted);font-size:.8rem}
+.syin{display:flex;flex-direction:column;gap:12px;padding:0 12px 14px}
+html.wide #tips .syfold{column-span:all}
+html.wide .syin{display:block;columns:2;column-gap:16px}
+html.wide .syin>*{break-inside:avoid;margin-bottom:12px}
+.sylink{margin-left:8px;font:inherit;font-size:.75rem;border:1px solid var(--rule);background:transparent;color:var(--muted);border-radius:999px;padding:1px 8px;cursor:pointer;vertical-align:1px}
+.mynotes{border-top:1px dashed var(--rule);margin-top:10px;padding-top:10px;display:flex;flex-direction:column;gap:8px}
+#webfold .mynotes{border-top:0;margin-top:0;padding-top:0}
+.nhead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.nhead h4{margin:0}
+.nbtn{font:inherit;font-size:.82rem;border:1px solid var(--rule);background:transparent;color:inherit;border-radius:999px;padding:4px 12px;cursor:pointer}
+.nbtn.sm{font-size:.75rem;padding:2px 10px;color:var(--muted)}
+.nbtn.pri{background:var(--accent,#d4a85a);border-color:transparent;color:#1a1a1a;font-weight:700}
+.nbtn.warn{border-color:#c0574a;color:#c0574a}
+.nbtn:disabled{opacity:.5}
+.nhint{margin:0;font-size:.82rem;color:var(--muted)}
+.nhint.warn{color:#c0574a}
+.nitem{border:1px solid var(--rule);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.nitem p{margin:0;line-height:1.65}
+.nsrc{font-size:.8rem;color:var(--muted)}
+.nsrc a{color:inherit;word-break:break-all}
+.nbtns{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.nform{display:flex;flex-direction:column;gap:8px}
+.nform textarea,.nform input{font:inherit;font-size:16px;width:100%;box-sizing:border-box;border:1px solid var(--rule);border-radius:10px;background:transparent;color:inherit;padding:8px 10px}
 </style>
-</head>
-<body>
 
 <div class="wrap">
   <header>
     <h1>芝心聊癒｜塔羅牌義手冊</h1>
     <p>78 張偉特塔羅 ‧ 正逆位 ‧ 解牌筆記</p>
+    <button type="button" class="lay" id="layBtn" aria-pressed="false">🖥 切換成電腦版</button>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="頁面分類">
     <button class="tab" type="button" role="tab" id="tab-cards" data-t="cards">牌義</button>
     <button class="tab" type="button" role="tab" id="tab-els" data-t="els">牌面元素</button>
     <button class="tab" type="button" role="tab" id="tab-tips" data-t="tips">看牌技巧</button>
-    <button class="tab" type="button" role="tab" id="tab-sy" data-t="sy">神癒系統</button>
+    <button class="tab" type="button" role="tab" id="tab-spr" data-t="spr">牌陣</button>
+    <button class="tab" type="button" role="tab" id="tab-rv" data-t="rv">復盤</button>
+    <button class="tab" type="button" role="tab" id="tab-diary" data-t="diary">日記</button>
   </nav>
 
+  <section id="spr" class="rx" hidden>
+    <div class="rintro">選一個牌陣，看每個位置的意思和排法。要記錄占卜時，按下方按鈕到「塔羅個案簿」。</div>
+    <div class="chips" id="sprChips" role="group" aria-label="選擇牌陣"></div>
+    <div id="sprBody"></div>
+  </section>
+  <section id="rv" class="rx" hidden>
+    <div class="rintro"><b>擺攤復盤</b>　在「牌陣」分頁存下的每一次占卜都會出現在這裡。隔一陣子回來看看：自評和共鳴有沒有變高、哪類問題比較卡、哪些牌常讓你卡住。</div>
+    <p class="rnote" id="rvNote" role="status"></p>
+    <div id="rvBody" style="display:flex;flex-direction:column;gap:12px"></div>
+  </section>
+
+  <section id="diary" class="rx" hidden>
+    <div class="rintro"><b>每日抽牌日記</b>　一早睡醒先翻日記牌，再抽今日運勢、建議、心態。晚上有空再回來復盤；平淡的日子只記牌也算數。</div>
+    <p class="rnote" id="dNote" role="status"></p>
+    <div id="diaryBody" style="display:flex;flex-direction:column;gap:12px"><div id="dEd"></div><div id="dRest" style="display:flex;flex-direction:column;gap:12px"></div></div>
+  </section>
   <section id="tips" hidden>
   <details class="guide" id="guide" open>
     <summary>解牌心法與主題牌組 <span>我的筆記</span></summary>
@@ -270,6 +491,46 @@ mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
   </div>
 
   <div class="tipsec">
+    <h3>元辰宮心靈探索牌陣<span class="src">原創</span></h3>
+    <p><b>使用時機：</b>想全面看看自己的內在宮殿：生命力、自我照顧、人際、事業、感情與財庫。適合年初、生日，或覺得卡卡、想「整理宮殿」的時候。共 11 張。</p>
+    <div role="img" aria-label="元辰宮牌陣排法：最上方本命樹；第二排屋外、管家；第三排客廳、書房、臥室；第四排灶房、米缸；最下排隱藏課題、調整方向、元辰宮指引" style="display:grid;grid-template-columns:repeat(6,1fr);grid-template-areas:'. . a a . .' '. b b c c .' 'd d e e f f' '. g g h h .' 'i i j j k k';gap:8px;width:100%;max-width:380px;margin:4px auto">
+      <div class="slot" style="grid-area:a;aspect-ratio:auto;min-height:62px"><b>1. 本命樹</b><i>生命根基</i></div>
+      <div class="slot" style="grid-area:b;aspect-ratio:auto;min-height:62px"><b>2. 屋外</b><i>外在呈現</i></div>
+      <div class="slot" style="grid-area:c;aspect-ratio:auto;min-height:62px"><b>3. 管家</b><i>自我管理</i></div>
+      <div class="slot" style="grid-area:d;aspect-ratio:auto;min-height:62px"><b>4. 客廳</b><i>人際家庭</i></div>
+      <div class="slot" style="grid-area:e;aspect-ratio:auto;min-height:62px"><b>5. 書房</b><i>事業學業</i></div>
+      <div class="slot" style="grid-area:f;aspect-ratio:auto;min-height:62px"><b>6. 臥室</b><i>感情親密</i></div>
+      <div class="slot" style="grid-area:g;aspect-ratio:auto;min-height:62px"><b>7. 灶房</b><i>賺錢・火力</i></div>
+      <div class="slot" style="grid-area:h;aspect-ratio:auto;min-height:62px"><b>8. 米缸</b><i>財庫・存量</i></div>
+      <div class="slot" style="grid-area:i;aspect-ratio:auto;min-height:62px"><b>9. 隱藏課題</b><i>未被看見</i></div>
+      <div class="slot" style="grid-area:j;aspect-ratio:auto;min-height:62px"><b>10. 調整方向</b><i>可以修補</i></div>
+      <div class="slot" style="grid-area:k;aspect-ratio:auto;min-height:62px"><b>11. 指引</b><i>下一步</i></div>
+    </div>
+    <ol>
+      <li><b>本命樹</b>：生命根基、元神狀態、目前生命的主調（整個牌陣的核心）</li>
+      <li><b>屋外</b>：外在呈現、別人眼中的你</li>
+      <li><b>管家</b>：自我管理、照顧自己的能力</li>
+      <li><b>客廳</b>：人際關係、家庭互動</li>
+      <li><b>書房</b>：事業、學業、思考方向</li>
+      <li><b>臥室</b>：感情、親密關係、休息與休養</li>
+      <li><b>灶房</b>：賺錢能力、行動力、身體的火力</li>
+      <li><b>米缸</b>：財庫、存款、福報的存量</li>
+      <li><b>隱藏課題</b>：宮中還沒被看見、需要面對的部分</li>
+      <li><b>調整方向</b>：現在可以整理、修補的地方</li>
+      <li><b>元辰宮指引</b>：給你的一句話或下一步</li>
+    </ol>
+    <div class="pt"><b>讀牌順序：</b>先看本命樹定下基調（茂盛、乾枯，還是正在發芽？）→ 巡宮（2～8），像走過一間一間房間描述景象 → 收尾（9 → 10 → 11），從問題、方法走到祝福。</div>
+    <div class="tri">
+      <div><b>屋外＋管家</b><i>2＋3</i>外表和內在的狀態一不一致</div>
+      <div><b>灶房＋米缸</b><i>7＋8</i>會不會賺、存不存得住；灶旺米缸空＝賺得到但留不住</div>
+      <div><b>客廳＋臥室</b><i>4＋6</i>一般人際和親密關係的對比</div>
+      <div><b>本命樹↔指引</b><i>1↔11</i>開頭和結尾呼應，看從現況要走向哪裡</div>
+    </div>
+    <div class="pt"><b>景象對照：</b>本命樹出現權杖、星星、太陽＝枝葉茂盛；寶劍三、高塔或逆位＝需要澆水或修剪。灶房逆位＝灶火弱，留意體力或收入來源。米缸出現錢幣十、錢幣 ACE＝米缸豐滿；錢幣五＝需要補庫。</div>
+    <div class="pt"><b>擺攤精簡版（五張）：</b>本命樹 → 管家 → 灶房 → 米缸 → 元辰宮指引。</div>
+  </div>
+
+  <div class="tipsec">
     <h3>各牌在牌陣裡代表的問題<span class="src">出自《解決問題牌陣》</span></h3>
     <p>問「問題出在哪」時，每張牌都可以從正逆位找出卡關的原因。大致上，<b>正位多半是「太過」</b>（太主動、太自信、付出太多），<b>逆位多半是「不足」或「走偏」</b>（太被動、資源不夠、方向錯誤）。</p>
     <div class="pt">每張牌展開後，最下面藍色虛線框的「解決問題牌陣」欄就是各牌的對照；搜尋「解決問題牌陣」會列出全部 78 張。</div>
@@ -329,10 +590,14 @@ mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
       <div><b>教皇 vs 戰車 vs 惡魔</b>都是一人在上、兩者在下的三角構圖，上方的人能控制眼前人事物。教皇促進精神性（聖父、聖子、聖靈）；戰車控制黑白斯芬克斯，催促實際事物前進；惡魔像墮落男女的仲介者，推動內心的慾望</div>
     </div>
   </div>
-  </section>
-
-  <section id="sy" hidden>
-  <div class="srcnote"><b>資料來源：</b>本分頁整理自《神癒塔羅：圖解實戰自學筆記》（林哲寬）。這套「神癒系統」主張不死背、用邏輯推導牌義。牌義分頁裡標有「神癒塔羅」的欄位，也都出自這本書；書中「皇帝、魔術師、愚者、隱者、王后」在這裡依你的叫法寫成國王、魔法師、愚人、隱士、皇后。</div>
+  <details class="syfold" id="webfold">
+    <summary><span>網路收集</span><small>網路上看到的解牌技巧・點開看</small></summary>
+    <div class="syin"><div class="mynotes" data-nk="tip" data-nc="_"></div></div>
+  </details>
+  <details class="syfold" id="syfold">
+    <summary><span>神癒系統</span><small>林哲寬《神癒塔羅：圖解實戰自學筆記》・點開看</small></summary>
+    <div class="syin">
+  <div class="srcnote"><b>資料來源：</b>本段整理自《神癒塔羅：圖解實戰自學筆記》（林哲寬）。這套「神癒系統」主張不死背、用邏輯推導牌義。牌義分頁裡標有「神癒塔羅」的欄位，也都出自這本書；書中「皇帝、魔術師、愚者、隱者、王后」在這裡依你的叫法寫成國王、魔法師、愚人、隱士、皇后。</div>
 
   <div class="tipsec">
     <h3>天地人三才架構</h3>
@@ -467,7 +732,11 @@ mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
     </ol>
     <div class="pt"><b>書上建議的練習：</b>每天抽一張並記錄感受；用天地人分析生活中的事件；幫朋友解牌並請他回饋；容許自己解錯，把錯當成調整邏輯的訊號；定期為自己做一次完整解讀。</div>
   </div>
+    </div>
+  </details>
   </section>
+
+  <section id="sy" hidden></section>
 
   <div class="bar">
     <label class="search" for="q">
@@ -1016,12 +1285,19 @@ function flowSec(f){
   <p>共通點：${hl(f[1])}</p>${f[2]?`<p>正位：${hl(f[2])}</p>`:''}
   <p class="fh">逆位解藥：${hl(f[3])}</p>${f[4]?ul(L(f[4])):''}</div>`;
 }
+function cardImg(c,i){
+  let k;
+  if(c.suit==='maj')k='maj-'+String(i).padStart(2,'0');
+  else if(c.court)k=c.suit+'-'+({'侍':'page','騎':'knight','后':'queen','王':'king'}[c.num]);
+  else k=c.suit+'-'+String(c.num==='A'?1:+c.num).padStart(2,'0');
+  return `<img class="cimg" src="cards/${k}.jpg" alt="${esc(c.name)}" loading="lazy" onerror="this.remove()">`;
+}
 function card(c,i){
   const open=(Q||PIN!=null)?' open':'';
   return `<details class="card" style="--sc:var(${SC[c.suit]})"${open} data-i="${i}">
   <summary><span class="badge${c.court?' court':''}">${esc(c.num)}</span>
   <span class="ttl"><b>${hl(c.name)}</b><span class="en">${esc(c.en)}</span><span class="kw">${hl(c.key)}</span></span></summary>
-  <div class="body">${body(c)}</div></details>`;
+  <div class="body">${cardImg(c,i)}${body(c)}</div></details>`;
 }
 // 牌面元素：[分類代碼, 分類名, [[名稱, 意義, 例牌(、分隔), 色票]]]
 const ELS=[
@@ -1148,6 +1424,16 @@ const BOOK={
 '寶劍國王':['以累積的知識與經驗做出完美判決，嚴以律己也嚴以待人，不允許天真；聰明，但有點想靠道理走遍天下','略顯神經質的表情、正面對峙的姿勢、緊握的拳頭、平靜天空與飛鳥'],
 '聖杯國王':['溫柔中懷著明確的熱情，歷經風霜而能寬恕一切；對俗世不太感興趣，但追求夢想的熱情仍在','魚形項鍊、躍起的魚、游刃有餘的沉穩表情、浮在海上的王座']
 };
+// 牌面元素：人物方向、人數（來自看牌技巧），以及其他也有這個元素的牌
+ELS.push(['dir','人物面對的方向',[['朝向正面','正視問題、已下定決心、氣勢強；也可能只專注眼前，沒看到其他可能','戰車'],['朝向側面','沒有好好面對、裝作沒看見或有遺漏；問對方想法時，可解成對方沒留意到自己','愚人'],['朝向後方','沒看見重要的事或在逃避；也可能是邁向下一階段、不回首過去','聖杯八']]],
+ ['count','人數',[['沒有人物','多半暗示運氣、狀況等環境變化；寶劍三的愛心則代表人心','月亮、命運之輪、權杖八'],['一名人物','多半就是當事人；憑直覺判斷是在講實際處境還是心理狀態','正義'],['兩名以上','重點是把自己帶入哪一個人，施捨方或接受方意義完全不同，順從直覺','錢幣六']]]);
+const ELMORE={"animal:狗": "月亮、錢幣十", "animal:馬": "死神、權杖六、權杖騎士、聖杯騎士、寶劍騎士、錢幣騎士", "animal:牛": "命運之輪、世界", "animal:魚": "聖杯國王", "animal:沙羅曼達（火蜥蜴）": "權杖騎士、權杖侍者", "animal:斯芬克斯": "戰車", "animal:蛇": "魔法師、命運之輪", "animal:獅子": "命運之輪、世界、權杖皇后、權杖國王", "fly:鳥": "寶劍國王、寶劍皇后、寶劍侍者", "fly:猛禽": "命運之輪、世界", "fly:蝴蝶": "寶劍皇后", "plant:紅薔薇": "力量", "plant:白薔薇": "死神", "plant:向日葵": "權杖皇后", "plant:百合": "魔法師", "water:河川": "戰車、聖杯五", "water:海洋": "權杖三、聖杯國王", "water:波浪": "聖杯國王", "water:水窪": "星星", "weather:烏雲": "寶劍三、寶劍五", "weather:太陽": "愚人、死神", "dir:朝向正面": "正義、教皇、魔法師", "dir:朝向側面": "寶劍騎士", "dir:朝向後方": "權杖三、聖杯五", "count:沒有人物": "寶劍三", "robe:石榴": "女祭司", "robe:葡萄": "錢幣國王", "hand:地球": "國王", "hand:旗幟": "太陽、審判", "shape:五芒星": "錢幣 ACE、魔法師", "shape:六芒星": "隱士", "shape:圓形": "命運之輪、世界", "cross:希臘十字": "女祭司", "odd:聖獸": "世界"};
+ELS.forEach(g=>g[2].forEach(e=>{const m=ELMORE[g[0]+':'+e[0]];if(m){const a=e[2].split('、');m.split('、').forEach(n=>{if(!a.includes(n))a.push(n)});e[2]=a.join('、')}}));
+const EGRP=[['nature','自然',['animal','plant','water','weather','fly']],['people','人物',['face','dir','count','robe','hand']],['symbol','符號',['cross','shape','odd','color']],['scene','場景與物件',['bg','item','deco']]];
+const EGOF={},EORD={};EGRP.forEach(g=>g[2].forEach(k=>{EGOF[k]=g[0];EORD[k]=Object.keys(EORD).length}));
+const ELCROP=new Set(["animal-0", "animal-10", "animal-12", "animal-13", "animal-14", "animal-2", "animal-3", "animal-4", "animal-5", "animal-6", "animal-7", "animal-8", "animal-9", "bg-0", "bg-1", "bg-2", "bg-3", "cross-0", "cross-1", "cross-2", "cross-3", "cross-4", "deco-1", "deco-2", "deco-3", "dir-0", "dir-1", "dir-2", "face-0", "face-1", "face-2", "face-3", "face-4", "fly-0", "fly-1", "fly-2", "fly-3", "fly-4", "hand-0", "hand-1", "hand-2", "hand-3", "hand-4", "item-0", "item-1", "item-2", "item-3", "item-4", "odd-0", "odd-1", "odd-2", "odd-3", "odd-4", "plant-0", "plant-1", "plant-2", "plant-3", "plant-4", "robe-0", "robe-1", "robe-2", "robe-3", "robe-4", "robe-5", "shape-0", "shape-1", "shape-2", "shape-3", "shape-4", "water-0", "water-1", "water-2", "water-3", "water-4", "weather-0", "weather-1", "weather-2", "weather-3", "weather-4"]);
+const EIDOF={};ELS.forEach(g=>g[2].forEach((e,i)=>{if(!EIDOF[e[0]])EIDOF[e[0]]=g[0]+'-'+i}));
+let FG='nature',ESEL=null;
 const NAMEIDX={};CARDS.forEach((c,i)=>NAMEIDX[c.name]=i);
 const ELBY={};
 ELS.forEach(g=>g[2].forEach(e=>e[2].split('、').forEach(n=>{(ELBY[n]=ELBY[n]||[]).includes(e[0])||ELBY[n].push(e[0])})));
@@ -1159,10 +1445,13 @@ CARDS.forEach(c=>{const b=BOOK[c.name];c.text+=' '+(b?b.join(' '):'')+' '+(ELBY[
   if(e)h+=`<div class="sec"><h4>牌面元素（點了看說明）</h4><div class="tags">${e.map(n=>`<button type="button" class="tag" data-el="${esc(n)}">${hl(n)}</button>`).join('')}</div></div>`;
   h+=syHTML(c);
   h+=psHTML(c);
+  h+=dSenseHTML(c);
+  h+=nBlock('card',c.name);
   return h;
 }
 // ===== 出自《神癒塔羅：圖解實戰自學筆記》（林哲寬） =====
-const SRC='<span class="src">出自《神癒塔羅：圖解實戰自學筆記》</span>';
+const SRC='<span class="src">出自《神癒塔羅：圖解實戰自學筆記》</span><button type="button" class="sylink" onclick="goSy()">看神癒系統 →</button>';
+window.goSy=()=>{const t=document.getElementById('tab-tips');if(t)t.click();setTimeout(()=>{const f=document.getElementById('syfold');if(f){f.open=true;f.scrollIntoView({behavior:'smooth',block:'start'});}},80);};
 // 大牌：[關鍵詞, 理, 氣, 象, 數, 光明, 陰暗, 感情, 工作, 財運, 提示]
 const SYM={
 '愚人':['自由・冒險・無限可能','不受束縛、渴望自由，不想被世俗框架限制','變動、沒有固定方向，像風一樣自由，也容易失焦','輕裝上路的旅人，雀躍，但背後是深淵：自信與危險並存','0：無限可能，也是混沌與不穩定','前途開闊|勇於嘗試新事物|跳脫框架的創意','缺乏計劃、不負責任|不切實際|在無知中走入危險','相處輕鬆愉快，但缺乏穩定感，可能有一方不太認真','想打破規則、創新，但也可能心浮氣躁','錢容易花在當下的快樂上，難以累積'],
@@ -1237,6 +1526,20 @@ function psHTML(c){const m=PS[c.name];if(!m)return '';
   <div class="pos"><div class="sec up"><h4>正位</h4>${ul(L(m[0]))}</div><div class="sec rev"><h4>逆位</h4>${ul(L(m[1]))}</div></div></div>`;}
 CARDS.forEach(c=>{const m=PS[c.name];if(m)c.text+=' 解決問題牌陣 '+m.join(' ').toLowerCase()});
 const baseBody=body;body=c=>baseBody(c)+extra(c);
+function elCards(e){return e[2].split('、').map(s=>s.trim()).filter(n=>NAMEIDX[n]!=null)}
+function elImgHTML(e,id){
+  if(ELCROP.has(id))return `<img src="el/${id}.jpg" alt="" loading="lazy">`;
+  if(e[3])return `<i class="elsw" style="background:var(${e[3]})"></i>`;
+  const c=elCards(e)[0];if(c==null)return '';const i=NAMEIDX[c];
+  return `<img class="elfull" src="cards/${rKey(CARDS[i],i)}.jpg" alt="" loading="lazy">`;
+}
+function elCirc(e,id){
+  return `<button type="button" class="elci${id===ESEL?' on':''}" data-eid="${id}" aria-pressed="${id===ESEL}"><span class="elimg">${elImgHTML(e,id)}</span><b>${hl(e[0])}</b><small>${esc(elCards(e)[0]||'')}</small></button>`;
+}
+function elDetail(e,id,g){
+  const cs=elCards(e);
+  return `<div class="eldet"><div class="eldh"><span class="elimg big">${elImgHTML(e,id)}</span><div><b>${hl(e[0])}</b><small>${g[1]}</small></div><button type="button" class="elx" data-eid="${id}" aria-label="收合">×</button></div><p>${hl(e[1])}</p><p class="nhint">出現在這些牌（點牌看牌義）：</p><div class="elcards">${cs.map(n=>{const i=NAMEIDX[n];return `<button type="button" class="elcard" data-go="${i}"><img src="cards/${rKey(CARDS[i],i)}.jpg" alt="${esc(n)}" loading="lazy"><span>${esc(n)}</span></button>`}).join('')}</div></div>`;
+}
 function elCard(e){
   const ex=e[2].split('、').filter(n=>NAMEIDX[n]!=null).map(n=>`<button class="tag" type="button" data-go="${NAMEIDX[n]}">例：${esc(n)}</button>`).join('');
   return `<div class="elc"><b>${e[3]?`<span class="sw" style="background:var(${e[3]})"></span>`:''}${hl(e[0])}</b><p>${hl(e[1])}</p><div class="tags">${ex}</div></div>`;
@@ -1246,20 +1549,23 @@ const chipsEl=document.getElementById('chips'),listEl=document.getElementById('l
 let F=null,FE=null,TAB='cards',PIN=null;
 const mk=(set,k,t,on)=>{const b=document.createElement('button');b.className='chip';b.type='button';b.id='chip-'+set+'-'+k;b.textContent=t;b.dataset.k=k;b.dataset.set=set;b.onclick=on;chipsEl.appendChild(b)};
 [['all','全部'],['maj','大牌'],['wand','權杖'],['cup','聖杯'],['sword','寶劍'],['pent','錢幣'],['court','宮廷牌']].forEach(([k,t])=>mk('cards',k,t,()=>{F=F===k?null:k;PIN=null;render()}));
-[['all','全部'],...ELS.map(g=>[g[0],g[1]])].forEach(([k,t])=>mk('els',k,t,()=>{FE=FE===k?null:k;render()}));
+EGRP.forEach(g=>mk('elg',g[0],g[1],()=>{FG=g[0];FE=null;ESEL=null;Q='';q.value='';render()}));
+{const br=document.createElement('div');br.className='chipbr';br.id='chipbr';chipsEl.appendChild(br)}
+ELS.slice().sort((a,b)=>EORD[a[0]]-EORD[b[0]]).forEach(g=>mk('els',g[0],g[1],()=>{FE=FE===g[0]?null:g[0];ESEL=null;render()}));
 try{const t=localStorage.getItem('tarot-tab');if(t&&document.getElementById('tab-'+t))TAB=t}catch(e){}
 const EMPTY='<p class="empty">找不到符合的內容，換個關鍵字試試</p>';
 const HINT={cards:'<p class="empty">點上面的分類（大牌、權杖、聖杯…）就會列出牌，也可以直接搜尋</p>',els:'<p class="empty">點上面的分類（動物、植物、顏色…）就會列出元素，也可以直接搜尋</p>'};
 function render(){
   document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===TAB));
-  const st=TAB==='tips'||TAB==='sy';
+  const st=TAB==='tips'||TAB==='sy'||TAB==='spr'||TAB==='rv'||TAB==='diary';document.getElementById('diary').hidden=TAB!=='diary';document.getElementById('spr').hidden=TAB!=='spr';document.getElementById('rv').hidden=TAB!=='rv';
   tipsEl.hidden=TAB!=='tips';syEl.hidden=TAB!=='sy';barEl.hidden=st;countEl.hidden=st;
   listEl.hidden=TAB!=='cards';elList.hidden=TAB!=='els';
-  chipsEl.querySelectorAll('.chip').forEach(b=>{b.hidden=b.dataset.set!==TAB;b.setAttribute('aria-pressed',b.dataset.k===(b.dataset.set==='cards'?F:FE))});
+  chipsEl.querySelectorAll('.chip').forEach(b=>{const s=b.dataset.set;b.hidden=TAB==='els'?!(s==='elg'||(s==='els'&&EGOF[b.dataset.k]===FG)):s!==TAB;b.setAttribute('aria-pressed',s==='elg'?String(b.dataset.k===FG&&!Q):String(b.dataset.k===(s==='cards'?F:FE)))});
+  chipsEl.classList.toggle('elmode',TAB==='els');{const br=document.getElementById('chipbr');if(br)br.hidden=TAB!=='els'}
   q.placeholder=TAB==='els'?'搜尋元素，如：狗、紅色、十字架、月亮':'搜尋牌名或關鍵字，如：療傷、出軌、建議位置';
   clr.hidden=!Q&&PIN==null;
   const ql=Q.toLowerCase();
-  const idle=!Q&&PIN==null&&(TAB==='cards'?F==null:FE==null);
+  const idle=!Q&&PIN==null&&TAB==='cards'&&F==null;
   if(idle&&!st){(TAB==='cards'?listEl:elList).innerHTML=HINT[TAB];countEl.textContent='';return}
   if(TAB==='cards'){
     let out=CARDS.map((c,i)=>[c,i]);
@@ -1268,28 +1574,554 @@ function render(){
     countEl.textContent=PIN!=null?`正在看：${CARDS[PIN].name}（按「清除」回到全部）`:(Q?`「${Q}」找到 `:'')+out.length+' 張'+(Q?'，已自動展開':'');
   }else if(TAB==='els'){
     let n=0;
-    const h=ELS.filter(g=>FE==null||FE==='all'||g[0]===FE).map(g=>{
-      const items=g[2].filter(e=>!ql||(g[1]+' '+e.slice(0,3).join(' ')).toLowerCase().includes(ql));
+    const gs=ELS.filter(g=>ql?true:(FE?g[0]===FE:EGOF[g[0]]===FG)).sort((a,b)=>EORD[a[0]]-EORD[b[0]]);
+    const out=gs.map(g=>{
+      const items=g[2].map((e,i)=>[e,g[0]+'-'+i]).filter(([e])=>!ql||(g[1]+' '+e.slice(0,3).join(' ')).toLowerCase().includes(ql));
       n+=items.length;
-      return items.length?`<h3 class="grp">${g[1]}</h3><div class="els-grid">${items.map(elCard).join('')}</div>`:'';
+      const sel=items.find(([,id])=>id===ESEL);
+      return items.length?`<h3 class="grp">${g[1]}</h3><div class="elcirc-grid">${items.map(([e,id])=>elCirc(e,id)).join('')}</div>${sel?elDetail(sel[0],sel[1],g):''}`:'';
     }).join('');
-    elList.innerHTML=h||EMPTY;
-    countEl.textContent=(Q?`「${Q}」找到 `:'')+n+' 個元素';
+    elList.innerHTML=out||EMPTY;
+    countEl.textContent=(Q?`「${Q}」找到 `:'')+n+' 個元素・點圓圈看說明';
   }
 }
 [['go-pk','錢幣騎士'],['go-p6','錢幣六'],['go-s9','寶劍九']].forEach(([id,n])=>{const b=document.getElementById(id);if(b&&NAMEIDX[n]!=null)b.dataset.go=NAMEIDX[n]});
 {const b=document.querySelector('[data-go="13"]');if(b)b.dataset.go=NAMEIDX['死神']}
-const go=(tab)=>{TAB=tab;try{localStorage.setItem('tarot-tab',tab)}catch(e){}};
+const go=(tab)=>{if(tab==='sy'){tab='tips';setTimeout(()=>{const f=document.getElementById('syfold');if(f){f.open=true;f.scrollIntoView({block:'start'});}},60);}TAB=tab;try{localStorage.setItem('tarot-tab',tab)}catch(e){}};
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{go(b.dataset.t);PIN=null;Q='';q.value='';render()});
 document.addEventListener('click',ev=>{
   const g=ev.target.closest('[data-go]'),el=ev.target.closest('[data-el]');
   if(g){go('cards');PIN=+g.dataset.go;Q='';q.value='';render();window.scrollTo({top:0})}
-  else if(el){go('els');FE='all';PIN=null;Q=el.dataset.el;q.value=Q;render();window.scrollTo({top:0})}
+  else if(el){go('els');FE=null;PIN=null;ESEL=EIDOF[el.dataset.el]||null;Q=el.dataset.el;q.value=Q;render();window.scrollTo({top:0})}
 });
 q.addEventListener('input',()=>{Q=q.value.trim();PIN=null;render()});
+elList.addEventListener('click',ev=>{const b=ev.target.closest('[data-eid]');if(!b)return;ESEL=ESEL===b.dataset.eid?null:b.dataset.eid;render();if(ESEL){const d=elList.querySelector('.eldet');if(d)d.scrollIntoView({block:'nearest',behavior:'smooth'})}});
 clr.onclick=()=>{q.value='';Q='';PIN=null;render();q.focus()};
 render();
+
+// ===== 牌陣選牌＋復盤（紀錄存在這個網頁自己的資料庫，只有你看得到）=====
+const RSPR=[{"id": "time", "name": "時間之流", "count": "三張", "pos": ["過去發生了什麼", "現在發生什麼（是提問者本身，還是他在問的對象？）", "依前兩張的因果關係，未來會如何"], "lay": ["3/1.15", 22, [[1, 20, 50], [2, 50, 50], [3, 80, 50]]]}, {"id": "prob", "name": "解決問題", "count": "三張", "pos": ["原因：為何有這個問題", "狀況：當前的實際情境", "建議：如何解決問題"], "lay": ["3/1.15", 22, [[1, 20, 50], [2, 50, 50], [3, 80, 50]]]}, {"id": "bms", "name": "身心靈", "count": "四張", "pos": ["身", "心：情緒、心情", "靈：內心狀態", "心聲"], "lay": ["2.6", 18, [[1, 14, 50], [2, 38, 50], [3, 62, 50], [4, 86, 50]]]}, {"id": "yuan", "name": "元辰宮", "count": "十一張", "pos": ["本命樹：生命根基、元神狀態、目前生命的主調（整個牌陣的核心）", "屋外：外在呈現、別人眼中的你", "管家：自我管理、照顧自己的能力", "客廳：人際關係、家庭互動", "書房：事業、學業、思考方向", "臥室：感情、親密關係、休息與休養", "灶房：賺錢能力、行動力、身體的火力", "米缸：財庫、存款、福報的存量", "隱藏課題：宮中還沒被看見、需要面對的部分", "調整方向：現在可以整理、修補的地方", "元辰宮指引：給你的一句話或下一步"], "lay": ["0.85", 13, [[1, 50, 10], [2, 30, 30], [3, 70, 30], [4, 20, 50], [5, 50, 50], [6, 80, 50], [7, 30, 70], [8, 70, 70], [9, 20, 90], [10, 50, 90], [11, 80, 90]]]}, {"id": "relation", "name": "關係牌陣", "count": "四張", "pos": ["個案的狀態", "對方狀態", "過程", "結果"], "lay": ["1.15", 13, [[1, 28, 82], [2, 72, 82], [3, 50, 48], [4, 50, 17]]]}, {"id": "cross6", "name": "人際十字", "count": "六張", "pos": ["個案的狀態", "對方狀態", "困難", "現況", "過程", "結果"], "lay": ["1.35", 12, [[1, 50, 17], [2, 50, 83], [3, 14, 50], [4, 32, 50], [5, 68, 50], [6, 86, 50]]]}, {"id": "love", "name": "感情", "count": "八張", "pos": ["提問者現在對這段關係的看法", "對方現在對這段關係的看法", "這段關係的現狀", "提問者過去的感情狀態", "對方過去的感情狀態", "提問者未來對這段關係的看法", "對方未來對這段關係的看法", "這段關係的未來"], "lay": ["1.05", 15, [[1, 20, 15], [4, 20, 50], [6, 20, 85], [3, 50, 33], [8, 50, 85], [2, 80, 15], [5, 80, 50], [7, 80, 85]]]}, {"id": "deep", "name": "深入關係", "count": "八張", "pos": ["提問者最深層的恐懼", "提問者對這段關係的期待", "提問者對這段關係的表面態度", "對方對這段關係的表面態度", "對方對這段關係的期待", "對方對這段關係最深層的恐懼", "這段關係的現狀", "對這段關係的建議"], "lay": ["2.3", 10, [[1, 8, 50], [2, 21, 50], [3, 34, 50], [7, 50, 20], [8, 50, 80], [4, 66, 50], [5, 79, 50], [6, 92, 50]]]}, {"id": "ushape", "name": "U 型陣", "count": "七張", "pos": ["問題的過去狀況（半年前）", "問題的現在狀況（前後一個月）", "問題的未來狀況（近未來，約三個月內）", "慣性調整", "問題的環境、資源", "困難", "問題的結果"], "tips": [null, null, null, "此問題當前的境況", "相關人士怎麼看提問者，或環境、資源", "提問者內心真正的渴望或擔憂", "此事件的結果（更遠的未來，通常半年到一年）"], "lay": ["1.15", 13, [[1, 22, 18], [2, 22, 50], [3, 22, 82], [4, 50, 82], [5, 78, 82], [6, 78, 50], [7, 78, 18]]]}, {"id": "celtic", "name": "塞爾特十字", "count": "十張", "pos": ["提問者在當下時刻的狀態", "問題現狀（橫在你眼前的事）", "問題的基本狀況或隱藏的人事物", "過去如何影響了當前的情況", "懸在你頭上可能發生的事（加冕還是破壞）", "未來三個月的進展", "你內在的擔憂或期待", "外在影響與環境、資源", "建議", "結果：考量目前的一切，此事的可能結果（半年到一年）"], "lay": ["1.25", 12, [[5, 32, 13], [4, 12, 48], [1, 32, 43], [2, 32, 57, 1], [6, 52, 48], [3, 32, 87], [10, 82, 11], [9, 82, 37], [8, 82, 63], [7, 82, 89]]]}, {"id": "choice", "name": "二選一", "count": "七張", "pos": ["提問者的現狀", "A 選擇的現狀", "B 選擇的現狀", "A 選擇隱藏的狀態", "B 選擇隱藏的狀態", "A 選擇的發展", "B 選擇的發展"], "lay": ["1.55", 13, [[6, 10, 22], [4, 24, 42], [2, 38, 66], [1, 50, 84], [3, 62, 66], [5, 76, 42], [7, 90, 22]]]}, {"id": "season", "noMind": true, "name": "四季", "count": "五張", "pos": ["大牌：未來三個月主要會經歷的主題", "寶劍牌：知識的追求，這季思考與溝通的狀態", "聖杯牌：情緒感受，這季情感連結或內在追求是否滿足", "權杖牌：熱情與意志，這季行動力與慾望能否好好展現", "錢幣牌：物質世界與顯化，這季成就的呈現、是否達到目標"], "lay": ["1.3", 15, [[2, 50, 15], [5, 22, 50], [1, 50, 50], [3, 78, 50], [4, 50, 85]]]}, {"id": "year", "name": "十二宮流年", "count": "十二張", "pos": ["未來這一年的主題（自己）", "正財與物質運用", "短途交通、溝通，與鄰居、同事的關係", "居家、原生家庭、心靈家園", "創造力、戀愛、偏財投資", "日常習慣、工作型態、健康", "商業與愛情上的人際關係、契約", "合夥的資產、稅務、遺產或債務", "長途旅行、人生哲學、宗教", "公眾形象與職業、與權威人士的關係", "事業的財、社群、朋友的朋友", "可能需要做的犧牲、隱藏的敵人"], "lay": ["1.15", 10, [["01", 8, 49.99999999999999], ["02", 13.626933041053576, 70.5], ["03", 28.999999999999982, 85.50704155516198], ["04", 49.99999999999999, 91], ["05", 71, 85.50704155516198], ["06", 86.37306695894641, 70.50000000000001], ["07", 92, 50.00000000000001], ["08", 86.37306695894644, 29.50000000000003], ["09", 70.99999999999999, 14.49295844483801], ["10", 50.000000000000014, 9], ["11", 29.000000000000032, 14.492958444837996], ["12", 13.626933041053569, 29.50000000000001]]]}, {"id": "self", "name": "自由牌陣", "count": "", "pos": [], "lay": null}];
+const RQTYPES=['感情','事業工作','財運','人際','家庭','學業','自我成長','其他'];
+const RREACT=['很有共鳴','部分共鳴','沒有共鳴','不確定'];
+const rEsc=x=>esc(String(x==null?'':x));
+function rKey(c,i){
+  if(c.suit==='maj')return 'maj-'+String(i).padStart(2,'0');
+  if(c.court)return c.suit+'-'+({'侍':'page','騎':'knight','后':'queen','王':'king'}[c.num]);
+  return c.suit+'-'+String(c.num==='A'?1:+c.num).padStart(2,'0');
+}
+function rCardOpts(v,used){
+  let h='<option value="">— 選牌 —</option>',g='';
+  CARDS.forEach(c=>{if(used&&used.has(c.name)&&c.name!==v)return;const grp=S[c.suit];if(grp!==g){if(g)h+='</optgroup>';h+=`<optgroup label="${grp}">`;g=grp}h+=`<option${c.name===v?' selected':''}>${rEsc(c.name)}</option>`});
+  return h+'</optgroup>';
+}
+const rOpts=(arr,v,ph)=>(ph?`<option value="">${ph}</option>`:'')+arr.map(x=>`<option${x===v?' selected':''}>${rEsc(x)}</option>`).join('');
+const rToday=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+function rFace(c){
+  if(!c||!c.c)return '';const i=NAMEIDX[c.c];if(i==null)return `<div class="face${c.r?' r':''}">${rEsc(c.c)}</div>`;
+  return `<div class="face${c.r?' r':''}" title="${rEsc(c.c)}${c.r?'（逆位）':''}"><img src="cards/${rKey(CARDS[i],i)}.jpg" alt="${rEsc(c.c)}${c.r?'（逆位）':''}" loading="lazy" onerror="this.parentNode.textContent=this.alt"></div>`;
+}
+const RDRAFT={};
+function rDraft(s){
+  if(!RDRAFT[s.id]){const n=s.pos.length;RDRAFT[s.id]={mind:{c:'',r:false},cards:Array.from({length:n||3},()=>({c:'',r:false,aux:[]})),ins:[],labels:n?null:['第 1 張','第 2 張','第 3 張'],f:{date:rToday(),place:'',qtype:'',question:'',reaction:'',score:'',reading:'',stuck:'',improve:''}}}
+  return RDRAFT[s.id];
+}
+const rPos=(s,dr,i)=>s.pos.length?String(s.pos[i]).replace(/<[^>]+>/g,''):(dr.labels[i]||('第 '+(i+1)+' 張'));
+function rRow(i,label,cell,custom){
+  return `<div class="rrow" data-i="${i}"><div class="pl">${i<0?'<b class="mk">心</b>':`<b>${i+1}</b>`}${custom?`<input class="lb" value="${rEsc(label)}" aria-label="第 ${i+1} 張的牌位名稱">`:`<span>${rEsc(label)}</span>`}</div><select class="cs" aria-label="${rEsc(label)}：選牌">${rCardOpts(cell.c,rUsed(RSPR.find(x=>x.id===RSP)))}</select><label class="rv"><input type="checkbox" class="rc"${cell.r?' checked':''}>逆位</label></div>`;
+}
+function rAuxRows(i,c){
+  return (c.aux||[]).map((a,j)=>`<div class="rrow raux" data-i="${i}" data-a="${j}"><div class="pl"><b class="ax">輔</b><span>輔助牌 ${j+1}</span><button type="button" class="xb" data-act="rmaux" aria-label="移除輔助牌">✕</button></div><select class="cs" aria-label="第 ${i+1} 張的輔助牌：選牌">${rCardOpts(a.c,rUsed(RSPR.find(x=>x.id===RSP)))}</select><label class="rv"><input type="checkbox" class="rc"${a.r?' checked':''}>逆位</label></div>`).join('')+
+  `<div class="auxadd"><button type="button" class="lnk" data-act="addaux" data-i="${i}">＋ 第 ${i+1} 張的輔助牌</button></div>`;
+}
+function rInsRows(dr){
+  return (dr.ins||[]).map((x,k)=>`<div class="rrow rins" data-n="${k}"><div class="pl"><b class="in">插</b><span>插牌 ${k+1}${x.from&&x.from.length===2?`<small>（${rEsc(x.from[0])}、${rEsc(x.from[1])}之間）</small>`:''}</span><button type="button" class="xb" data-act="rmins" aria-label="移除插牌">✕</button></div><select class="cs" aria-label="插牌：選牌">${rCardOpts(x.c,rUsed(RSPR.find(y=>y.id===RSP)))}</select><span></span></div>`).join('');
+}
+function rNum(name){const i=NAMEIDX[name];if(i==null)return null;const c=CARDS[i];if(c.court)return null;return {s:c.suit,n:c.suit==='maj'?i:(c.num==='A'?1:+c.num)}}
+function rCardAt(s,n){if(s==='maj')return CARDS[n]&&CARDS[n].suit==='maj'?CARDS[n]:null;return CARDS.find(c=>c.suit===s&&!c.court&&(c.num==='A'?1:+c.num)===n)}
+function rTable(s){const dr=rDraft(s),u=[];if(!s.noMind&&dr.mind.c)u.push(dr.mind.c);dr.cards.forEach(c=>{if(c.c)u.push(c.c);(c.aux||[]).forEach(a=>a.c&&u.push(a.c))});return u}
+function rSuggest(s){const dr=rDraft(s),tc=rTable(s),have=new Set(tc.concat((dr.ins||[]).map(x=>x.c).filter(Boolean))),out=[],seen=new Set();
+  for(let i=0;i<tc.length;i++)for(let j=i+1;j<tc.length;j++){const a=rNum(tc[i]),b=rNum(tc[j]);if(!a||!b||a.s!==b.s||Math.abs(a.n-b.n)!==2)continue;
+    const mid=rCardAt(a.s,(a.n+b.n)/2);if(!mid||have.has(mid.name)||seen.has(mid.name))continue;seen.add(mid.name);out.push({c:mid.name,from:a.n<b.n?[tc[i],tc[j]]:[tc[j],tc[i]]})}
+  return out}
+function rUsed(s){const dr=rDraft(s),u=new Set(rTable(s));(dr.ins||[]).forEach(x=>{if(x.c)u.add(x.c)});return u}
+function rCellOf(dr,row){if(!row)return null;if(row.dataset.n!=null)return dr.ins[+row.dataset.n];const i=+row.dataset.i;if(i<0)return dr.mind;const c=dr.cards[i];if(!c)return null;return row.dataset.a!=null?(c.aux||[])[+row.dataset.a]:c}
+function rRefreshOpts(s){const dr=rDraft(s),u=rUsed(s);document.querySelectorAll('#rec .rrow').forEach(r=>{const cell=rCellOf(dr,r),sel=r.querySelector('select.cs');if(!sel||!cell)return;sel.innerHTML=rCardOpts(cell.c,u);sel.value=cell.c||''});rDrawSugg(s)}
+function rDrawSugg(s){const el=document.getElementById('rsugg');if(!el)return;const g=rSuggest(s);el.innerHTML=g.length?`<span class="hint">可能的插牌（點一下加入）：</span>${g.map((x,k)=>`<button type="button" class="sg" data-act="sugg" data-k="${k}">＋ ${rEsc(x.c)}<small>（${rEsc(x.from[0])}、${rEsc(x.from[1])}）</small></button>`).join('')}`:''}
+function rBoard(id,ratio,w,slots){
+  const el=document.getElementById(id);if(!el)return;el.style.aspectRatio=ratio;el.dataset.w=w;el.dataset.r=ratio;
+  el.innerHTML=slots.map(s=>`<div class="bslot${s[3]?' x':''}" style="left:${s[1]}%;top:${s[2]}%;width:${w}%" data-n="${parseInt(s[0],10)}" data-l="${s[0]}" data-x="${s[1]}" data-y="${s[2]}"><span>${s[0]}</span></div>`).join('');
+}
+function rForm(s){
+  const dr=rDraft(s),f=dr.f,custom=!s.pos.length;
+  let h=`<div class="rec" id="rec"><h4>📝 記錄這次占卜</h4><p class="hint">${s.noMind?'這個牌陣不抽心態牌。':'切牌翻出的那張放在「心態牌」。'}選牌時，上面的牌面會即時照牌陣位置排出來；選過的牌不會再出現在其他位置的選單裡。輔助牌會疊在那張牌的右上角。</p>`;
+  h+=`<div class="pv"><h5>牌面（即時）</h5><div class="pvrow" id="pvside" style="align-self:flex-start"></div>${s.lay?'<div class="rboard" id="bd2"></div>':'<div class="pvrow" id="pvrow"></div>'}</div>`;
+  if(!s.noMind)h+=rRow(-1,'心態牌（切牌）',dr.mind,false);
+  dr.cards.forEach((c,i)=>{h+=rRow(i,rPos(s,dr,i),c,custom)+rAuxRows(i,c)});
+  if(custom)h+=`<div class="btns"><button type="button" class="btn ghost" data-act="add">＋ 加一張</button>${dr.cards.length>1?'<button type="button" class="btn ghost" data-act="rm">－ 少一張</button>':''}</div>`;
+  h+=`<div class="insbox"><h5>插牌</h5><p class="hint">從牌面推出的隱藏訊息，例如有寶劍三和寶劍五，中間的寶劍四就是插牌。</p>${rInsRows(dr)}<div class="rsugg" id="rsugg"></div><button type="button" class="lnk" data-act="addins">＋ 手動加插牌</button></div>`;
+  h+=`<div class="fgrid">
+   <label>日期<input type="date" data-f="date" value="${rEsc(f.date)}"></label>
+   <label>市集／地點<input data-f="place" value="${rEsc(f.place)}"></label>
+   <label>問題類型<select data-f="qtype">${rOpts(RQTYPES,f.qtype,'— 選擇 —')}</select></label>
+   <label>客人反應<select data-f="reaction">${rOpts(RREACT,f.reaction,'— 選擇 —')}</select></label>
+   <label>自評（1–5）<select data-f="score">${rOpts(['1','2','3','4','5'],f.score,'— 選擇 —')}</select></label>
+  </div>
+  <label class="fl">問題<input data-f="question" value="${rEsc(f.question)}" placeholder="客人問了什麼"></label>
+  <label class="fl">我的解讀重點<textarea rows="3" data-f="reading">${rEsc(f.reading)}</textarea></label>
+  <label class="fl">卡住的地方<textarea rows="2" data-f="stuck">${rEsc(f.stuck)}</textarea></label>
+  <label class="fl">下次可以改進<textarea rows="2" data-f="improve">${rEsc(f.improve)}</textarea></label>
+  <div class="btns"><button type="button" class="btn" data-act="save">儲存這次占卜</button><button type="button" class="btn ghost" data-act="clear">清空重填</button></div><p class="msg" id="recMsg" role="status"></p></div>`;
+  return h;
+}
+function rPaint(s){
+  const dr=rDraft(s),m=document.getElementById('mindc');
+  if(m)m.innerHTML=`心態牌：<b>${dr.mind.c?rEsc(dr.mind.c)+(dr.mind.r?'（逆）':''):'未選'}</b>`;
+  document.querySelectorAll('#bd .bslot').forEach(sl=>{const c=dr.cards[+sl.dataset.n-1];sl.innerHTML=`<span>${rEsc(sl.dataset.l)}${c&&c.c?`<small>${rEsc(c.c)}${c.r?'↓':''}</small>`:''}</span>`});
+  const bd=document.getElementById('bd2');
+  if(bd){bd.querySelectorAll('.baux').forEach(x=>x.remove());const w=+bd.dataset.w,rv=String(bd.dataset.r).split('/').reduce((a,b)=>a/ +b),hh=w*1.4*rv;let mx=0;
+    bd.querySelectorAll('.bslot').forEach(sl=>{const c=dr.cards[+sl.dataset.n-1];sl.innerHTML=c&&c.c?rFace(c):`<span>${rEsc(sl.dataset.l)}</span>`;
+      const ax=(c&&c.aux||[]).filter(a=>a.c);mx=Math.max(mx,ax.length);const x=+sl.dataset.x,y=+sl.dataset.y;
+      ax.forEach((a,j)=>{const d=document.createElement('div');d.className='baux';d.style.cssText=`left:${x+w*(0.32+j*0.16)}%;top:${y-hh*(0.3+j*0.12)}%;width:${w*0.8}%`;d.innerHTML=rFace(a);bd.appendChild(d)})});
+    bd.style.marginTop=mx?Math.round(w*(0.45+0.2*mx))+'%':''}
+  const side=document.getElementById('pvside');
+  if(side)side.innerHTML=(s.noMind?'':`<div><div class="pc" id="pvm">${rFace(dr.mind)||'心'}</div><span class="pvl">心態牌</span></div>`)+(dr.ins||[]).filter(x=>x.c).map(x=>`<div><div class="pc">${rFace(x)}</div><span class="pvl in">插牌</span></div>`).join('');
+  const pr=document.getElementById('pvrow');if(pr)pr.innerHTML=dr.cards.map((c,i)=>`<div><div class="pcw"><div class="pc">${c.c?rFace(c):i+1}</div>${(c.aux||[]).filter(a=>a.c).map((a,j)=>`<div class="pc pax" style="left:${40+j*14}%;top:${-16-j*10}%">${rFace(a)}</div>`).join('')}</div><span class="pvl">${rEsc(rPos(s,dr,i))}</span></div>`).join('');
+}
+function rBind(s){
+  const box=document.getElementById('rec');if(!box)return;const dr=rDraft(s);
+  const cellOf=el=>rCellOf(dr,el.closest('.rrow'));
+  box.addEventListener('change',e=>{const t=e.target;
+    if(t.classList.contains('cs')){const c=cellOf(t);c.c=t.value;if(t.closest('.rins'))c.from=[];rPaint(s);rRefreshOpts(s)}
+    else if(t.classList.contains('rc')){cellOf(t).r=t.checked;rPaint(s)}
+    else if(t.dataset.f)dr.f[t.dataset.f]=t.value});
+  box.addEventListener('input',e=>{const t=e.target;if(t.dataset.f)dr.f[t.dataset.f]=t.value;else if(t.classList.contains('lb')){dr.labels[+t.closest('.rrow').dataset.i]=t.value;rPaint(s)}});
+  box.addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+    if(a==='add'){dr.cards.push({c:'',r:false,aux:[]});dr.labels.push('第 '+dr.cards.length+' 張');rDrawSpr()}
+    else if(a==='rm'){dr.cards.pop();dr.labels.pop();rDrawSpr()}
+    else if(a==='addaux'){const c=dr.cards[+b.dataset.i];(c.aux=c.aux||[]).push({c:'',r:false});rDrawSpr()}
+    else if(a==='rmaux'){const r=b.closest('.rrow');dr.cards[+r.dataset.i].aux.splice(+r.dataset.a,1);rDrawSpr()}
+    else if(a==='addins'){dr.ins.push({c:'',from:[]});rDrawSpr()}
+    else if(a==='rmins'){dr.ins.splice(+b.closest('.rrow').dataset.n,1);rDrawSpr()}
+    else if(a==='sugg'){const g=rSuggest(s)[+b.dataset.k];if(g){dr.ins.push(g);rDrawSpr()}}
+    else if(a==='clear'){delete RDRAFT[s.id];rDrawSpr()}
+    else if(a==='save'){const msg=document.getElementById('recMsg');
+      if(!dr.mind.c&&!dr.cards.some(c=>c.c)){msg.textContent='至少選一張牌再儲存喔。';return}
+      if(!RSTORE){msg.textContent='紀錄功能還在準備中，請等幾秒再按一次。';return}
+      const f=dr.f;
+      const rec={id:'r'+Date.now()+Math.floor(Math.random()*1e4),date:f.date||rToday(),place:f.place.trim(),spread:s.name,qtype:f.qtype,question:f.question.trim(),mind:{c:dr.mind.c,r:dr.mind.r},cards:dr.cards.map((c,i)=>({p:rPos(s,dr,i),c:c.c,r:c.r,aux:(c.aux||[]).filter(x=>x.c).map(x=>({c:x.c,r:!!x.r}))})),ins:(dr.ins||[]).filter(x=>x.c).map(x=>({c:x.c,from:x.from||[]})),reaction:f.reaction,score:f.score?+f.score:null,reading:f.reading.trim(),stuck:f.stuck.trim(),improve:f.improve.trim(),feedback:'',created:Date.now()};
+      b.disabled=true;msg.textContent='儲存中…';
+      try{await RSTORE.save(rec);delete RDRAFT[s.id];rDrawSpr();const m2=document.getElementById('recMsg');if(m2)m2.textContent='已儲存！到「復盤」分頁就看得到這筆紀錄。'}
+      catch(err){b.disabled=false;msg.textContent='儲存失敗：'+((err&&(err.code||err.message))||'請再試一次')}}
+  });
+}
+let RSP='time';
+const rChips=document.getElementById('sprChips');
+RSPR.forEach(s=>{const b=document.createElement('button');b.className='chip';b.type='button';b.dataset.sp=s.id;b.textContent=s.name+(s.count?'（'+s.count+'）':'');b.onclick=()=>{RSP=s.id;rDrawSpr()};rChips.appendChild(b)});
+function rDrawSpr(){
+  rChips.querySelectorAll('.chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sp===RSP));
+  const s=RSPR.find(x=>x.id===RSP);
+  let h=`<div class="panel"><h3>${s.name}${/陣$/.test(s.name)?'':'牌陣'}</h3>`;
+  if(s.pos.length)h+=`<ol class="rpos">${s.pos.map((p,i)=>`<li><b>${i+1}</b><span>${p}${s.tips&&s.tips[i]?`<small class="tip">💡 馬蹄鐵：${rEsc(s.tips[i])}</small>`:''}</span></li>`).join('')}</ol>`;
+  else h+='<p class="rnote">自己決定張數和每個牌位的名稱，適合自創牌陣或課程以外的牌陣。</p>';
+  if(s.lay)h+=`<div class="pv"><h5>牌陣排法</h5>${s.noMind?'':'<div class="pvrow" style="align-self:flex-start"><div><div class="pc">心</div><span class="pvl">心態牌</span></div></div>'}<div class="rboard" id="bd2"></div></div>`;
+  h+=`<div class="golink"><a class="btn" href="case.html#rec-${s.id}">📝 用這個牌陣到個案簿記錄</a><p class="hint">會打開「塔羅個案簿」並幫你選好這個牌陣，再選記錄給我自己、快速占卜或客人。</p></div></div>`;
+  document.getElementById('sprBody').innerHTML=h;
+  if(s.lay)rBoard('bd2',s.lay[0],s.lay[1],s.lay[2]);
+}
+rDrawSpr();
+
+let RSTORE=null,RRECS=[];
+function rNote(t){const n=document.getElementById('rvNote');if(n)n.textContent=t}
+function rLocal(){
+  try{RRECS=JSON.parse(localStorage.getItem('tarot-recs')||'[]')}catch(e){RRECS=[]}
+  const persist=()=>{try{localStorage.setItem('tarot-recs',JSON.stringify(RRECS))}catch(e){throw {message:'這個瀏覽器無法儲存'}}};
+  RSTORE={save:async r=>{RRECS=RRECS.concat([r]);persist();rDrawReview()},del:async id=>{RRECS=RRECS.filter(r=>r.id!==id);persist();rDrawReview()},upd:async(id,d)=>{RRECS=RRECS.map(r=>r.id===id?Object.assign({},r,d):r);persist();rDrawReview()}};
+  rNote('紀錄目前只存在這台裝置的瀏覽器裡：換手機或電腦就看不到，清除瀏覽資料也會不見。');
+  rDrawReview();
+}
+(async()=>{
+  try{
+    if(window.claude&&claude.use){
+      const db=await claude.use('db');
+      if(db){
+        const col=db.collection('readings');
+        RSTORE={save:r=>col.doc(r.id).set(r),del:id=>col.doc(id).delete(),upd:(id,d)=>col.doc(id).update(d)};
+        rNote('讀取紀錄中…');
+        const t=setTimeout(()=>rNote('紀錄暫時連不上，畫面上的資料可能不是最新的。'),10000);
+        col.onSnapshot(snap=>{if(!snap.metadata.fromCache){clearTimeout(t);rNote('')}RRECS=snap.docs.map(d=>d.data());rDrawReview()},
+          e=>{clearTimeout(t);rNote('紀錄讀取失敗（'+e.code+'），請重新整理頁面。')});
+        return;
+      }
+    }
+  }catch(e){}
+  rLocal();
+})();
+
+function rRecCard(r){
+  const cs=[r.mind&&r.mind.c?`<li><b>心態牌</b>：${rEsc(r.mind.c)}${r.mind.r?'（逆位）':''}</li>`:''].concat((r.cards||[]).map((c,i)=>`<li><b>${i+1}. ${rEsc(c.p)}</b>：${c.c?rEsc(c.c)+(c.r?'（逆位）':''):'—'}${(c.aux||[]).length?`<br><span class="axl">輔助：${c.aux.map(a=>rEsc(a.c)+(a.r?'（逆位）':'')).join('、')}</span>`:''}</li>`)).concat((r.ins||[]).map(x=>`<li><b>插牌</b>：${rEsc(x.c)}${x.from&&x.from.length===2?`（${rEsc(x.from[0])}、${rEsc(x.from[1])}之間）`:''}</li>`)).join('');
+  const line=(k,v)=>v?`<p><b>${k}：</b>${rEsc(v)}</p>`:'';
+  const imgs=[r.mind].concat(...(r.cards||[]).map(c=>[c].concat(c.aux||[])),r.ins||[]).filter(c=>c&&c.c).map(c=>`<div class="pc">${rFace(c)}</div>`).join('');
+  return `<details class="card" data-id="${rEsc(r.id)}" style="--sc:var(--line)"><summary><span class="badge" title="自評">${r.score||'–'}</span><span class="ttl"><b>${rEsc(r.date)}｜${rEsc(r.spread)}</b><span class="kw">${rEsc([r.qtype,r.place,r.reaction].filter(Boolean).join('・'))}</span></span></summary><div class="cb">${line('問題',r.question)}<div class="rcimgs">${imgs}</div><ul>${cs}</ul>${line('我的解讀重點',r.reading)}${line('卡住的地方',r.stuck)}${line('下次可以改進',r.improve)}<label class="fl">後續回饋（準不準、客人後來怎麼說）<textarea rows="2" class="fb">${rEsc(r.feedback)}</textarea></label><div class="btns"><button type="button" class="btn ghost" data-act="fb">儲存回饋</button><button type="button" class="btn ghost" data-act="del">刪除這筆</button></div></div></details>`;
+}
+function rDrawReview(){
+  const el=document.getElementById('rvBody');if(!el)return;
+  const GO=`<div class="panel golink"><p>📌 之後的占卜紀錄和復盤統計都改到「塔羅個案簿」，這裡只保留以前的紀錄。</p><a class="btn" href="case.html">打開塔羅個案簿</a></div>`;
+  const R=[...RRECS].sort((a,b)=>String(b.date).localeCompare(String(a.date))||(b.created||0)-(a.created||0));
+  if(!R.length){el.innerHTML=GO;return}
+  const avg=a=>{const v=a.filter(r=>typeof r.score==='number');return v.length?(v.reduce((x,r)=>x+r.score,0)/v.length).toFixed(1):'—'};
+  const res=a=>{const v=a.filter(r=>r.reaction);return v.length?Math.round(v.filter(r=>r.reaction==='很有共鳴').length/v.length*100)+'%':'—'};
+  const group=key=>{const m=new Map();R.forEach(r=>{const k=key(r)||'未填';if(!m.has(k))m.set(k,[]);m.get(k).push(r)});return m};
+  const bySpr=group(r=>r.spread);let fav='—',fn=0;bySpr.forEach((v,k)=>{if(v.length>fn){fn=v.length;fav=k}});
+  let h=`<div class="kpi"><div><b>總場次</b><span>${R.length}</span></div><div><b>平均自評</b><span>${avg(R)}</span></div><div><b>很有共鳴</b><span>${res(R)}</span></div><div><b>最常用牌陣</b><span class="sm">${rEsc(fav)}</span></div></div>`;
+  const tbl=(title,first,m,byKey)=>{const rows=[...m.entries()];if(byKey)rows.sort((a,b)=>b[0].localeCompare(a[0]));else rows.sort((a,b)=>b[1].length-a[1].length);
+    return `<div class="panel"><h3>${title}</h3><div class="tbl"><table><tr><th>${first}</th><th>場次</th><th>平均自評</th><th>很有共鳴</th></tr>${rows.map(([k,v])=>`<tr><td>${rEsc(k)}</td><td>${v.length}</td><td>${avg(v)}</td><td>${res(v)}</td></tr>`).join('')}</table></div></div>`};
+  h+=tbl('每月進步','月份',group(r=>String(r.date||'').slice(0,7)),true);
+  h+=tbl('各類問題','問題類型',group(r=>r.qtype),false);
+  h+=tbl('各牌陣','牌陣',bySpr,false);
+  const cc=new Map(),mc=new Map();
+  R.forEach(r=>{[r.mind].concat(r.cards||[]).forEach(c=>{if(c&&c.c)cc.set(c.c,(cc.get(c.c)||0)+1)});if(r.mind&&r.mind.c)mc.set(r.mind.c,(mc.get(r.mind.c)||0)+1)});
+  const topOf=m=>[...m.entries()].sort((a,b)=>b[1]-a[1]);
+  h+=`<div class="panel"><h3>最常出現的牌</h3><div class="kws">${topOf(cc).slice(0,10).map(([k,n])=>`<span>${rEsc(k)} × ${n}</span>`).join('')}</div>${mc.size?`<p class="rnote">心態牌最常出現：${topOf(mc).slice(0,5).map(([k,n])=>rEsc(k)+' × '+n).join('、')}</p>`:''}</div>`;
+  const st=R.filter(r=>r.stuck).slice(0,8);
+  if(st.length)h+=`<div class="panel"><h3>最近卡住的地方</h3><ul>${st.map(r=>`<li><b>${rEsc(r.date)}</b>　${rEsc(r.stuck)}</li>`).join('')}</ul></div>`;
+  h+=`<div class="panel"><h3>每一筆紀錄</h3><div class="list">${R.map(rRecCard).join('')}</div></div>`;
+  const open=[...el.querySelectorAll('details[open][data-id]')].map(d=>d.dataset.id);
+  el.innerHTML=GO+h;
+  open.forEach(id=>{el.querySelectorAll('details[data-id]').forEach(d=>{if(d.dataset.id===id)d.open=true})});
+}
+document.getElementById('rvBody').addEventListener('click',async e=>{const b=e.target.closest('[data-act]');if(!b||!RSTORE)return;const d=b.closest('details[data-id]');if(!d)return;const id=d.dataset.id;
+  if(b.dataset.act==='del'){if(b.dataset.armed!=='1'){b.dataset.armed='1';b.textContent='確定刪除？再按一次';return}b.disabled=true;try{await RSTORE.del(id)}catch(err){b.disabled=false;b.textContent='刪除失敗，再試一次'}}
+  else if(b.dataset.act==='fb'){const v=d.querySelector('.fb').value.trim();b.disabled=true;b.textContent='儲存中…';try{await RSTORE.upd(id,{feedback:v});b.textContent='已儲存'}catch(err){b.textContent='儲存失敗，再試一次'}b.disabled=false}
+});
+
+// ===== 每日抽牌日記 =====
+const DQ=[['act','直覺裡，牌中的人在做什麼？'],['me','如果你也在畫面裡，你會是誰？'],['feel','你的感受是什麼？'],['echo','今天發生的事，和這張牌有沒有呼應？']];
+const DFP=['今日運勢','建議','心態'];
+// 四個固定牌位：key、名稱、晚上連結事件的問法
+const DK=[['diary','日記','對上今天哪件事？'],['fort','運勢','事情怎麼發展？對上哪件事？'],['adv','建議','我怎麼應對？這個建議有用嗎？'],['mind','心態','問這個問題的當下，我其實是用什麼心態面對今天？']];
+const DMATCH=['吻合','部分吻合','不吻合','還不確定'];
+var DSENSE={}; // 個人牌義：牌名 → [{date,pos,text}]
+let DSTORE=null,DMAP={},DSEL=rToday(),DMONTH=rToday().slice(0,7),DDRAFT=null,DDIRTY=false,DMORN=null,DSAVING=false,DPEND=false,DTIMER=null;
+const dId=d=>'d'+String(d).replace(/-/g,'');
+const DTXT=['morning','act','me','feel','echo','hit','fread','freflect','fhit','ev_diary','ev_fort','ev_mind','ev_adv','story','ev1','ev2','ev3','sum1','sum2','sum3','sum4','rel1','rel2','rel3','rel4','best','forced','ask','gpt'];
+function dBlank(date){const d={date,diary:{c:'',r:false},fortune:DFP.map(p=>({p,c:'',r:false})),plain:false};
+  DTXT.forEach(k=>d[k]='');DK.forEach(([k])=>{d['in_'+k]='';d['m_'+k]='';d['e_'+k]='';d['b_'+k]='';d['u_'+k]='';d['pm_'+k]=''});return d}
+function dNorm(e){
+  const d=Object.assign(dBlank(e.date),JSON.parse(JSON.stringify(e)));
+  if(!e.diary){
+    if(Array.isArray(e.cards)){d.diary=e.cards[0]?{c:e.cards[0].c||'',r:!!e.cards[0].r}:{c:'',r:false};d.fortune=DFP.map((p,i)=>{const c=e.cards[i+1]||{};return {p,c:c.c||'',r:!!c.r}})}
+    else if(e.c)d.diary={c:e.c,r:!!e.r};
+  }
+  if(!Array.isArray(d.fortune)||!d.fortune.length)d.fortune=dBlank(e.date).fortune;
+  delete d.c;delete d.r;delete d.cards;return d;
+}
+const dHas=e=>e&&((e.diary&&e.diary.c)||(e.fortune||[]).some(c=>c.c));
+const dCardOf=(d,k)=>k==='diary'?d.diary:(d.fortune.find(c=>c.p===({fort:'今日運勢',mind:'心態',adv:'建議'})[k])||null);
+function dLoad(date){if(DTIMER||DDIRTY)dFlush();DMORN=null;DSEL=date;DMONTH=date.slice(0,7);const e=DMAP[date];DDRAFT=e?dNorm(e):dBlank(date);DDIRTY=false;dDrawEd();dDrawRest()}
+function dFUsed(){return new Set(((DDRAFT&&DDRAFT.fortune)||[]).map(x=>x.c).filter(Boolean))}
+function dFRefresh(){const u=dFUsed();document.querySelectorAll('[data-fi]').forEach(r=>{const c=DDRAFT.fortune[+r.dataset.fi],sel=r.querySelector('select.fcs');if(!c||!sel)return;sel.innerHTML=rCardOpts(c.c,u);sel.value=c.c||''})}
+function dRowF(i,c){
+  return `<div class="rrow" data-fi="${i}"><div class="pl"><b>${i+1}</b>${i<DFP.length?`<span>${rEsc(c.p)}</span>`:`<input class="flb" value="${rEsc(c.p)}" aria-label="第 ${i+1} 張的牌位名稱">`}</div><select class="fcs" aria-label="${rEsc(c.p)}：選牌">${rCardOpts(c.c,dFUsed())}</select><label class="rv"><input type="checkbox" class="frc"${c.r?' checked':''}>逆位</label></div>`;
+}
+const dIn=(key,label,ph)=>`<label class="fl">${label}<input data-d="${key}" value="${rEsc(DDRAFT[key])}"${ph?` placeholder="${ph}"`:''}></label>`;
+const dTa=(key,label,rows,ph)=>`<label class="fl">${label}<textarea rows="${rows||2}" data-d="${key}"${ph?` placeholder="${ph}"`:''}>${rEsc(DDRAFT[key])}</textarea></label>`;
+const dCardTag=c=>c&&c.c?`${rEsc(c.c)}${c.r?'（逆）':''}`:'未選';
+const DINK={'今日運勢':'in_fort','建議':'in_adv','心態':'in_mind'};
+const dTrunc=t=>{t=String(t||'');return t.length>9?t.slice(0,9)+'…':t};
+function dEvChips(k){
+  const d=DDRAFT,evs=[1,2,3].filter(i=>d['ev'+i]);
+  if(!evs.length)return '<span class="hint">先在上面寫今天發生的事，這裡就能直接點</span>';
+  return evs.map(i=>`<button type="button" class="mchip ev" data-ek="${k}" data-v="${i}" aria-pressed="${d['e_'+k]===String(i)}">第${i}件・${rEsc(dTrunc(d['ev'+i]))}</button>`).join('')+`<button type="button" class="mchip ev" data-ek="${k}" data-v="none" aria-pressed="${d['e_'+k]==='none'}">都沒有</button>`;
+}
+function dMorningSummary(d){
+  const rows=[['日記牌',d.diary,'in_diary']].concat(d.fortune.map(c=>[c.p,c,DINK[c.p]]));
+  return `<div class="panel"><div class="dmh2"><h3>🌙☀️ 早上的牌</h3><button type="button" class="btn ghost" id="dmopen">編輯早上</button></div>
+  <div class="pvrow">${rows.map(([p,c])=>`<div><div class="pc">${c&&c.c?rFace(c):'?'}</div><span class="pvl">${rEsc(p)}</span></div>`).join('')}</div>
+  ${rows.some(([,,k])=>k&&d[k])?`<ul class="dmeans">${rows.filter(([,,k])=>k&&d[k]).map(([p,c,k])=>`<li><b>${rEsc(p)}・${dCardTag(c)}</b>：${rEsc(d[k])}</li>`).join('')}</ul>`:''}</div>`;
+}
+function dEditor(){
+  const d=DDRAFT,saved=!!DMAP[d.date];
+  const full=d.diary.c&&d.fortune.slice(0,DFP.length).every(c=>c.c);
+  const collapsed=DMORN===false||(DMORN===null&&saved&&full);
+  const old=DQ.filter(([k])=>d[k]).map(([k,q])=>dTa(k,q)).join('')+(d.morning?dTa('morning','第一眼的直覺（舊欄位）'):'')+(d.fread?dTa('fread','今天的運勢、建議、心態在說什麼？（舊欄位）'):'')+(d.freflect?dTa('freflect','今天實際過得怎樣？（舊欄位）'):'')+(d.story?dTa('story','整合成今天的故事（舊欄位）'):'')
+    +(d.sum1||d.sum2||d.sum3||d.sum4?dIn('sum1','今天發生了（舊欄位）')+dIn('sum2','事情的發展是（舊欄位）')+dIn('sum3','當時我的感受是（舊欄位）')+dIn('sum4','我可以採取的方向是（舊欄位）'):'')
+    +(d.hit||d.fhit?`<p class="hint">舊的分數：日記牌呼應 ${rEsc(d.hit||'－')}／5、運勢準確度 ${rEsc(d.fhit||'－')}／5</p>`:'');
+  const cardQ=([k,name,q])=>{const c=dCardOf(d,k);return `<div class="dq"><div class="pc qmini">${c&&c.c?rFace(c):''}</div><div class="dqf"><span class="fl">${name}・${dCardTag(c)}：${q}</span>
+    <div class="mchips evc" data-evk="${k}" role="group" aria-label="${name}對上哪件事">${dEvChips(k)}</div>
+    <div class="mchips" role="group" aria-label="${name}吻合程度">${DMATCH.map(m=>`<button type="button" class="mchip" data-m="${k}" data-v="${m}" aria-pressed="${d['m_'+k]===m}">${m}</button>`).join('')}</div>
+    <input class="dnote" data-d="ev_${k}" value="${rEsc(d['ev_'+k])}" placeholder="補充（選填）" aria-label="${name}補充"></div></div>`};
+  const morning=collapsed?dMorningSummary(d):`<div class="panel"><div class="dmh2"><h3>🌙 早上・日記牌</h3>${saved&&full?'<button type="button" class="btn ghost" id="dmclose">收合早上</button>':''}</div><p class="hint">一早睡醒、還沒做任何事，直接翻的那一張：今天的主題。</p>
+  <div class="dtop"><div class="pc big" id="dface">${d.diary.c?rFace(d.diary):'?'}</div>
+   <div class="dpick"><label class="fl">抽到的牌<select id="dcard">${rCardOpts(d.diary.c)}</select></label>
+   <label class="rv"><input type="checkbox" id="drev"${d.diary.r?' checked':''}>逆位</label>
+   <button type="button" class="btn ghost" id="drand">🔮 幫我抽一張</button></div></div>
+  ${dIn('in_diary','我認為這張牌的意思（早上先寫，幾個關鍵字也可以）')}
+  </div>
+  <div class="panel"><h3>☀️ 早上・今日運勢</h3><p class="hint">針對今天一整天：運勢看事情的發展，建議看可以怎麼做，心態看問這個問題的當下，自己是用什麼心態面對今天。</p>
+  ${d.fortune.map((c,i)=>dRowF(i,c)).join('')}
+  <div class="btns dnum"><label class="rv">抽<input type="number" id="fn" min="1" max="20" value="${d.fortune.length}" inputmode="numeric">張</label><button type="button" class="btn ghost" id="frand">🔮 幫我抽</button><button type="button" class="btn ghost" id="fadd">＋ 加一張</button>${d.fortune.length>DFP.length?'<button type="button" class="btn ghost" id="frm">－ 少一張</button>':''}</div>
+  <div class="pv"><div class="pvrow" id="fpv">${dFpv()}</div></div>
+  <p class="dgrp">我認為這張牌的意思（早上先寫，幾個關鍵字也可以）</p>
+  ${dIn('in_fort','運勢')}${dIn('in_adv','建議')}${dIn('in_mind','心態')}
+  <div class="btns"><button type="button" class="btn ghost" id="dquick">✓ 今天只記牌，先儲存</button></div><p class="msg" id="dqmsg" role="status"></p>
+  </div>`;
+  return `<div class="panel"><h3>${d.date===rToday()?'今天':rEsc(d.date)}</h3>
+  <label class="fl">日期<input type="date" id="ddate" value="${rEsc(d.date)}"></label>
+  <p class="hint">選好牌就會自動儲存，之後寫的每一格也會自動存。有抽牌就算記錄，其他都是選填。</p>
+  <p class="msg dsv" role="status"></p>
+  ${dBakOffer(d)}
+  </div>
+  ${morning}
+  <div class="panel"><h3>🌜 晚上・復盤</h3>
+  <p class="dgrp">今天實際發生的事（一行一件）</p>
+  ${dIn('ev1','1.')}${dIn('ev2','2.')}${dIn('ev3','3.')}
+  <p class="dgrp">今天的主題・日記牌</p>
+  ${cardQ(DK[0])}
+  <p class="dgrp">今天的運勢・運勢／建議／心態</p>
+  ${cardQ(DK[1])}${cardQ(DK[2])}${cardQ(DK[3])}
+  <p class="dgrp">牌與牌之間的關聯</p>
+  ${dIn('rel1','日記牌 × 今天的運勢','同一件事？互補？對照？')}${dIn('rel2','建議 × 心態','建議怎麼回應我當下的心態？')}${dIn('rel3','其他值得注意的組合','例如重複的花色、數字、圖像')}${dIn('rel4','哪些牌其實對應不同的事？')}
+  <label class="fl">💬 GPT 的統整（討論完把【今日統整】貼回來）<textarea rows="6" data-d="gpt" placeholder="【今日統整】…">${rEsc(d.gpt)}</textarea></label>
+  <details class="dold"${['b_','u_','pm_'].some(p=>DK.some(([k])=>d[p+k]))||d.best||d.forced||d.ask?' open':''}><summary>深入練習（有空再寫）</summary>
+   ${DK.map(([k,name])=>`<p class="dgrp">${name}・${dCardTag(dCardOf(d,k))}</p>${dIn('b_'+k,'圖像或牌義依據')}${dIn('u_'+k,'不吻合／尚未確認的地方')}`).join('')}
+   <p class="dgrp">我的牌感收穫</p>
+   <p class="hint">「個人牌義」會自動收進「牌義」分頁那張牌底下。</p>
+   ${DK.map(([k,name])=>{const c=dCardOf(d,k);return c&&c.c?dIn('pm_'+k,`個人牌義：${rEsc(c.c)}（${name}）`):''}).join('')}
+   ${dIn('best','哪個聯想最有圖像依據？')}${dIn('forced','哪個聯想可能是硬套？')}${dIn('ask','還想釐清的問題')}
+  </details>
+  ${old?`<details class="dold"><summary>之前版本寫的內容</summary>${old}</details>`:''}
+  </div>
+  <div class="panel"><div class="btns"><button type="button" class="btn" id="dmd">📋 複製去問 GPT</button>${saved?'<button type="button" class="btn ghost" id="ddel">刪除這天</button>':''}</div><p class="msg dsv" role="status"></p><p class="msg" id="dmsg" role="status"></p><div id="dmdbox"></div></div>`;
+}
+function dFpv(){return DDRAFT.fortune.map((c,i)=>`<div><div class="pc">${c.c?rFace(c):i+1}</div><span class="pvl">${rEsc(c.p)}</span></div>`).join('')}
+function dMd(){
+  const d=DDRAFT,ct=c=>c&&c.c?c.c+(c.r?'（逆位）':''):'（未選）',L=[];
+  const order=[['diary','日記'],['fort','運勢'],['adv','建議'],['mind','心態']];
+  L.push(`# ${d.date.replace(/-/g,'/')}｜每日塔羅日記`,'','## 今日抽牌');
+  order.forEach(([k,n])=>L.push(`- ${n}：${ct(dCardOf(d,k))}`));
+  d.fortune.slice(DFP.length).filter(c=>c.c).forEach(c=>L.push(`- ${c.p}：${ct(c)}`));
+  L.push('','（日記牌是一早睡醒直接翻的；運勢、建議、心態是針對今天一整天，心態指我問這個問題的當下，用什麼心態面對今天。）');
+  const evs=[d.ev1,d.ev2,d.ev3].filter(Boolean);
+  if(evs.length){L.push('','## 今天實際發生的事');evs.forEach((x,i)=>L.push(`${i+1}. ${x}`))}
+  L.push('','## 單張牌');
+  order.forEach(([k,n])=>{const c=dCardOf(d,k);if(!c||!c.c)return;
+    const ek=d['e_'+k],et=ek==='none'?'都沒有對上':(ek&&d['ev'+ek]?d['ev'+ek]:''),en=d['ev_'+k];
+    L.push('',`### ${n}：${ct(c)}`,`- 我認為的意思：${d['in_'+k]||''}`,`- 今天發生了什麼：${et}${en?(et?'（'+en+'）':en):''}`,`- 是否符合：${d['m_'+k]||''}`);
+    if(d['b_'+k])L.push(`- 圖像或牌義依據：${d['b_'+k]}`);
+    if(d['u_'+k])L.push(`- 不吻合／尚未確認：${d['u_'+k]}`);
+    if(d['pm_'+k])L.push(`- 我的新牌感：${d['pm_'+k]}`)});
+  const rel=[['日記牌 × 今天的運勢',d.rel1],['建議 × 心態',d.rel2],['其他組合',d.rel3],['對應不同事件的牌',d.rel4]].filter(x=>x[1]);
+  if(rel.length){L.push('','## 我看到的牌與牌互動');rel.forEach(([k,v])=>L.push(`- ${k}：${v}`))}
+  if(d.sum1||d.sum2||d.sum3||d.sum4)L.push('','## 我的整體解讀',`今天發生了${d.sum1||'＿＿'}，事情的發展是${d.sum2||'＿＿'}，當時我的感受是${d.sum3||'＿＿'}，我可以採取的方向是${d.sum4||'＿＿'}。`);
+  const more=[['最有圖像依據的聯想',d.best],['可能是硬套的聯想',d.forced],['還想釐清的問題',d.ask]].filter(x=>x[1]);
+  if(more.length){L.push('','## 牌感收穫');more.forEach(([k,v])=>L.push(`- ${k}：${v}`))}
+  L.push('','---','請幫我：',
+   '1. 逐張看我的牌義和今天的事：哪些連結有圖像或牌義依據、哪些可能是硬套、有沒有我沒想到的解讀、哪裡其實不吻合。請直接指出，不用只說符合。',
+   '2. 再看牌與牌之間的互動：日記牌和今天的運勢有沒有呼應、建議怎麼回應我當下的心態，以及其他值得注意的組合（重複的花色、數字、圖像）。我寫的互動也請幫我看有沒有道理。',
+   '3. 最後用下面的格式幫我統整，我會貼回我的日記：','',
+   '【今日統整】','- 今天的主題：','- 今天的主題（日記牌）：','- 今天的運勢（運勢、建議、心態）：','- 牌與牌的互動：','- 可能硬套的地方：','- 我的新牌感：','- 明天可以留意：');
+  return L.join('\n');
+}
+function dCal(){
+  const [y,m]=DMONTH.split('-').map(Number),first=new Date(y,m-1,1).getDay(),days=new Date(y,m,0).getDate(),td=rToday();
+  let cells='';for(let i=0;i<first;i++)cells+='<div></div>';
+  for(let d=1;d<=days;d++){const ds=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`,e=DMAP[ds];
+    const c0=e?(e.diary&&e.diary.c?e.diary:(e.fortune||[]).find(c=>c.c)):null;
+    cells+=`<button type="button" class="dday${ds===DSEL?' sel':''}${ds===td?' today':''}" data-day="${ds}" aria-label="${ds}${c0?'：'+rEsc(c0.c):''}"><span>${d}</span>${c0?`<div class="pc mini">${rFace(c0)}</div>`:''}</button>`}
+  return `<div class="panel"><div class="dmh"><button type="button" class="btn ghost" data-mon="-1" aria-label="上個月">‹</button><h3>${y} 年 ${m} 月</h3><button type="button" class="btn ghost" data-mon="1" aria-label="下個月">›</button></div><div class="dcal"><b>日</b><b>一</b><b>二</b><b>三</b><b>四</b><b>五</b><b>六</b>${cells}</div><p class="rnote">格子裡是那天的日記牌。點日期可以看或補寫那天的日記。</p></div>`;
+}
+function dStats(){
+  const es=Object.values(DMAP).filter(e=>dHas(e)&&String(e.date).startsWith(DMONTH));
+  if(!es.length)return '<div class="panel"><p class="rnote">這個月還沒有日記。</p></div>';
+  const top=m=>[...m.entries()].sort((a,b)=>b[1]-a[1]);
+  const add=(m,k)=>m.set(k,(m.get(k)||0)+1);
+  const grp=()=>({suit:{maj:0,wand:0,cup:0,sword:0,pent:0},n:0,rev:0});
+  const G={theme:grp(),fort:grp()},byPos=new Map([['日記牌',new Map()]]);
+  const put=(g,c)=>{g.n++;const k=NAMEIDX[c.c];if(k!=null)g.suit[CARDS[k].suit]++;if(c.r)g.rev++};
+  es.forEach(e=>{if(e.diary&&e.diary.c){put(G.theme,e.diary);add(byPos.get('日記牌'),e.diary.c)}
+    (e.fortune||[]).forEach(c=>{if(!c.c)return;put(G.fort,c);if(!byPos.has(c.p))byPos.set(c.p,new Map());add(byPos.get(c.p),c.c)})});
+  const mt=ks=>{let y=0,n=0;es.forEach(e=>ks.forEach(k=>{const v=e['m_'+k];if(v){n++;if(v==='吻合')y++}}));return n?`${y}<small>／${n}</small>`:'—'};
+  const gl=(name,g)=>g.n?`<p class="rnote"><b>${name}</b>（${g.n} 張）：大牌 ${g.suit.maj}、權杖 ${g.suit.wand}、聖杯 ${g.suit.cup}、寶劍 ${g.suit.sword}、錢幣 ${g.suit.pent}；逆位 ${g.rev}</p>`:'';
+  const match=DK.map(([k,name])=>{const v=es.map(e=>e['m_'+k]).filter(Boolean);if(!v.length)return '';const c=m=>v.filter(x=>x===m).length;return `<li><b>${name}</b>：吻合 ${c('吻合')}、部分 ${c('部分吻合')}、不吻合 ${c('不吻合')}、還不確定 ${c('還不確定')}</li>`}).join('');
+  const line=(name,m)=>{const t=top(m).filter(([,n])=>n>1).slice(0,4);return t.length?`<li><b>${rEsc(name)}</b>：${t.map(([k,n])=>rEsc(k)+' × '+n).join('、')}</li>`:''};
+  const rep=[...byPos.entries()].map(([p,m])=>line(p,m)).join('');
+  const written=es.filter(e=>e.ev1||e.sum1||e.gpt||DK.some(([k])=>e['ev_'+k]||e['e_'+k]||e['m_'+k])).length;
+  return `<div class="panel"><h3>這個月的牌</h3><div class="kpi"><div><b>抽牌天數</b><span>${es.length}</span></div><div><b>有寫復盤</b><span>${written}</span></div><div><b>日記牌吻合</b><span>${mt(['diary'])}</span></div><div><b>運勢三張吻合</b><span>${mt(['fort','adv','mind'])}</span></div></div>
+  ${gl('今天的主題・日記牌',G.theme)}${gl('今天的運勢・運勢／建議／心態',G.fort)}
+  ${match?`<p class="rnote">各牌位吻合程度：</p><ul class="rnote">${match}</ul>`:''}
+  ${rep?`<p class="rnote">這個月重複出現的牌：</p><ul class="rnote">${rep}</ul>`:''}</div>`;
+}
+function dDrawEd(){const el=document.getElementById('dEd');if(el)el.innerHTML=dEditor()}
+function dDrawRest(){const el=document.getElementById('dRest');if(el)el.innerHTML=dCal()+dStats()}
+function dRandIdx(n,exclude){const pool=CARDS.map((_,i)=>i).filter(i=>!exclude.has(CARDS[i].name));n=Math.min(n,pool.length);const a=new Uint32Array(n*2);crypto.getRandomValues(a);
+  const out=[];for(let i=0;i<n;i++){const j=i+a[i]%(pool.length-i);[pool[i],pool[j]]=[pool[j],pool[i]];out.push({c:CARDS[pool[i]].name,r:a[n+i]%2===1})}return out}
+// 個人牌義收進「牌義」分頁
+function dBuildSense(){
+  const S={};Object.values(DMAP).forEach(e=>DK.forEach(([k,name])=>{const t=e['pm_'+k],c=dCardOf(e,k);if(t&&c&&c.c){(S[c.c]=S[c.c]||[]).push({date:e.date,pos:name,r:c.r,text:t})}}));
+  Object.values(S).forEach(a=>a.sort((x,y)=>String(y.date).localeCompare(String(x.date))));DSENSE=S;
+}
+function dSenseHTML(c){
+  const a=(typeof DSENSE==='object'&&DSENSE)?DSENSE[c.name]:null;if(!a||!a.length)return '';
+  return `<div class="sec dsense"><h4>我的日記牌感</h4><ul>${a.map(x=>`<li><b>${rEsc(x.date)}</b>（${rEsc(x.pos)}${x.r?'・逆位':''}）${rEsc(x.text)}</li>`).join('')}</ul></div>`;
+}
+function dStatus(t){document.querySelectorAll('#dEd .dsv').forEach(m=>m.textContent=t)}
+const DBAK='tarot-diary-bak';
+function dBakGet(date){try{const b=JSON.parse(localStorage.getItem(DBAK)||'null');return b&&b.date===date?b:null}catch(e){return null}}
+function dBakSet(){try{localStorage.setItem(DBAK,JSON.stringify(DDRAFT))}catch(e){}}
+function dBakDel(date){try{const b=JSON.parse(localStorage.getItem(DBAK)||'null');if(!b||b.date===date)localStorage.removeItem(DBAK)}catch(e){}}
+function dBakOffer(d){
+  if(DDIRTY)return '';const b=dBakGet(d.date);if(!b||!dHas(b))return '';
+  const sig=o=>{const c=Object.assign({},o);delete c.updated;return JSON.stringify(c)};
+  if(sig(dNorm(b))===sig(d))return '';
+  return `<div class="dbak"><p class="hint">這台手機上有這天還沒存好的內容，要接著寫嗎？</p><div class="btns"><button type="button" class="btn ghost" id="dbakyes">接著寫</button><button type="button" class="btn ghost" id="dbakno">不用</button></div></div>`;
+}
+function dQueue(){DDIRTY=true;dBakSet();clearTimeout(DTIMER);dStatus('…');DTIMER=setTimeout(dFlush,1200)}
+async function dFlush(){
+  clearTimeout(DTIMER);DTIMER=null;
+  if(!dHas(DDRAFT)){dStatus('選好牌之後就會自動儲存');return}
+  if(!DSTORE){dStatus('準備中…');DTIMER=setTimeout(dFlush,1500);return}
+  if(DSAVING){DPEND=true;return}
+  DSAVING=true;const doc=Object.assign({},JSON.parse(JSON.stringify(DDRAFT)),{updated:Date.now()});DDRAFT.updated=doc.updated;
+  const was=!!DMAP[doc.date];
+  let ok=false;
+  try{await DSTORE.save(doc);ok=true;DMAP[doc.date]=dNorm(doc);dBuildSense();if(!DTIMER&&!DPEND){DDIRTY=false;dBakDel(doc.date)}dDrawRest();
+    if(!was&&DSEL===doc.date){const b=document.querySelector('#dEd #dmd');if(b&&!document.getElementById('ddel'))b.insertAdjacentHTML('afterend','<button type="button" class="btn ghost" id="ddel">刪除這天</button>')}
+    dStatus('已自動儲存 '+new Date().toTimeString().slice(0,5))}
+  catch(err){dStatus('自動儲存失敗（'+((err&&(err.code||err.message))||'請稍後再試')+'），稍後會再試一次');DDIRTY=true;DTIMER=setTimeout(dFlush,5000)}
+  DSAVING=false;if(DPEND){DPEND=false;dFlush()}
+  return ok
+}
+(function(){
+  const box=document.getElementById('diaryBody');
+  const syncF=()=>{if(DMORN===null)DMORN=true;const y=window.scrollY;dDrawEd();window.scrollTo(0,y);dQueue()};
+  box.addEventListener('change',e=>{const t=e.target,fi=t.closest('[data-fi]');
+    if(t.id==='dcard'){DDRAFT.diary.c=t.value;syncF()}
+    else if(t.id==='drev'){DDRAFT.diary.r=t.checked;syncF()}
+    else if(t.id==='ddate'){if(t.value)dLoad(t.value)}
+    else if(fi&&t.classList.contains('fcs')){DDRAFT.fortune[+fi.dataset.fi].c=t.value;syncF();dFRefresh()}
+    else if(fi&&t.classList.contains('frc')){DDRAFT.fortune[+fi.dataset.fi].r=t.checked;syncF()}
+    else if(t.dataset.d){DDRAFT[t.dataset.d]=t.value;dQueue()}});
+  box.addEventListener('input',e=>{const t=e.target,fi=t.closest('[data-fi]');
+    if(t.dataset.d){DDRAFT[t.dataset.d]=t.value;dQueue();if(/^ev[123]$/.test(t.dataset.d))document.querySelectorAll('#dEd .evc').forEach(c=>c.innerHTML=dEvChips(c.dataset.evk))}
+    else if(fi&&t.classList.contains('flb')){DDRAFT.fortune[+fi.dataset.fi].p=t.value;dQueue();document.getElementById('fpv').innerHTML=dFpv()}});
+  box.addEventListener('click',async e=>{const t=e.target.closest('button');if(!t)return;
+    if(t.dataset.m){const k=t.dataset.m;DDRAFT['m_'+k]=DDRAFT['m_'+k]===t.dataset.v?'':t.dataset.v;dQueue();t.parentNode.querySelectorAll('.mchip').forEach(b=>b.setAttribute('aria-pressed',DDRAFT['m_'+k]===b.dataset.v))}
+    else if(t.dataset.ek){const k=t.dataset.ek;DDRAFT['e_'+k]=DDRAFT['e_'+k]===t.dataset.v?'':t.dataset.v;dQueue();t.parentNode.querySelectorAll('.mchip').forEach(b=>b.setAttribute('aria-pressed',DDRAFT['e_'+k]===b.dataset.v))}
+    else if(t.id==='dquick'){const m=document.getElementById('dqmsg');
+      if(!dHas(DDRAFT)){if(m)m.textContent='先選今天抽到的牌再儲存喔。';return}
+      if(!DSTORE){if(m)m.textContent='日記功能還在準備中，請等幾秒再按一次。';return}
+      t.disabled=true;if(m)m.textContent='儲存中…';const ok=await dFlush();t.disabled=false;
+      const m2=document.getElementById('dqmsg');if(m2)m2.textContent=ok?'牌記好了 ✨ 晚上有空再回來寫也可以。':(ok===false?'儲存失敗，稍後會自動再試一次。':'正在儲存，稍等一下就好。')}
+    else if(t.id==='dbakyes'){const b=dBakGet(DSEL);if(b){DDRAFT=dNorm(b);DDRAFT.date=DSEL;DMORN=true;dDrawEd();dQueue()}}
+    else if(t.id==='dbakno'){dBakDel(DSEL);dDrawEd()}
+    else if(t.id==='dmopen'){DMORN=true;dDrawEd()}
+    else if(t.id==='dmclose'){DMORN=false;dDrawEd()}
+    else if(t.id==='drand'){const [x]=dRandIdx(1,new Set(DDRAFT.fortune.map(c=>c.c).filter(Boolean)));DDRAFT.diary=x;syncF()}
+    else if(t.id==='frand'){let n=parseInt(document.getElementById('fn').value,10);if(!(n>=1))n=DDRAFT.fortune.length;n=Math.min(n,20);
+      while(DDRAFT.fortune.length<n)DDRAFT.fortune.push({p:'第 '+(DDRAFT.fortune.length+1)+' 張',c:'',r:false});
+      const ex=new Set(DDRAFT.diary.c?[DDRAFT.diary.c]:[]);dRandIdx(n,ex).forEach((x,i)=>{DDRAFT.fortune[i].c=x.c;DDRAFT.fortune[i].r=x.r});syncF()}
+    else if(t.id==='fadd'){DDRAFT.fortune.push({p:'第 '+(DDRAFT.fortune.length+1)+' 張',c:'',r:false});syncF()}
+    else if(t.id==='frm'){if(DDRAFT.fortune.length>DFP.length)DDRAFT.fortune.pop();syncF()}
+    else if(t.id==='dmd'){const txt=dMd(),mb=document.getElementById('dmdbox');let ok=false;
+      try{if(navigator.clipboard&&navigator.clipboard.writeText){await navigator.clipboard.writeText(txt);ok=true}}catch(err){}
+      document.getElementById('dmsg').textContent=ok?'已複製！貼給 GPT 討論，最後把【今日統整】貼回上面的「GPT 的統整」。':'沒辦法自動複製，請把下面的文字全選後複製，貼給 GPT。';
+      if(!ok){mb.innerHTML=`<textarea class="dmdta" rows="12" readonly>${rEsc(txt)}</textarea>`;const ta=mb.querySelector('textarea');ta.focus();ta.select()}}
+    else if(t.id==='ddel'){if(t.dataset.armed!=='1'){t.dataset.armed='1';t.textContent='確定刪除？再按一次';return}
+      clearTimeout(DTIMER);DTIMER=null;DDIRTY=false;t.disabled=true;try{await DSTORE.del(DDRAFT.date);delete DMAP[DDRAFT.date];dBuildSense();DDRAFT=dBlank(DSEL);DMORN=null;dDrawEd();dDrawRest()}catch(err){t.disabled=false;t.textContent='刪除失敗，再試一次'}}
+    else if(t.dataset.day){dLoad(t.dataset.day)}
+    else if(t.dataset.mon){const [y,m]=DMONTH.split('-').map(Number),d=new Date(y,m-1+(+t.dataset.mon),1);DMONTH=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');dDrawRest()}
+  });
+  dLoad(rToday());
+})();
+function dApply(list){
+  DMAP={};list.forEach(e=>{if(e&&e.date)DMAP[e.date]=dNorm(e)});
+  dBuildSense();
+  if(!DDIRTY){const e=DMAP[DSEL],act=document.activeElement,ed=document.getElementById('dEd');
+    const typing=act&&ed&&ed.contains(act)&&/^(INPUT|TEXTAREA|SELECT)$/.test(act.tagName);
+    const same=e&&DDRAFT&&e.updated&&e.updated===DDRAFT.updated;
+    if(!typing&&!same){DDRAFT=e?dNorm(e):dBlank(DSEL);dDrawEd()}}
+  dDrawRest();
+  try{if(TAB==='cards')render()}catch(e){}
+}
+function dNote(t){const n=document.getElementById('dNote');if(n)n.textContent=t}
+(async()=>{
+  try{
+    if(window.claude&&claude.use){
+      const db=await claude.use('db');
+      if(db){
+        const col=db.collection('diary');
+        DSTORE={save:r=>col.doc(dId(r.date)).set(r),del:date=>col.doc(dId(date)).delete()};
+        dNote('讀取日記中…');
+        const t=setTimeout(()=>dNote('日記暫時連不上，畫面上的資料可能不是最新的。'),10000);
+        col.onSnapshot(snap=>{if(!snap.metadata.fromCache){clearTimeout(t);dNote('')}dApply(snap.docs.map(d=>d.data()))},
+          e=>{clearTimeout(t);dNote('日記讀取失敗（'+e.code+'），請重新整理頁面。')});
+        return;
+      }
+    }
+  }catch(e){}
+  let L0={};try{L0=JSON.parse(localStorage.getItem('tarot-diary')||'{}')}catch(e){}
+  const persist=()=>{try{localStorage.setItem('tarot-diary',JSON.stringify(DMAP))}catch(e){throw {message:'這個瀏覽器無法儲存'}}};
+  DSTORE={save:async r=>{DMAP[r.date]=r;persist()},del:async date=>{delete DMAP[date];persist()}};
+  dNote('日記目前只存在這台裝置的瀏覽器裡：換手機或電腦就看不到，清除瀏覽資料也會不見。');
+  dApply(Object.values(L0));
+})();
+
+// ===== 電腦版／手機版切換 =====
+(function(){const KEY='layout-mode',root=document.documentElement,btn=document.getElementById('layBtn'),mq=matchMedia('(min-width:900px)');let m=null;try{m=localStorage.getItem(KEY)}catch(e){}
+  const apply=()=>{const wide=m?m==='wide':mq.matches;root.classList.toggle('wide',wide);if(btn){btn.textContent=wide?'📱 切換成手機版':'🖥 切換成電腦版';btn.setAttribute('aria-pressed',String(wide))}};
+  if(btn)btn.onclick=()=>{m=root.classList.contains('wide')?'narrow':'wide';try{localStorage.setItem(KEY,m)}catch(e){}apply()};
+  try{mq.addEventListener('change',()=>{if(!m)apply()})}catch(e){}
+  apply()})();
+
+// ===== 我的收集（網路上看到的牌義、解牌技巧）：存在 Claude，只有自己看得到 =====
+let NOTES=[],NDB=null,NSTATE='load',NADD=null,NEDIT=null,NDEL=null,NERR='';
+const nEsc=s=>String(s==null?'':s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const nKey=(k,c)=>k+'|'+c;
+function nBlock(kind,card){return `<div class="mynotes" data-nk="${kind}" data-nc="${nEsc(card)}">${nInner(kind,card)}</div>`;}
+function nForm(n){return `<div class="nform"><textarea rows="4" placeholder="用自己的話寫重點">${n?nEsc(n.text):''}</textarea>
+  <input type="text" placeholder="來源（網址或作者，可不填）" value="${n?nEsc(n.src||''):''}">
+  <div class="nbtns"><button type="button" class="nbtn pri" data-nsave="${n?n.id:''}">儲存</button><button type="button" class="nbtn" data-ncancel>取消</button></div></div>`;}
+function nSrc(s){if(!s)return '';const t=nEsc(s);return /^https?:\/\//i.test(s)?`<a href="${t}" target="_blank" rel="noopener">${t.length>40?t.slice(0,40)+'…':t}</a>`:t;}
+function nInner(kind,card){
+  const list=NOTES.filter(n=>n.kind===kind&&n.card===card), key=nKey(kind,card);
+  let h=`<div class="nhead"><h4>${kind==='card'?'我的收集':'網路收集的解牌技巧'}</h4>${NSTATE==='ok'&&NADD!==key?`<button type="button" class="nbtn" data-nadd="${nEsc(key)}">＋新增</button>`:''}</div>`;
+  if(NSTATE==='off')return h+'<p class="nhint">這個畫面沒辦法存資料。請在 Safari 登入 Claude 後打開這頁。</p>';
+  if(NSTATE==='load')return h+'<p class="nhint">讀取中…</p>';
+  if(NSTATE==='slow')h+='<p class="nhint">暫時連不上，資料可能不是最新的。</p>';
+  if(NSTATE==='err')return h+'<p class="nhint">資料讀取失敗，請稍後重新打開這頁。</p>';
+  if(NADD===key)h+=nForm(null);
+  if(!list.length&&NADD!==key)h+=`<p class="nhint">${kind==='card'?'還沒有收集。看到不錯的解釋，按「＋新增」記下來。':'還沒有收集。看到不錯的技巧，按「＋新增」記下來。'}</p>`;
+  h+=list.map(n=>NEDIT===n.id?nForm(n):`<div class="nitem"><p>${nEsc(n.text).replace(/\n/g,'<br>')}</p>${n.src?`<p class="nsrc">來源：${nSrc(n.src)}</p>`:''}
+    <div class="nbtns">${NDEL===n.id?`<span class="nhint">確定刪除？</span><button type="button" class="nbtn warn" data-ndelok="${n.id}">刪除</button><button type="button" class="nbtn" data-ncancel>不要</button>`:`<button type="button" class="nbtn sm" data-nedit="${n.id}">修改</button><button type="button" class="nbtn sm" data-ndel="${n.id}">刪除</button>`}</div></div>`).join('');
+  if(NERR)h+=`<p class="nhint warn">${NERR}</p>`;
+  return h;
+}
+['input','change','keydown','keyup'].forEach(t=>document.addEventListener(t,e=>{if(e.target&&e.target.closest&&e.target.closest('.nform'))e.stopPropagation();},true));
+function nPaint(){document.querySelectorAll('.mynotes').forEach(el=>{el.innerHTML=nInner(el.dataset.nk,el.dataset.nc);});}
+(async()=>{let db=null;try{db=window.claude&&claude.use?await claude.use('db'):null;}catch(e){db=null;}
+  if(!db){NSTATE='off';nPaint();return;}
+  NDB=db;const t=setTimeout(()=>{if(NSTATE==='load'){NSTATE='slow';nPaint();}},10000);
+  try{db.collection('notes').orderBy('ts','asc').onSnapshot(s=>{NOTES=s.docs.map(d=>Object.assign({id:d.id},d.data()));if(!s.metadata.fromCache){clearTimeout(t);NSTATE='ok';}else if(NSTATE!=='slow')NSTATE='ok';nPaint();},
+    e=>{clearTimeout(t);NSTATE=e&&e.code==='revoked'?'off':'err';nPaint();});}catch(e){clearTimeout(t);NSTATE='err';nPaint();}
+})();
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-nadd],[data-nsave],[data-ncancel],[data-nedit],[data-ndel],[data-ndelok]');if(!b)return;
+  e.preventDefault();e.stopPropagation();NERR='';
+  if(b.dataset.nadd!=null){NADD=b.dataset.nadd;NEDIT=NDEL=null;nPaint();const box=document.querySelector(`.mynotes[data-nk="${NADD.split('|')[0]}"][data-nc="${CSS.escape(NADD.split('|').slice(1).join('|'))}"] textarea`);if(box)box.focus();return;}
+  if(b.dataset.ncancel!=null){NADD=NEDIT=NDEL=null;nPaint();return;}
+  if(b.dataset.nedit){NEDIT=b.dataset.nedit;NADD=NDEL=null;nPaint();return;}
+  if(b.dataset.ndel){NDEL=b.dataset.ndel;NADD=NEDIT=null;nPaint();return;}
+  if(!NDB)return;
+  if(b.dataset.ndelok){b.disabled=true;try{await NDB.collection('notes').doc(b.dataset.ndelok).delete();NDEL=null;}catch(err){NERR='刪除失敗，請再試一次。';}nPaint();return;}
+  if(b.dataset.nsave!=null){const f=b.closest('.nform'),text=f.querySelector('textarea').value.trim(),src=f.querySelector('input').value.trim();
+    if(!text){f.querySelector('textarea').focus();return;}
+    const wrap=b.closest('.mynotes');b.disabled=true;
+    try{if(b.dataset.nsave){await NDB.collection('notes').doc(b.dataset.nsave).update({text,src});}
+      else{await NDB.collection('notes').add({kind:wrap.dataset.nk,card:wrap.dataset.nc,text,src,ts:Date.now()});}
+      NADD=NEDIT=null;}
+    catch(err){NERR=err&&err.code==='quota_exceeded'?'空間已滿，請先刪掉一些舊的收集。':'儲存失敗，請再試一次。';b.disabled=false;}
+    nPaint();}
+},true);
 </script>
 
-</body>
-</html>
+</body></html>

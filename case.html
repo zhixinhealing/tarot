@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>芝心聊癒｜塔羅個案簿</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&family=Noto+Sans+TC:wght@400;500;700&family=DM+Mono:wght@500&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
+<script>(function(){var srcs=['https://unpkg.com/lunar-javascript@1.6.12/lunar.js'];
+function next(){if(typeof Solar!=='undefined'||!srcs.length)return;var s=document.createElement('script');s.src=srcs.shift();s.onload=function(){window.dispatchEvent(new Event('lunarready'))};s.onerror=next;document.head.appendChild(s);}
+window.addEventListener('load',function(){setTimeout(next,300)});})();</script>
+<style>
+:root{
+  --bg:#f3f1f6; --panel:#ffffff; --ink:#24203a; --muted:#6c6782;
+  --line:#2f3b8f; --accent:#b0833f; --hl:#d0427f; --hl-bg:#fbe8f0;
+  --soft:#e9ecf8; --rule:#dcd9e6; --ok:#2f8a55; --warn:#c0661f;
+  --s-maj:#b0833f; --s-wand:#d4692a; --s-cup:#2f7fc1; --s-sword:#5a5f86; --s-pent:#2f8a55;
+  --c-pre:#e8742a; --c-post:#24a055; --c-main:#e0505a;
+  --ring:#5cc08f;--ring-soft:#e8f8ef;--tri-out:#b7e0c8;--tri-in:#3f9a5e;--node:#ffffff;
+  --n-left:#3f5a4c;--n-right:#e58a6f;--n-top:#e08a2e;--star:#e0484a;--raw:#2a2a2a;
+  --t-mid:#3b7fd6;--t-mid-bg:#eef4fd;--t-young:#4a9a5c;--t-young-bg:#e3f8e9;--t-old:#e0b53c;--t-old-bg:#fdf6dd;
+  --display:"Noto Serif TC","Songti TC",serif;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --num:"DM Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#16141f; --panel:#211e2e; --ink:#ece9f5; --muted:#a39fb8;
+  --line:#8d9cf0; --accent:#d7ab68; --hl:#f07aaa; --hl-bg:#3a2030;
+  --soft:#2b2a40; --rule:#36334a; --ok:#5cc489; --warn:#f0a060;
+  --s-maj:#d7ab68; --s-wand:#f0905a; --s-cup:#6fb0ea; --s-sword:#a7abd6; --s-pent:#5cc489;
+  --c-pre:#f39553; --c-post:#4cc47a; --c-main:#f07a82;
+  --ring:#4fae80;--ring-soft:#1c2e25;--tri-out:#2f5a42;--tri-in:#5cc08f;--node:#211e2e;
+  --n-left:#cfe6d8;--n-right:#f2a48c;--n-top:#e8963a;--star:#f07070;--raw:#ece9f5;
+  --t-mid:#7fb0f0;--t-mid-bg:#1f2a3d;--t-young:#7cc98e;--t-young-bg:#1d3326;--t-old:#ecc85e;--t-old-bg:#352e18;
+  color-scheme:dark}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6;
+  padding:20px max(16px,env(safe-area-inset-left,0px)) 64px}
+.wrap{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.3}
+h2{font-size:1.15rem}h3{font-size:1rem}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--panel);border:1.5px solid var(--rule);border-radius:10px;padding:9px 11px;width:100%;min-width:0;max-width:100%}
+input,select{min-height:44px}
+input[type=date]{-webkit-appearance:none;appearance:none;display:block;text-align:left}
+input[type=date]::-webkit-date-and-time-value{text-align:left}
+input[type=checkbox]{-webkit-appearance:auto;appearance:auto;width:20px;height:20px;min-height:0;padding:0;margin:0;flex:none;accent-color:var(--line)}
+.ck{display:flex;gap:8px;align-items:center;font-size:.9rem;cursor:pointer}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--line);outline-offset:0;border-color:var(--line)}
+label.l{display:block;font-size:.82rem;font-weight:700;color:var(--muted);margin:0 0 4px}
+.hint{font-size:.8rem;color:var(--muted);margin:2px 0 0}
+.panel{background:var(--panel);border:1px solid var(--rule);border-radius:16px;padding:16px}
+.btn{border:0;border-radius:999px;padding:9px 18px;font-weight:700;background:var(--soft);color:var(--line)}
+.btn.pri{background:var(--line);color:var(--panel)}
+.btn.sm{padding:5px 12px;font-size:.85rem}
+.btn.ghost{background:transparent;border:1.5px solid var(--rule);color:var(--ink)}
+.btn.danger{background:var(--hl-bg);color:var(--hl)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media (max-width:480px){.grid2.st{grid-template-columns:minmax(0,1fr)}}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.live{padding:4px 0 10px;border-bottom:1px dashed var(--rule)}
+.live .cap{font-size:.75rem;color:var(--muted);text-align:center;margin-top:4px}
+.feerow{display:flex;gap:8px;align-items:center}
+.feerow input{flex:1}
+.f{display:flex;flex-direction:column}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1.5px solid var(--rule);background:var(--panel);border-radius:999px;padding:3px 12px;font-size:.82rem}
+.chip[aria-pressed="true"]{background:var(--line);border-color:var(--line);color:var(--panel)}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;border-radius:999px;padding:1px 9px;background:var(--soft);color:var(--line)}
+.tag.warn{background:var(--hl-bg);color:var(--hl)}
+.tag.ok{background:color-mix(in srgb,var(--ok) 15%,transparent);color:var(--ok)}
+.tag.gold{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent)}
+.note{font-size:.85rem;color:var(--muted);text-align:center}
+.err{color:var(--hl);font-size:.85rem}
+
+/* 封面 */
+#cover{min-height:calc(100vh - 90px);display:flex;align-items:center;justify-content:center}
+.cv{text-align:center;max-width:360px;width:100%;display:flex;flex-direction:column;align-items:center;gap:14px}
+.cv svg{width:150px;height:150px}
+.cv .brand{font-size:.9rem;letter-spacing:.3em;color:var(--accent);font-weight:700}
+.cv h1{font-size:2rem;font-weight:900;letter-spacing:.08em}
+.cv p{margin:0;color:var(--muted);font-size:.9rem}
+.cv .pin{display:flex;gap:8px;width:100%}
+.cv .pin input{text-align:center;letter-spacing:.4em;font-family:var(--num)}
+.cv .go{font-size:1.1rem;padding:12px 44px;letter-spacing:.2em}
+
+/* 列表 */
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.top h1{font-size:1.3rem}
+.iconbtn{border:0;background:var(--soft);color:var(--line);border-radius:999px;width:38px;height:38px;display:grid;place-items:center;font-size:1.05rem;flex:none}
+.stat{display:flex;gap:8px}
+.stat div{flex:1;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:8px 10px}
+.stat b{display:block;font-family:var(--num);font-size:1.15rem;color:var(--line)}
+.stat span{font-size:.75rem;color:var(--muted)}
+.sec-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.fl{display:flex;flex-direction:column;gap:6px}
+.fu{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--soft);border:0;text-align:left;width:100%}
+.fu .d{font-family:var(--num);font-size:.8rem;color:var(--muted);flex:none;min-width:52px}
+.fu .t{flex:1;min-width:0}
+.fu .t b{display:block}
+.fu .t span{font-size:.82rem;color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fu.late .d{color:var(--hl);font-weight:700}
+.months{display:flex;flex-direction:column;gap:8px}
+details.mo{background:var(--panel);border:1px solid var(--rule);border-radius:14px}
+details.mo>summary{list-style:none;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer}
+details.mo>summary::-webkit-details-marker{display:none}
+details.mo>summary .m{font-family:var(--display);font-weight:900;font-size:1.05rem;min-width:52px}
+details.mo>summary .n{color:var(--muted);font-size:.85rem;flex:1}
+details.mo>summary::after{content:"›";color:var(--muted);transition:transform .2s;font-size:1.2rem}
+details.mo[open]>summary::after{transform:rotate(90deg)}
+details.mo.cur>summary .m{color:var(--hl)}
+.cl{display:flex;flex-direction:column;gap:6px;padding:0 10px 10px}
+.cc{display:flex;gap:12px;align-items:center;border:0;background:var(--soft);border-radius:12px;padding:9px 12px;text-align:left;width:100%}
+.av{width:38px;height:38px;border-radius:50%;background:var(--line);color:var(--panel);display:grid;place-items:center;font-family:var(--display);font-weight:900;flex:none}
+.cc .t{flex:1;min-width:0}
+.cc .t b{font-size:1rem}
+.cc .t .s{font-size:.8rem;color:var(--muted)}
+.cc .tags{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.bday{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+.bday button{flex:none;border:1.5px solid var(--hl);background:var(--hl-bg);color:var(--ink);border-radius:12px;padding:6px 12px;text-align:left}
+.bday button small{display:block;color:var(--muted);font-family:var(--num);font-size:.75rem}
+
+/* 個案檔案 */
+.ch{display:flex;gap:14px;align-items:center}
+.ch .av{width:54px;height:54px;font-size:1.4rem}
+.ch h1{font-size:1.4rem}
+.tabs{display:flex;background:var(--panel);border:1px solid var(--rule);border-radius:999px;padding:4px;gap:4px;position:sticky;top:6px;z-index:5}
+.tabs button{flex:1;border:0;background:transparent;border-radius:999px;padding:7px 4px;font-weight:700;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--line);color:var(--panel)}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}
+dl.kv dt{color:var(--muted);font-size:.85rem;font-weight:700;white-space:nowrap}
+dl.kv dd{margin:0;white-space:pre-wrap;word-break:break-word}
+.box{background:var(--soft);border-radius:12px;padding:10px 12px;white-space:pre-wrap;word-break:break-word;min-height:20px}
+.tl{display:flex;flex-direction:column;gap:10px;position:relative}
+.ss{background:var(--panel);border:1px solid var(--rule);border-radius:14px;overflow:hidden}
+.ss>summary{list-style:none;padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:6px}
+.ss>summary::-webkit-details-marker{display:none}
+.ss .h{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ss .h .d{font-family:var(--num);font-weight:700;color:var(--line)}
+.ss .q{font-size:.92rem}
+.ss .mini{display:flex;gap:3px;flex-wrap:wrap}
+.ss .mini .face{width:26px}
+.ss .bd{padding:0 14px 14px;display:flex;flex-direction:column;gap:12px;border-top:1px dashed var(--rule);padding-top:12px}
+.ss .lbl{font-size:.8rem;font-weight:700;color:var(--muted);margin-bottom:3px}
+
+/* 牌 */
+.face{aspect-ratio:7/12;border-radius:4px;overflow:hidden;background:var(--soft);display:grid;place-items:center;font-size:.6rem;text-align:center;line-height:1.2;flex:none}
+.face img{width:100%;height:100%;object-fit:cover;display:block}
+.face.r img{transform:rotate(180deg)}
+.board{position:relative;width:100%;background:var(--soft);border-radius:12px;margin:0 auto}
+.bwrap{display:flex;flex-direction:column;gap:6px}
+.bmain{flex:1;min-width:0}
+.mslot{flex:none;width:clamp(40px,11%,64px);position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:6px}
+.mslot .face{width:100%;border:1px solid var(--rule);box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.mslot .no{position:absolute;top:0;left:-5px;background:var(--hl);color:#fff;font-size:.6rem;border-radius:999px;min-width:16px;height:16px;display:grid;place-items:center;z-index:2}
+.mslot small{font-size:.65rem;color:var(--muted)}
+.slot{position:absolute;transform:translate(-50%,-50%)}
+.slot.x{transform:translate(-50%,-50%) rotate(90deg);z-index:2}
+.slot .face{width:100%;box-shadow:0 1px 3px rgba(0,0,0,.2);border:1px solid var(--rule)}
+.slot .no{position:absolute;top:-7px;left:-7px;background:var(--line);color:var(--panel);font-family:var(--num);font-size:.6rem;border-radius:999px;min-width:16px;height:16px;display:grid;place-items:center;padding:0 3px;z-index:3}
+.slot .no{z-index:6}
+.slot .auxf{position:absolute;width:78%;transform:rotate(16deg);transform-origin:center;z-index:4}
+.slot .auxf .face{box-shadow:0 2px 5px rgba(0,0,0,.3);border:1.5px solid var(--hl)}
+.slot.x .no{transform:rotate(-90deg)}
+.side{display:flex;flex-direction:row;gap:12px;justify-content:flex-start;padding-left:4px}
+.mslot.ins .no{background:var(--accent)}
+.insrow{display:flex;flex-direction:column;gap:6px;border:1px dashed var(--accent);border-radius:12px;padding:10px;background:var(--panel)}
+.insrow .from{font-size:.78rem;color:var(--muted)}
+.sugg{display:flex;flex-wrap:wrap;gap:6px}
+.sugg button{border:1.5px dashed var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:.82rem}
+.laybar{display:flex;align-items:center;justify-content:center;gap:8px;font-size:.82rem;color:var(--muted)}
+/* 新增 */
+.view{display:flex;flex-direction:column;gap:14px}
+.nav3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.nav3 button{border:1px solid var(--rule);background:var(--panel);border-radius:14px;padding:10px 4px;font-weight:700;font-size:.88rem;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav3 b{font-size:1.2rem}
+.mecard{border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--panel))}
+.av.me{background:var(--accent)}
+.av.ar{background:var(--muted)}
+details.mo.arch>summary .m{font-size:1.2rem;min-width:30px}
+.tip{display:block;font-size:.75rem;color:var(--muted);margin-top:2px}
+.insinfo .from b{color:var(--hl);margin-left:2px}
+.optv{border:1px solid var(--rule);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.opth{display:flex;gap:8px;align-items:center}
+.ol{background:var(--line);color:var(--panel);border-radius:8px;min-width:28px;height:28px;padding:0 8px;display:grid;place-items:center;font-weight:900}
+.optrow{display:flex;gap:10px;align-items:center;border:1px solid var(--rule);border-radius:12px;padding:10px}
+.olbl{width:52px!important;flex:none;text-align:center;font-weight:900}
+.osum{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.osum .mini{display:flex;gap:3px;flex-wrap:wrap}.osum .mini .face{width:20px}
+.ob{display:flex;flex-direction:column;gap:6px}
+.sfilter{justify-content:center}
+.bars{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.bar1{display:grid;grid-template-columns:64px minmax(0,1fr) 72px;gap:8px;align-items:center;font-size:.85rem}
+.bt{height:14px;background:var(--soft);border-radius:999px;overflow:hidden;display:flex}
+.bt i{display:block;height:100%}
+.bt:not(.stack) i{border-radius:999px}
+.bn{font-family:var(--num);font-size:.78rem;color:var(--muted);text-align:right}
+.legend2{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;font-size:.78rem;color:var(--muted)}
+.legend2 i,.dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.tblw{overflow-x:auto;margin-top:8px}
+.tbl{border-collapse:collapse;width:100%;font-size:.85rem}
+.tbl th,.tbl td{border-bottom:1px solid var(--rule);padding:7px 6px;text-align:left;white-space:nowrap}
+.tbl th{color:var(--muted);font-size:.78rem}
+.tbl td.tc{white-space:normal;min-width:120px;font-size:.8rem}
+.topc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:8px}
+.topc>div{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.topc .face{width:100%;max-width:56px}
+.topc small{font-size:.72rem;line-height:1.3}
+.fxh{margin:12px 0 6px;font-size:.95rem}
+.fx{border-left:3px solid var(--rule);padding:4px 10px;margin-bottom:8px}
+.fo{font-size:.88rem;color:var(--muted)}
+.fn{font-size:.92rem;font-weight:700}
+.chooser{display:flex;flex-direction:column;gap:6px}
+/* 電腦版 */
+html.lay-d .wrap{max-width:1100px}
+html.lay-d #client .cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:16px;align-items:start}
+html.lay-d #client .cols>div{display:flex;flex-direction:column;gap:14px}
+html.lay-d .months{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+.lrow{display:flex;flex-direction:column;gap:14px}
+.lrow:empty{display:none}
+html.lay-d .lrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
+html.lay-d .sheet .wrap{max-width:1100px}
+html.lay-d .sgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+html.lay-d #sLeft{position:sticky;top:56px}
+html.lay-d #sLeft .live{border:1px solid var(--rule);border-radius:16px;background:var(--panel);padding:14px}
+.sgrid>div{display:flex;flex-direction:column;gap:12px}
+#sLeft:empty{display:none}
+html.lay-d .sheet .bar .btn{max-width:240px}
+.plist{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.plist li{display:flex;gap:10px;align-items:flex-start}
+.plist .face{width:44px}
+.plist .pn{font-family:var(--num);color:var(--line);font-weight:700;min-width:18px}
+.plist .pt{flex:1;min-width:0}
+.plist .pt small{display:block;color:var(--muted);font-size:.78rem;line-height:1.4}
+.plist .aux{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.plist .aux span{display:flex;gap:5px;align-items:center;font-size:.8rem;background:var(--hl-bg);border-radius:8px;padding:3px 6px 3px 3px}
+.plist .aux .face{width:22px}
+.from{font-size:.78rem;color:var(--muted)}
+.photos{display:flex;gap:8px;flex-wrap:wrap}
+.photos a,.photos .ph{width:84px;height:84px;border-radius:10px;overflow:hidden;display:block;position:relative;background:var(--soft)}
+.photos img{width:100%;height:100%;object-fit:cover}
+.photos .ph button{position:absolute;top:3px;right:3px;border:0;background:rgba(0,0,0,.55);color:#fff;border-radius:999px;width:22px;height:22px;font-size:.75rem}
+
+/* 表單 sheet */
+.sheet{position:fixed;inset:0;background:var(--bg);z-index:50;overflow-y:auto;padding:16px max(16px,env(safe-area-inset-left,0px)) 90px}
+.sheet .wrap{gap:12px}
+.sheet .sh{display:flex;align-items:center;justify-content:space-between;position:sticky;top:-16px;background:var(--bg);padding:10px 0;z-index:3}
+.sheet .bar{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--rule);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;justify-content:center;z-index:4}
+.sheet .bar .btn{flex:1;max-width:300px}
+.fs{display:flex;flex-direction:column;gap:10px}
+.pos{border:1px solid var(--rule);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px;background:var(--panel)}
+.pos .ph2{display:flex;gap:8px;align-items:baseline}
+.pos .ph2 b{font-family:var(--num);color:var(--line)}
+.pos .ph2 span{font-size:.85rem;flex:1}
+.pick{display:flex;gap:8px;align-items:center}
+.pick .face{width:34px}
+.pick select{flex:1}
+.rv{flex:none;border:1.5px solid var(--rule);background:var(--panel);border-radius:999px;padding:6px 10px;font-size:.8rem;font-weight:700;white-space:nowrap}
+.rv[aria-pressed="true"]{background:var(--hl);border-color:var(--hl);color:#fff}
+.auxrow{padding-left:14px;border-left:3px solid var(--hl-bg)}
+.auxrow .t{font-size:.75rem;color:var(--hl);font-weight:700}
+.x{border:0;background:transparent;color:var(--muted);font-size:1rem;padding:4px 6px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1.5px solid var(--rule);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:.85rem}
+.seg button[aria-pressed="true"]{background:var(--line);color:var(--panel);border-color:var(--line)}
+
+/* 九宮格・七秒讀心數（同靈數羅盤） */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.legend span{font-size:.8rem;font-weight:700;border:1px solid currentColor;border-radius:999px;padding:2px 12px}
+.lg-pre{color:var(--c-pre)}.lg-post{color:var(--c-post)}.lg-main{color:var(--c-main)}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:360px;margin:0 auto}
+.cell{aspect-ratio:1;border:1.5px solid var(--rule);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.cell svg{width:88%;height:88%}
+.cell text{font-family:var(--body);font-weight:700;text-anchor:middle;dominant-baseline:middle}
+.cell .pre{fill:none;stroke:var(--c-pre);stroke-width:2.5}
+.cell .post{fill:none;stroke:var(--c-post);stroke-width:2.5;stroke-linejoin:round}
+.cell .main{fill:none;stroke:var(--c-main);stroke-width:2.5}
+.pyr{width:100%;max-width:440px;height:auto;margin:0 auto;display:block}
+.pyr text{text-anchor:middle;dominant-baseline:middle}
+.pyr .ring{fill:none;stroke:var(--ring);stroke-width:1.6}
+.pyr .tri-out{fill:var(--ring-soft);stroke:var(--tri-out);stroke-width:4;stroke-linejoin:round}
+.pyr .tri-in{fill:none;stroke:var(--tri-in);stroke-width:2.6;stroke-linecap:round}
+.pyr .node{fill:var(--node)}
+.pyr .node-top{fill:var(--n-top)}
+.pyr .node,.pyr .node-top{filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.14))}
+.pyr .nv{font-family:var(--body);font-size:17px;font-weight:700}
+.pyr .nl{fill:var(--n-left)}.pyr .nr{fill:var(--n-right)}.pyr .nt{fill:#fff}
+.pyr .star{fill:var(--star);font-size:11px}
+.pyr .raw{font-family:var(--body);fill:var(--raw);font-size:15px;font-weight:700}
+.pyr .rawl{font-family:var(--body);fill:var(--raw);font-size:9px}
+.pyr .grp{font-family:var(--body);font-size:11px;stroke:var(--panel);stroke-width:5px;stroke-linejoin:round;paint-order:stroke}
+.pyr .grp-s{font-size:9px}
+.pyr .tile-t{font-family:var(--num);font-size:15px}
+.nums{display:flex;gap:8px}
+.nums div{flex:1;text-align:center;background:var(--soft);border-radius:12px;padding:8px}
+.nums b{display:block;font-family:var(--num);font-size:1.3rem;color:var(--line)}
+.nums span{font-size:.75rem;color:var(--muted)}
+details.fold>summary{cursor:pointer;font-weight:700;font-family:var(--display)}
+.confirm{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--hl-bg);border-radius:10px;padding:8px 10px;font-size:.85rem}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:.85rem;z-index:99}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+
+  <!-- 封面 -->
+  <section id="cover">
+    <div class="cv">
+      <svg viewBox="0 0 160 160" aria-hidden="true">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--line)"/><stop offset="1" stop-color="var(--hl)"/></linearGradient></defs>
+        <circle cx="80" cy="80" r="74" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="2 5"/>
+        <circle cx="80" cy="80" r="62" fill="none" stroke="var(--rule)" stroke-width="1"/>
+        <rect x="52" y="34" width="56" height="92" rx="7" fill="var(--panel)" stroke="url(#g1)" stroke-width="2.5" transform="rotate(-10 80 80)"/>
+        <rect x="56" y="38" width="48" height="84" rx="5" fill="none" stroke="var(--accent)" stroke-width="1" transform="rotate(-10 80 80)"/>
+        <g transform="rotate(-10 80 80)">
+          <path d="M86 62a16 16 0 1 0 0 30a12.5 12.5 0 1 1 0-30z" fill="var(--accent)"/>
+          <path d="M66 104l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="var(--hl)"/>
+          <circle cx="94" cy="52" r="2" fill="var(--line)"/><circle cx="70" cy="56" r="1.4" fill="var(--line)"/>
+        </g>
+        <path d="M128 36l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="var(--accent)"/>
+        <path d="M30 118l1.5 4 4 1.5-4 1.5-1.5 4-1.5-4-4-1.5 4-1.5z" fill="var(--line)"/>
+      </svg>
+      <div class="brand">芝心聊癒</div>
+      <h1>塔羅個案簿</h1>
+      <p>每一次相遇，都是一段故事的延續</p>
+      <p class="hint" style="max-width:280px">資料只存在這台裝置的瀏覽器裡，記得到 ⚙︎ 設定定期「匯出備份」。</p>
+      <div class="pin" id="pinBox" hidden><input id="pinIn" type="password" inputmode="numeric" maxlength="8" placeholder="輸入密碼" autocomplete="off"></div>
+      <button class="btn pri go" id="goBtn" disabled>開始</button>
+      <div class="err" id="coverErr"></div>
+      <div class="note" id="coverNote">連線中…</div>
+    </div>
+  </section>
+
+  <!-- 個案列表 -->
+  <section id="list" class="view" hidden></section>
+
+  <!-- 個案檔案 -->
+  <section id="client" class="view" hidden></section>
+  <section id="pub" class="view" hidden></section>
+  <section id="stats" class="view" hidden></section>
+</div>
+
+<div class="sheet" id="sheet" hidden></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const SPREADS=[{"id":"time","name":"時間之流","count":"三張","pos":["過去發生了什麼","現在發生什麼（是提問者本身，還是他在問的對象？）","依前兩張的因果關係，未來會如何"],"lay":["3/1.15",22,[[1,20,50],[2,50,50],[3,80,50]]]},{"id":"prob","name":"解決問題","count":"三張","pos":["原因：為何有這個問題","狀況：當前的實際情境","建議：如何解決問題"],"lay":["3/1.15",22,[[1,20,50],[2,50,50],[3,80,50]]]},{"id":"bms","name":"身心靈","count":"四張","pos":["身","心：情緒、心情","靈：內心狀態","心聲"],"lay":["2.6",18,[[1,14,50],[2,38,50],[3,62,50],[4,86,50]]]},{"id":"yuan","name":"元辰宮","count":"十一張","pos":["本命樹：生命根基、元神狀態、目前生命的主調（整個牌陣的核心）","屋外：外在呈現、別人眼中的你","管家：自我管理、照顧自己的能力","客廳：人際關係、家庭互動","書房：事業、學業、思考方向","臥室：感情、親密關係、休息與休養","灶房：賺錢能力、行動力、身體的火力","米缸：財庫、存款、福報的存量","隱藏課題：宮中還沒被看見、需要面對的部分","調整方向：現在可以整理、修補的地方","元辰宮指引：給你的一句話或下一步"],"lay":["0.85",13,[[1,50,10],[2,30,30],[3,70,30],[4,20,50],[5,50,50],[6,80,50],[7,30,70],[8,70,70],[9,20,90],[10,50,90],[11,80,90]]]},{"id":"relation","name":"關係牌陣","count":"四張","pos":["個案的狀態","對方狀態","過程","結果"],"lay":["1.15",13,[[1,28,82],[2,72,82],[3,50,48],[4,50,17]]]},{"id":"cross6","name":"人際十字","count":"六張","pos":["個案的狀態","對方狀態","困難","現況","過程","結果"],"lay":["1.35",12,[[1,50,17],[2,50,83],[3,14,50],[4,32,50],[5,68,50],[6,86,50]]]},{"id":"love","name":"感情","count":"八張","pos":["提問者現在對這段關係的看法","對方現在對這段關係的看法","這段關係的現狀","提問者過去的感情狀態","對方過去的感情狀態","提問者未來對這段關係的看法","對方未來對這段關係的看法","這段關係的未來"],"lay":["1.05",15,[[1,20,15],[4,20,50],[6,20,85],[3,50,33],[8,50,85],[2,80,15],[5,80,50],[7,80,85]]]},{"id":"deep","name":"深入關係","count":"八張","pos":["提問者最深層的恐懼","提問者對這段關係的期待","提問者對這段關係的表面態度","對方對這段關係的表面態度","對方對這段關係的期待","對方對這段關係最深層的恐懼","這段關係的現狀","對這段關係的建議"],"lay":["2.3",10,[[1,8,50],[2,21,50],[3,34,50],[7,50,20],[8,50,80],[4,66,50],[5,79,50],[6,92,50]]]},{"id":"ushape","name":"U 型陣","count":"七張","pos":["問題的過去狀況（半年前）","問題的現在狀況（前後一個月）","問題的未來狀況（近未來，約三個月內）","慣性調整","問題的環境、資源","困難","問題的結果"],"tips":[null,null,null,"此問題當前的境況","相關人士怎麼看提問者，或環境、資源","提問者內心真正的渴望或擔憂","此事件的結果（更遠的未來，通常半年到一年）"],"lay":["1.15",13,[[1,22,18],[2,22,50],[3,22,82],[4,50,82],[5,78,82],[6,78,50],[7,78,18]]]},{"id":"celtic","name":"塞爾特十字","count":"十張","pos":["提問者在當下時刻的狀態","問題現狀（橫在你眼前的事）","問題的基本狀況或隱藏的人事物","過去如何影響了當前的情況","懸在你頭上可能發生的事（加冕還是破壞）","未來三個月的進展","你內在的擔憂或期待","外在影響與環境、資源","建議","結果：考量目前的一切，此事的可能結果（半年到一年）"],"lay":["1.25",12,[[5,32,13],[4,12,48],[1,32,43],[2,32,57,1],[6,52,48],[3,32,87],[10,82,11],[9,82,37],[8,82,63],[7,82,89]]]},{"id":"choice","name":"二選一","count":"七張","pos":["提問者的現狀","A 選擇的現狀","B 選擇的現狀","A 選擇隱藏的狀態","B 選擇隱藏的狀態","A 選擇的發展","B 選擇的發展"],"lay":["1.55",13,[[6,10,22],[4,24,42],[2,38,66],[1,50,84],[3,62,66],[5,76,42],[7,90,22]]]},{"id":"season","noMind":true,"name":"四季","count":"五張","pos":["大牌：未來三個月主要會經歷的主題","寶劍牌：知識的追求，這季思考與溝通的狀態","聖杯牌：情緒感受，這季情感連結或內在追求是否滿足","權杖牌：熱情與意志，這季行動力與慾望能否好好展現","錢幣牌：物質世界與顯化，這季成就的呈現、是否達到目標"],"lay":["1.3",15,[[2,50,15],[5,22,50],[1,50,50],[3,78,50],[4,50,85]]]},{"id":"year","name":"十二宮流年","count":"十二張","pos":["未來這一年的主題（自己）","正財與物質運用","短途交通、溝通，與鄰居、同事的關係","居家、原生家庭、心靈家園","創造力、戀愛、偏財投資","日常習慣、工作型態、健康","商業與愛情上的人際關係、契約","合夥的資產、稅務、遺產或債務","長途旅行、人生哲學、宗教","公眾形象與職業、與權威人士的關係","事業的財、社群、朋友的朋友","可能需要做的犧牲、隱藏的敵人"],"lay":["1.15",10,[["01",8,49.99999999999999],["02",13.626933041053576,70.5],["03",28.999999999999982,85.50704155516198],["04",49.99999999999999,91],["05",71,85.50704155516198],["06",86.37306695894641,70.50000000000001],["07",92,50.00000000000001],["08",86.37306695894644,29.50000000000003],["09",70.99999999999999,14.49295844483801],["10",50.000000000000014,9],["11",29.000000000000032,14.492958444837996],["12",13.626933041053569,29.50000000000001]]]},{"id":"rel","name":"人際關係（舊）","count":"四張","pos":["提問者對這段關係的看法","對方（提問者在意的對象）的看法","這段關係的現狀","這段關係的未來（通常指 3–6 個月；大牌多代表影響深遠）"],"lay":["1.35",17,[[1,22,27],[2,50,27],[3,78,27],[4,50,75]]],"hidden":true},{"id":"horse","name":"馬蹄鐵（舊）","count":"七張","pos":["問題的過去狀況（半年前）","問題的現在狀況（前後一個月）","問題的未來狀況（近未來，約三個月內）","此問題當前的境況","相關人士怎麼看提問者，或環境、資源","提問者內心真正的渴望或擔憂","此事件的結果（更遠的未來，通常半年到一年）"],"lay":["1.9",11,[[1,8,22],[2,22,42],[3,36,64],[4,50,80],[5,64,64],[6,78,42],[7,92,22]]],"hidden":true},{"id":"self","name":"自由牌陣","count":"","pos":[],"lay":null}];
+const CARDS=[{"n":"愚人","k":"maj-00","s":"maj"},{"n":"魔法師","k":"maj-01","s":"maj"},{"n":"女祭司","k":"maj-02","s":"maj"},{"n":"女皇","k":"maj-03","s":"maj"},{"n":"國王","k":"maj-04","s":"maj"},{"n":"教皇","k":"maj-05","s":"maj"},{"n":"戀人","k":"maj-06","s":"maj"},{"n":"戰車","k":"maj-07","s":"maj"},{"n":"力量","k":"maj-08","s":"maj"},{"n":"隱士","k":"maj-09","s":"maj"},{"n":"命運之輪","k":"maj-10","s":"maj"},{"n":"正義","k":"maj-11","s":"maj"},{"n":"吊人","k":"maj-12","s":"maj"},{"n":"死神","k":"maj-13","s":"maj"},{"n":"節制","k":"maj-14","s":"maj"},{"n":"惡魔","k":"maj-15","s":"maj"},{"n":"高塔","k":"maj-16","s":"maj"},{"n":"星星","k":"maj-17","s":"maj"},{"n":"月亮","k":"maj-18","s":"maj"},{"n":"太陽","k":"maj-19","s":"maj"},{"n":"審判","k":"maj-20","s":"maj"},{"n":"世界","k":"maj-21","s":"maj"},{"n":"權杖 ACE","k":"wand-01","s":"wand"},{"n":"權杖二","k":"wand-02","s":"wand"},{"n":"權杖三","k":"wand-03","s":"wand"},{"n":"權杖四","k":"wand-04","s":"wand"},{"n":"權杖五","k":"wand-05","s":"wand"},{"n":"權杖六","k":"wand-06","s":"wand"},{"n":"權杖七","k":"wand-07","s":"wand"},{"n":"權杖八","k":"wand-08","s":"wand"},{"n":"權杖九","k":"wand-09","s":"wand"},{"n":"權杖十","k":"wand-10","s":"wand"},{"n":"權杖侍者","k":"wand-page","s":"wand"},{"n":"權杖騎士","k":"wand-knight","s":"wand"},{"n":"權杖皇后","k":"wand-queen","s":"wand"},{"n":"權杖國王","k":"wand-king","s":"wand"},{"n":"聖杯 ACE","k":"cup-01","s":"cup"},{"n":"聖杯二","k":"cup-02","s":"cup"},{"n":"聖杯三","k":"cup-03","s":"cup"},{"n":"聖杯四","k":"cup-04","s":"cup"},{"n":"聖杯五","k":"cup-05","s":"cup"},{"n":"聖杯六","k":"cup-06","s":"cup"},{"n":"聖杯七","k":"cup-07","s":"cup"},{"n":"聖杯八","k":"cup-08","s":"cup"},{"n":"聖杯九","k":"cup-09","s":"cup"},{"n":"聖杯十","k":"cup-10","s":"cup"},{"n":"聖杯侍者","k":"cup-page","s":"cup"},{"n":"聖杯騎士","k":"cup-knight","s":"cup"},{"n":"聖杯皇后","k":"cup-queen","s":"cup"},{"n":"聖杯國王","k":"cup-king","s":"cup"},{"n":"寶劍 ACE","k":"sword-01","s":"sword"},{"n":"寶劍二","k":"sword-02","s":"sword"},{"n":"寶劍三","k":"sword-03","s":"sword"},{"n":"寶劍四","k":"sword-04","s":"sword"},{"n":"寶劍五","k":"sword-05","s":"sword"},{"n":"寶劍六","k":"sword-06","s":"sword"},{"n":"寶劍七","k":"sword-07","s":"sword"},{"n":"寶劍八","k":"sword-08","s":"sword"},{"n":"寶劍九","k":"sword-09","s":"sword"},{"n":"寶劍十","k":"sword-10","s":"sword"},{"n":"寶劍侍者","k":"sword-page","s":"sword"},{"n":"寶劍騎士","k":"sword-knight","s":"sword"},{"n":"寶劍皇后","k":"sword-queen","s":"sword"},{"n":"寶劍國王","k":"sword-king","s":"sword"},{"n":"錢幣 ACE","k":"pent-01","s":"pent"},{"n":"錢幣二","k":"pent-02","s":"pent"},{"n":"錢幣三","k":"pent-03","s":"pent"},{"n":"錢幣四","k":"pent-04","s":"pent"},{"n":"錢幣五","k":"pent-05","s":"pent"},{"n":"錢幣六","k":"pent-06","s":"pent"},{"n":"錢幣七","k":"pent-07","s":"pent"},{"n":"錢幣八","k":"pent-08","s":"pent"},{"n":"錢幣九","k":"pent-09","s":"pent"},{"n":"錢幣十","k":"pent-10","s":"pent"},{"n":"錢幣侍者","k":"pent-page","s":"pent"},{"n":"錢幣騎士","k":"pent-knight","s":"pent"},{"n":"錢幣皇后","k":"pent-queen","s":"pent"},{"n":"錢幣國王","k":"pent-king","s":"pent"}];
+(function(){const TW=[];for(let k=1;k<=12;k++){const t=(180+(k-1)*30)*Math.PI/180;TW.push([k,50+42*Math.cos(t),50-41*Math.sin(t)])}const y=SPREADS.find(s=>s.id==='year');if(y)y.lay[2]=TW;})();
+const IMGV=3;
+const SUITN={maj:'大牌',wand:'權杖',cup:'聖杯',sword:'寶劍',pent:'錢幣'};
+const CIDX={};CARDS.forEach((c,i)=>CIDX[c.n]=i);
+const QTYPES=['感情','事業工作','財運','人際','家庭','學業','自我成長','其他'];
+const REACT=['很有共鳴','部分共鳴','沒有共鳴','不確定'];
+const VERIFY=['應驗','部分應驗','沒有應驗','還不知道'];
+const SELFR=['很有共鳴','半信半疑','不想面對','豁然開朗','還在消化'];
+const PLATFORMS=['IG','Threads','YouTube','Facebook','TikTok','LINE 社群'];
+const QCOL=['#d0427f','#2f7fc1','#b0833f','#5a5f86','#2f8a55','#d4692a','#8a4fc1','#7a7f8c'];
+const QUICKC={id:'',name:'快速占卜',quick:true};
+const ZOD=[['摩羯',1,19],['水瓶',2,18],['雙魚',3,20],['牡羊',4,19],['金牛',5,20],['雙子',6,21],['巨蟹',7,22],['獅子',8,22],['處女',9,22],['天秤',10,23],['天蠍',11,22],['射手',12,21],['摩羯',12,31]];
+const SX='鼠牛虎兔龍蛇馬羊猴雞狗豬';
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const md=s=>{if(!s)return '';const [y,m,d]=s.split('-');return (+m)+'/'+(+d)};
+const fmtD=s=>s?s.replace(/-/g,'/'):'';
+function toast(t){const e=$('toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,2200)}
+
+/* ===== 生日相關 ===== */
+function zodiac(s){if(!s)return '';const [,m,d]=s.split('-').map(Number);for(const z of ZOD){if(m<z[1]||(m===z[1]&&d<=z[2]))return z[0]}return ''}
+function lunarOf(s){if(!s||typeof Solar==='undefined')return null;try{const [y,m,d]=s.split('-').map(Number);const l=Solar.fromYmd(y,m,d).getLunar();return {y:l.getYear(),m:Math.abs(l.getMonth()),d:l.getDay(),leap:l.getMonth()<0}}catch(e){return null}}
+function shengxiao(c){const ly=c.lunar&&c.lunar.y;if(ly)return SX[((ly-4)%12+12)%12];if(c.solar){const y=+c.solar.slice(0,4);return SX[((y-4)%12+12)%12]+'？'}return ''}
+function ageOf(c){if(c.solar){const [y,m,d]=c.solar.split('-').map(Number);const n=new Date();let a=n.getFullYear()-y;if(n.getMonth()+1<m||(n.getMonth()+1===m&&n.getDate()<d))a--;return a}return c.age||''}
+const lunarTxt=l=>l&&l.y?`${l.y} 年${l.leap?'閏':''}${l.m} 月 ${l.d} 日`:'';
+
+/* ===== 靈數（與靈數羅盤相同算法） ===== */
+const dsum=n=>String(Math.abs(n)).split('').reduce((a,c)=>a+ +c,0);
+const one=n=>{while(n>9)n=dsum(n);return n;};
+function lifeNums(y,m,d){const s=dsum(String(y)+m+d);const chain=[s];let x=s;while(x>9){x=dsum(x);chain.push(x);}return {chain,shown:chain.length>2?chain.slice(0,-1).join('/'):String(s),main:x,total:s};}
+function gridHTML(y,m,d,ln){
+  const count=str=>{const c={};for(const ch of str)if(ch!=='0')c[ch]=(c[ch]||0)+1;return c;};
+  const pre=count(String(y)+m+d);const post=count(ln.chain.slice(0,-1).join('')||String(ln.total));let html='';
+  for(let k=1;k<=9;k++){const p=pre[k]||0,t=post[k]||0,isMain=ln.main===k;let s='';
+    if(isMain)s+=`<rect class="main" x="8" y="8" width="84" height="84"/>`;
+    for(let i=0;i<t;i++){const g=i*7;s+=`<path class="post" d="M50 ${14+g}L${16+g*.9} ${84-g*.4}H${84-g*.9}Z"/>`;}
+    for(let i=0;i<p;i++)s+=`<circle class="pre" cx="50" cy="${t?60:50}" r="${17+i*5}"/>`;
+    s+=`<text x="50" y="${t?61:51}" style="font-size:24px;fill:var(--line)">${k}</text>`;
+    html+=`<div class="cell"><svg viewBox="0 0 100 100" aria-label="${k}">${s}</svg></div>`;}
+  return html;
+}
+const base4=(y,m,d)=>{const ys=String(y).padStart(4,'0');const yy=+ys.slice(2);return [one(d),one(m),one(+ys.slice(0,2)),yy===0?5:one(yy)];};
+function pyramid(y,m,d){const b=base4(y,m,d);const mL=one(b[0]+b[1]),mR=one(b[2]+b[3]),top=one(mL+mR);const tri=(a,c)=>[a,c,one(a+c)];
+  return {b,mL,mR,top,left:tri(one(mL+b[0]),one(mL+b[1])),upper:tri(one(top+mR),one(top+mL)),right:tri(one(mR+b[2]),one(mR+b[3]))};}
+function tiles(cx,cy,[a,c,t],name,range,col,bg){const w=25,g=1.5,top=cy,bot=cy+w+g;
+  const tile=(x,yv,v)=>`<rect x="${x-w/2}" y="${yv-w/2}" width="${w}" height="${w}" rx="2" style="fill:var(${bg})"/><text class="tile-t" x="${x}" y="${yv}" style="fill:var(${col})">${v}</text>`;
+  return `<text class="grp" x="${cx}" y="${cy-39}" style="fill:var(${col})">${name}</text><text class="grp grp-s" x="${cx}" y="${cy-26}" style="fill:var(${col})">${range}</text>`+tile(cx,top,t)+tile(cx-w/2-g/2,bot,a)+tile(cx+w/2+g/2,bot,c);}
+function pyrSVG(p,yy,m,d){const ys=String(yy).padStart(4,'0'),pad=v=>String(v).padStart(2,'0');const raw=[pad(d),pad(m),ys.slice(0,2),ys.slice(2)];
+  const T=[200,131],BL=[133,250],BR=[267,250];const L=[166.5,190],R=[233.5,190],B=[[133,240],[178,240],[222,240],[267,240]];
+  const ln=(P,Q)=>`M${P[0]} ${P[1]}L${Q[0]} ${Q[1]}`;
+  const node=([x,yv],v,cls,r=12)=>`<circle class="node" cx="${x}" cy="${yv}" r="${r}"/><text class="nv ${cls}" x="${x}" y="${yv+1}">${v}</text>`;
+  return `<circle class="ring" cx="200" cy="193" r="153"/><circle class="ring" cx="200" cy="193" r="131"/><path class="tri-out" d="M200 98L107 259H293Z"/><path class="tri-in" d="${ln(T,BL)}${ln(T,BR)}${ln(BL,BR)}${ln(L,R)}${ln(L,B[1])}${ln(R,B[2])}"/>`+
+   `<circle class="node-top" cx="${T[0]}" cy="${T[1]}" r="12"/><text class="nv nt" x="${T[0]}" y="${T[1]+1}">${p.top}</text>`+
+   node(L,p.mL,'nl')+node(R,p.mR,'nr')+node(B[0],p.b[0],'nl')+node(B[1],p.b[1],'nl')+node(B[2],p.b[2],'nr')+node(B[3],p.b[3],'nr')+
+   `<text class="star" x="200" y="112">*</text><text class="star" x="121" y="256">*</text><text class="star" x="279" y="256">*</text>`+
+   raw.map((v,i)=>`<text class="raw" x="${B[i][0]+2}" y="276">${v}</text>`).join('')+
+   `<text class="rawl" x="${B[0][0]+2}" y="290">日期</text><text class="rawl" x="${B[1][0]+2}" y="290">月份</text><text class="rawl" x="247" y="290">年份</text>`+
+   tiles(200,55,p.upper,'中年','41–60','--t-mid','--t-mid-bg')+tiles(98,140,p.left,'青年','21–40','--t-young','--t-young-bg')+tiles(302,140,p.right,'晚年','61–','--t-old','--t-old-bg');}
+function personNo(c){if(!c.solar)return null;const [y,m,d]=c.solar.split('-').map(Number);return pyramid(y,m,d).top}
+
+/* ===== 牌 ===== */
+function face(c,cls=''){if(!c||!c.c)return `<div class="face ${cls}"></div>`;const i=CIDX[c.c];const alt=esc(c.c)+(c.r?'（逆位）':'');
+  if(i==null)return `<div class="face ${cls}${c.r?' r':''}">${esc(c.c)}</div>`;
+  return `<div class="face ${cls}${c.r?' r':''}" title="${alt}"><img src="cards/${CARDS[i].k}.jpg?v=${IMGV}" alt="${alt}" decoding="async" onerror="imgErr(this)"></div>`;}
+function imgErr(im){if(!im.dataset.retry){im.dataset.retry=1;setTimeout(()=>{im.src=im.src.split('?')[0]+'?v='+IMGV+'&r='+Date.now()},400);return}im.parentNode.textContent=im.alt}
+const cname=c=>c&&c.c?esc(c.c)+(c.r?'<span class="tag warn" style="margin-left:4px">逆</span>':''):'<span style="color:var(--muted)">未選</span>';
+let CARD_OPTS='';{let g='';CARD_OPTS='<option value="">— 選牌 —</option>';CARDS.forEach(c=>{if(c.s!==g){if(g)CARD_OPTS+='</optgroup>';CARD_OPTS+=`<optgroup label="${SUITN[c.s]}">`;g=c.s}CARD_OPTS+=`<option>${esc(c.n)}</option>`});CARD_OPTS+='</optgroup>';}
+function cnum(name){const i=CIDX[name];if(i==null)return null;const c=CARDS[i];const m=c.k.match(/-(\d+)$/);return m?{s:c.s,n:+m[1]}:null}
+function cardBy(s,n){return CARDS.find(c=>{if(c.s!==s)return false;const m=c.k.match(/-(\d+)$/);return m&&+m[1]===n})}
+function tableCards(r){const s=spreadOf(r.spread);const u=[];if(!s.noMind&&r.mind&&r.mind.c)u.push(r.mind.c);(r.cards||[]).forEach(c=>{if(c.c)u.push(c.c);(c.aux||[]).forEach(a=>a.c&&u.push(a.c))});return u}
+function insSuggest(r){const tc=tableCards(r),have=new Set(tc.concat((r.ins||[]).map(x=>x.c).filter(Boolean))),out=[],seen=new Set();
+  for(let i=0;i<tc.length;i++)for(let j=i+1;j<tc.length;j++){const a=cnum(tc[i]),b=cnum(tc[j]);if(!a||!b||a.s!==b.s||Math.abs(a.n-b.n)!==2)continue;
+    const mid=cardBy(a.s,(a.n+b.n)/2);if(!mid||have.has(mid.n)||seen.has(mid.n))continue;seen.add(mid.n);const lo=a.n<b.n?tc[i]:tc[j],hi=a.n<b.n?tc[j]:tc[i];const x={c:mid.n,from:[lo,hi],auto:true};insOrient(r,x);out.push(x)}
+  return out}
+function findOnTable(r,name){const s=spreadOf(r.spread);if(!s.noMind&&r.mind&&r.mind.c===name)return r.mind;for(const c of (r.cards||[])){if(c.c===name)return c;for(const a of (c.aux||[]))if(a.c===name)return a}return null}
+function insOrient(r,x){if(!x.auto||!x.from||x.from.length!==2)return;const a=findOnTable(r,x.from[0]),b=findOnTable(r,x.from[1]);if(!a||!b)return;x.fromR=[!!a.r,!!b.r];x.r=!!(a.r||b.r)}
+const insTxt=x=>esc(x.c)+(x.r?'（逆）':'（正）')+(x.from&&x.from.length===2?`<span class="from">｜${esc(x.from[0])}${x.fromR?(x.fromR[0]?' 逆':' 正'):''}、${esc(x.from[1])}${x.fromR?(x.fromR[1]?' 逆':' 正'):''}之間</span>`:'');
+const spreadOf=id=>SPREADS.find(s=>s.id===id)||SPREADS.find(s=>s.id==='self');
+function posLabels(r){if(r.posNames&&r.posNames.length)return r.posNames;const s=spreadOf(r.spread);if(s.id==='self')return (r.labels||[]).map((l,i)=>l||('第 '+(i+1)+' 張'));return s.pos}
+function boardHTML(r){const s=spreadOf(r.spread);const ins=(r.ins||[]).filter(x=>x.c);
+  let side='';if(!s.noMind)side+=`<div class="mslot"><span class="no">心</span>${face(r.mind&&r.mind.c?r.mind:{})}<small>心態</small></div>`;
+  side+=ins.map(x=>`<div class="mslot ins"><span class="no">插</span>${face(x)}<small>插牌</small></div>`).join('');
+  if(!side)return boardCore(r);
+  return `<div class="bwrap"><div class="side">${side}</div><div class="bmain">${boardCore(r)}</div></div>`}
+function boardCore(r){
+  const s=spreadOf(r.spread),cards=r.cards||[];
+  if(!s.lay){const n=cards.length;if(!n)return '';const per=Math.min(n,5),w=Math.min(17,80/per),rows=Math.ceil(n/per);
+    const sl=cards.map((c,i)=>{const col=i%per,row=Math.floor(i/per);return [i+1,(100/(per+1))*(col+1),(100/(rows+1))*(row+1)]});
+    return boardInner(`${per*1.2}/${rows*1.25}`,w,sl,cards);}
+  return boardInner(s.lay[0],s.lay[1],s.lay[2],cards);
+}
+function boardInner(ratio,w,slots,cards){const mx=Math.max(0,...cards.map(c=>(c.aux||[]).filter(a=>a.c).length));
+  return `<div class="board" style="aspect-ratio:${ratio}${mx?`;margin-top:${Math.round(w*(0.45+0.2*mx))}%`:''}">`+slots.map(sl=>{const c=cards[sl[0]-1]||{};
+    const auxs=(c.aux||[]).filter(a=>a.c).map((a,j)=>`<div class="auxf" style="left:${56+j*14}%;top:${-22-j*10}%">${face(a)}</div>`).join('');
+    return `<div class="slot${sl[3]?' x':''}" style="left:${sl[1]}%;top:${sl[2]}%;width:${w}%"><span class="no">${sl[0]}</span>${face(c)}${auxs}</div>`}).join('')+`</div>`;
+}
+
+/* ===== 狀態 ===== */
+let LAYP='auto';try{LAYP=localStorage.getItem('case-layout')||'auto'}catch(e){}
+const isDesk=()=>LAYP==='d'||(LAYP==='auto'&&window.innerWidth>=900);
+function applyLay(){document.documentElement.classList.toggle('lay-d',isDesk())}
+applyLay();
+let _lw=isDesk();window.addEventListener('resize',()=>{const d=isDesk();applyLay();if(d!==_lw){_lw=d;if(sheet.hidden)refresh()}});
+function setLay(v){LAYP=v;try{localStorage.setItem('case-layout',v)}catch(e){}applyLay();_lw=isDesk();refresh();toast(v==='auto'?'版面：自動':v==='d'?'版面：電腦版':'版面：手機版')}
+let DB=null,ASSETS=null,CLIENTS=[],SESS=[],PUBS=[],SET={},READY={c:false,s:false,m:false,p:false},UNLOCK=false,VIEW='cover',CUR=null,TAB='rec',OPENM=new Set([new Date().getMonth()+1]),Q='';
+const col=n=>DB.collection(n);
+async function sha(t){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('zx-case:'+t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){let h=0;for(const ch of 'zx-case:'+t)h=(h*31+ch.charCodeAt(0))|0;return 'h'+h}}
+const sessOf=id=>SESS.filter(s=>id==='__quick'?!s.clientId:s.clientId===id).sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.ts||0)-(a.ts||0));
+const clientOf=id=>id==='__quick'?QUICKC:CLIENTS.find(c=>c.id===id);
+const selfC=()=>CLIENTS.find(c=>c.self);
+const clientForS=s=>s.clientId?clientOf(s.clientId):QUICKC;
+const isSelfS=s=>s.kind==='self'||!!(s.clientId&&(clientOf(s.clientId)||{}).self);
+const activeClients=()=>CLIENTS.filter(c=>!c.self&&!c.archived);
+const pending=()=>SESS.filter(s=>(s.follow||s.followDate)&&!s.followDone&&!((clientOf(s.clientId)||{}).archived)).sort((a,b)=>(a.followDate||'9999').localeCompare(b.followDate||'9999'));
+
+/* ===== 封面 ===== */
+function coverState(){
+  const ok=READY.c&&READY.s&&READY.m&&READY.p;
+  if(!DB)return;
+  $('coverNote').textContent=ok?'':'讀取資料中…';
+  $('pinBox').hidden=!(ok&&SET.pin);
+  $('goBtn').disabled=!ok;
+}
+$('goBtn').onclick=async()=>{
+  $('coverErr').textContent='';
+  if(SET.pin){const v=$('pinIn').value.trim();if(!v){$('coverErr').textContent='請輸入密碼';return}if(await sha(v)!==SET.pin){$('coverErr').textContent='密碼不對，再試一次';$('pinIn').value='';return}}
+  UNLOCK=true;$('pinIn').value='';show('list');consumePend();
+};
+$('pinIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('goBtn').click()});
+
+function show(v,id){VIEW=v;if(id!==undefined)CUR=id;['cover','list','client','pub','stats'].forEach(k=>$(k).hidden=v!==k);
+  if(v==='list')renderList();if(v==='client')renderClient();if(v==='pub')renderPub();if(v==='stats')renderStats();window.scrollTo(0,0);}
+
+/* ===== 個案列表 ===== */
+function renderList(){
+  const now=new Date(),cm=now.getMonth()+1,ym=today().slice(0,7);
+  const mon=SESS.filter(s=>(s.date||'').startsWith(ym));const fee=mon.reduce((a,s)=>a+(+s.fee||0),0);
+  const q=Q.trim().toLowerCase();
+  const act=activeClients(),arch=CLIENTS.filter(c=>c.archived&&!c.self);
+  const match=c=>!q||[c.name,c.contact,c.job,c.city,c.channel,c.archiveNote].join(' ').toLowerCase().includes(q);
+  const list=act.filter(match);
+  const pend=pending();const t=today();const me=selfC();
+  const groups={};list.forEach(c=>{const m=c.solar?+c.solar.slice(5,7):0;(groups[m]=groups[m]||[]).push(c)});
+  const bdays=act.filter(c=>c.solar&&+c.solar.slice(5,7)===cm).sort((a,b)=>a.solar.slice(8).localeCompare(b.solar.slice(8)));
+  const qs=sessOf('__quick');
+  let h=`<div class="top"><button class="iconbtn" id="lockBtn" aria-label="回到封面">🔒</button><h1>塔羅個案簿</h1><button class="iconbtn" id="setBtn" aria-label="設定">⚙︎</button></div>
+  <div class="stat"><div><b>${act.length}</b><span>位個案</span></div><div><b>${mon.length}</b><span>本月占卜</span></div><div><b>${fee?'$'+fee.toLocaleString():'—'}</b><span>本月收入</span></div></div>
+  <div class="nav3"><button id="quickBtn"><b>⚡</b>快速占卜</button><button id="pubBtn"><b>📣</b>大眾占卜</button><button id="statBtn"><b>📊</b>復盤統計</button></div>`;
+  if(me&&!q){const ms=sessOf(me.id);h+=`<button class="cc mecard" data-open="${me.id}"><span class="av me">我</span><span class="t"><b>${esc(me.name)}</b><div class="s">我自己的占卜・${ms.length} 次${ms.length?`・上次 ${fmtD(ms[0].date)}`:''}</div></span><span class="tags">${ms.some(s=>(s.follow||s.followDate)&&!s.followDone)?'<span class="tag warn">待追蹤</span>':''}</span></button>`}
+  h+=`<div class="row"><input id="q" type="search" placeholder="搜尋姓名、聯絡方式、職業…" value="${esc(Q)}" style="flex:1"><button class="btn pri" id="addC">＋ 新增個案</button></div>`;
+  let side='';
+  if(bdays.length&&!q)side+=`<div class="panel"><div class="sec-h"><h2>🎂 ${cm} 月壽星</h2><span class="hint">可以傳祝福或邀約流年占卜</span></div><div class="bday">${bdays.map(c=>`<button data-open="${c.id}"><b>${esc(c.name)}</b><small>${md(c.solar)}${c.solar.slice(5)===t.slice(5)?'・今天':''}</small></button>`).join('')}</div></div>`;
+  if(pend.length&&!q)side+=`<div class="panel"><div class="sec-h"><h2>📌 待追蹤</h2><span class="hint">${pend.length} 筆</span></div><div class="fl">${pend.slice(0,8).map(s=>{const c=clientForS(s)||{};const late=s.followDate&&s.followDate<=t;
+    return `<button class="fu${late?' late':''}" data-open="${s.clientId||'__quick'}" data-tab="rec"><span class="d">${s.followDate?md(s.followDate):'未定'}</span><span class="t"><b>${esc(s.clientId?(c.name||'（已刪除）'):'⚡ '+(s.guestName||'快速占卜'))}</b><span>${esc(s.follow||s.question||'')}</span></span></button>`}).join('')}</div></div>`;
+  if(qs.length&&!q)side+=`<div class="panel"><div class="sec-h"><h2>⚡ 快速占卜紀錄</h2><button class="btn sm" data-open="__quick">查看全部 ${qs.length}</button></div><div class="fl">${qs.slice(0,3).map(s=>`<button class="fu" data-open="__quick"><span class="d">${md(s.date)}</span><span class="t"><b>${esc(s.guestName||'路人')}</b><span>${esc(s.question||spreadOf(s.spread).name)}</span></span></button>`).join('')}</div></div>`;
+  if(side)h+=`<div class="lrow">${side}</div>`;
+  h+=`<div class="months">`;
+  for(let m=1;m<=12;m++){const arr=(groups[m]||[]).sort((a,b)=>a.solar.slice(8).localeCompare(b.solar.slice(8)));if(!arr.length&&q)continue;
+    h+=`<details class="mo${m===cm?' cur':''}" data-m="${m}"${(q&&arr.length)||OPENM.has(m)?' open':''}><summary><span class="m">${m} 月</span><span class="n">${arr.length?arr.length+' 位':'—'}${m===cm?'・本月':''}</span></summary>${arr.length?`<div class="cl">${arr.map(ccard).join('')}</div>`:''}</details>`;}
+  const nob=groups[0]||[];
+  if(nob.length)h+=`<details class="mo" data-m="0"${q||OPENM.has(0)?' open':''}><summary><span class="m">未填</span><span class="n">${nob.length} 位・還沒填生日</span></summary><div class="cl">${nob.map(ccard).join('')}</div></details>`;
+  h+=`</div>`;
+  const archM=arch.filter(match);
+  if(archM.length)h+=`<details class="mo arch"${q||OPENM.has(-1)?' open':''} data-m="-1"><summary><span class="m">📦</span><span class="n">已封存（${archM.length} 位）・不會出現在壽星、待追蹤裡</span></summary><div class="cl">${archM.map(ccard).join('')}</div></details>`;
+  if(!act.length)h+=`<p class="note">還沒有個案。按「＋ 新增個案」開始第一筆吧！</p>`;
+  h+=`<div class="laybar">版面<div class="seg">${[['auto','自動'],['m','手機版'],['d','電腦版']].map(([v,l])=>`<button type="button" data-lay="${v}" aria-pressed="${LAYP===v}">${l}</button>`).join('')}</div></div>`;
+  $('list').innerHTML=h;
+  const qi=$('q');qi.oninput=()=>{Q=qi.value;const p=qi.selectionStart;renderList();const n=$('q');n.focus();try{n.setSelectionRange(p,p)}catch(e){}};
+}
+function ccard(c){const ss=sessOf(c.id),n=ss.length,pend=ss.some(s=>(s.follow||s.followDate)&&!s.followDone);
+  const bits=[c.solar?md(c.solar):'',zodiac(c.solar),c.city].filter(Boolean).join('・');
+  return `<button class="cc" data-open="${c.id}"><span class="av${c.archived?' ar':''}">${esc((c.name||'?').slice(0,1))}</span><span class="t"><b>${esc(c.name)}</b><div class="s">${esc(bits)}${n?`・上次 ${fmtD(ss[0].date)}`:''}${c.archived&&c.archiveNote?`・${esc(c.archiveNote)}`:''}</div></span><span class="tags">${c.archived?'<span class="tag">已封存</span>':''}${n>1?`<span class="tag gold">回頭客 ×${n}</span>`:n?'<span class="tag">1 次</span>':''}${pend&&!c.archived?'<span class="tag warn">待追蹤</span>':''}</span></button>`;}
+
+document.addEventListener('toggle',e=>{const d=e.target;if(d.classList&&d.classList.contains('mo')){const m=+d.dataset.m;d.open?OPENM.add(m):OPENM.delete(m)}},true);
+
+/* ===== 個案檔案 ===== */
+function renderClient(){
+  if(CUR==='__quick'){const ss=sessOf('__quick');
+    $('client').innerHTML=`<div class="top"><button class="iconbtn" id="backBtn" aria-label="返回列表">←</button><span></span><button class="btn sm pri" id="newQ">＋ 快速占卜</button></div>
+    <div class="ch"><span class="av">⚡</span><div><h1>快速占卜</h1><p class="hint">不用建檔的路人紀錄。想留下資料時，按「轉成個案」。</p></div></div>
+    ${ss.length?`<div class="tl">${ss.map((s,i)=>sessHTML(s,i===0)).join('')}</div>`:'<div class="panel note">還沒有快速占卜紀錄。</div>'}`;return}
+  const c=clientOf(CUR);if(!c){show('list');return}
+  const ss=sessOf(c.id),pn=personNo(c);
+  let h=`<div class="top"><button class="iconbtn" id="backBtn" aria-label="返回列表">←</button><span></span><button class="btn sm pri" id="newS">＋ 這次占卜</button></div>
+  ${c.archived?`<div class="confirm">📦 已封存${c.archiveNote?'：'+esc(c.archiveNote):''}<button class="btn sm" id="unarch">恢復</button></div>`:''}
+  <div class="ch"><span class="av${c.self?' me':''}">${c.self?'我':esc((c.name||'?').slice(0,1))}</span><div><h1>${esc(c.name)}${c.self?' <span class="tag gold">我自己</span>':''}</h1><div class="chips" style="margin-top:4px">${[c.solar?`<span class="tag">${zodiac(c.solar)}座</span>`:'',shengxiao(c)?`<span class="tag">屬${shengxiao(c)}</span>`:'',pn?`<span class="tag gold">${pn} 號人</span>`:'',ageOf(c)!==''?`<span class="tag">${ageOf(c)} 歲</span>`:'',ss.length?`<span class="tag ${ss.length>1?'gold':''}">${c.self?'占卜':'來訪'} ${ss.length} 次</span>`:''].join('')}</div></div></div>
+`;
+  if(isDesk()){h+=`<div class="cols"><div>${infoHTML(c)}${numHTML(c)}</div><div><div class="sec-h"><h2>${c.self?'占卜紀錄':'諮詢紀錄'}</h2></div>${recHTML(c,ss)}</div></div>`}
+  else{h+=`<div class="tabs" role="tablist">${[['info','基本資料'],['rec',c.self?'占卜紀錄':'諮詢紀錄'],['num','靈數']].map(([k,t])=>`<button role="tab" data-tab2="${k}" aria-selected="${TAB===k}">${t}</button>`).join('')}</div>`;
+  if(TAB==='info')h+=infoHTML(c);
+  else if(TAB==='rec')h+=recHTML(c,ss);
+  else h+=numHTML(c);}
+  $('client').innerHTML=h;
+}
+function infoHTML(c){
+  const row=(k,v)=>v!==''&&v!=null?`<dt>${k}</dt><dd>${esc(v)}</dd>`:'';
+  return `<div class="panel"><div class="sec-h"><h2>基本資料</h2><button class="btn sm" id="editC">編輯</button></div>
+  <dl class="kv">${row('姓名',c.name)}${row('年紀',ageOf(c)===''?'':ageOf(c)+' 歲')}${row('職業',c.job)}${row('縣市',c.city)}${row('星座',c.solar?zodiac(c.solar)+'座':'')}${row('生肖',shengxiao(c))}${row('國曆生日',fmtD(c.solar))}${row('農曆生日',lunarTxt(c.lunar))}${row('聯絡方式',c.contact)}${row('認識管道',c.channel)}${row('第一次見面',c.firstPlace)}</dl></div>
+  <div class="panel"><h3 style="margin-bottom:6px">主訴</h3><div class="box">${esc(c.complaint||'')||'<span style="color:var(--muted)">還沒填</span>'}</div></div>
+  <div class="panel"><h3 style="margin-bottom:6px">家庭背景／概況</h3><div class="box">${esc(c.family||'')||'<span style="color:var(--muted)">還沒填</span>'}</div></div>
+  <div class="panel"><h3 style="margin-bottom:6px">其他備註</h3><div class="box">${esc(c.memo||'')||'<span style="color:var(--muted)">還沒填</span>'}</div></div>`;
+}
+function recHTML(c,ss){
+  if(!ss.length)return `<div class="panel note">還沒有${c.self?'占卜':'諮詢'}紀錄。按右上角「＋ 這次占卜」新增。</div>`;
+  return `<div class="tl">${ss.map((s,i)=>sessHTML(s,i===0)).join('')}</div>`;
+}
+function sessHTML(s,open){
+  const sp=spreadOf(s.spread),labels=posLabels(s),cards=s.cards||[];
+  const late=s.followDate&&!s.followDone&&s.followDate<=today();
+  const me=isSelfS(s);
+  let h=`<details class="ss"${open?' open':''}><summary><div class="h"><span class="d">${fmtD(s.date)}</span>${!s.clientId?`<span class="tag gold">⚡ ${esc(s.guestName||'路人')}</span>`:''}${s.place?`<span class="tag">📍${esc(s.place)}</span>`:''}${s.qtype?`<span class="tag">${esc(s.qtype)}</span>`:''}<span class="tag">${esc(sp.name)}</span>${s.react?`<span class="tag ${s.react==='很有共鳴'?'ok':''}">${esc(s.react)}</span>`:''}${s.verify?`<span class="tag ${s.verify==='應驗'?'ok':s.verify==='沒有應驗'?'warn':'gold'}">${esc(s.verify)}</span>`:''}${(s.follow||s.followDate)&&!s.followDone?`<span class="tag warn">待追蹤${s.followDate?' '+md(s.followDate):''}</span>`:''}</div>
+  <div class="q">${s.question?'「'+esc(s.question)+'」':'<span style="color:var(--muted)">（沒有記問句）</span>'}</div>
+  <div class="mini">${cards.filter(c=>c.c).map(c=>face(c)).join('')}</div></summary><div class="bd">`;
+  if(s.questionFix)h+=`<div><div class="lbl">✏️ 問句修正</div><div class="box">${esc(s.questionFix)}</div></div>`;
+  if(s.mind&&s.mind.c)h+=`<div class="hint">心態牌：${cname(s.mind)}</div>`;
+  if((s.ins||[]).some(x=>x.c))h+=`<div class="hint">插牌：${s.ins.filter(x=>x.c).map(insTxt).join('、')}</div>`;
+  if(cards.some(c=>c.c)||(s.mind&&s.mind.c)||(s.ins||[]).some(x=>x.c))h+=`<div>${boardHTML(s)}</div>`;
+  h+=`<ul class="plist">${cards.map((c,i)=>`<li><span class="pn">${i+1}</span>${face(c)}<div class="pt">${cname(c)}<small>${esc(labels[i]||'')}</small>${(c.aux||[]).filter(a=>a.c).length?`<div class="aux">${c.aux.filter(a=>a.c).map(a=>`<span>${face(a)}輔助：${cname(a)}</span>`).join('')}</div>`:''}</div></li>`).join('')}</ul>`;
+  if(s.photos&&s.photos.length)h+=`<div><div class="lbl">牌面照片</div><div class="photos">${s.photos.map(p=>`<a href="/_blob/${esc(p)}" target="_blank" rel="noopener"><img src="/_blob/${esc(p)}" alt="牌面照片" loading="lazy"></a>`).join('')}</div></div>`;
+  if(s.reading)h+=`<div><div class="lbl">解讀筆記</div><div class="box">${esc(s.reading)}</div></div>`;
+  if(s.react||s.reactNote)h+=`<div><div class="lbl">${me?'當下感受':'當下反饋'}${s.react?'：'+esc(s.react):''}</div>${s.reactNote?`<div class="box">${esc(s.reactNote)}</div>`:''}</div>`;
+  if(s.verify||s.verifyNote)h+=`<div><div class="lbl">事後驗證${s.verify?'：'+esc(s.verify):''}</div>${s.verifyNote?`<div class="box">${esc(s.verifyNote)}</div>`:''}</div>`;
+  if(s.follow||s.followDate)h+=`<div><div class="lbl">備註／下次追蹤${s.followDate?'（'+fmtD(s.followDate)+'）':''}${s.followDone?' ✅ 已追蹤':''}</div>${s.follow?`<div class="box">${esc(s.follow)}</div>`:''}</div>`;
+  if(s.fee||s.feeN)h+=`<div class="hint">收費：${feeTxt(s)}${s.fee?'$'+(+s.fee).toLocaleString():''}</div>`;
+  h+=`<div class="row">${(s.follow||s.followDate)&&!s.followDone?`<button class="btn sm" data-done="${s.id}">標記已追蹤</button>`:''}<button class="btn sm" data-edits="${s.id}">編輯／補反饋</button>${!s.clientId?`<button class="btn sm" data-conv="${s.id}">轉成個案</button>`:''}<button class="btn sm ghost" data-dels="${s.id}">刪除</button></div><div data-confirm="${s.id}"></div></div></details>`;
+  return h;
+}
+function numHTML(c){
+  if(!c.solar)return `<div class="panel note">填了國曆生日，這裡就會自動出現九宮格和七秒讀心數。<br><button class="btn sm" id="editC" style="margin-top:8px">去填生日</button></div>`;
+  const [y,m,d]=c.solar.split('-').map(Number),ln=lifeNums(y,m,d),p=pyramid(y,m,d);
+  let h=`<div class="nums"><div><b>${ln.shown}</b><span>後天數</span></div><div><b>${ln.main}</b><span>主命數</span></div><div><b>${p.top}</b><span>幾號人</span></div></div>
+  <div class="panel"><h2>國曆九宮格</h2><div class="legend"><span class="lg-pre">○ 先天數</span><span class="lg-post">△ 後天數</span><span class="lg-main">□ 主命數</span></div><div class="grid9">${gridHTML(y,m,d,ln)}</div></div>`;
+  const L=c.lunar;
+  if(L&&L.y){const ll=lifeNums(L.y,L.m,L.d);h+=`<details class="panel fold"><summary>農曆九宮格（${L.y}/${L.m}/${L.d}）</summary><div class="legend"><span class="lg-pre">○ 先天數</span><span class="lg-post">△ 後天數</span><span class="lg-main">□ 主命數</span></div><div class="grid9">${gridHTML(L.y,L.m,L.d,ll)}</div><p class="hint" style="text-align:center">農曆後天數 ${ll.shown}・主命數 ${ll.main}</p></details>`;}
+  h+=`<div class="panel"><h2>七秒讀心數</h2><svg class="pyr" viewBox="0 0 400 350" role="img" aria-label="七秒讀心數">${pyrSVG(p,y,m,d)}</svg><p class="hint" style="text-align:center">完整解讀請到靈數羅盤查看。多胞胎校正不在這裡計算。</p></div>`;
+  return h;
+}
+
+/* ===== 點擊處理 ===== */
+document.addEventListener('click',async e=>{
+  const t=e.target.closest('button,[data-open]');if(!t)return;
+  if(t.dataset.open){CUR=t.dataset.open;TAB=t.dataset.tab||'rec';show('client');return}
+  if(t.dataset.lay){setLay(t.dataset.lay);return}
+  if(t.id==='lockBtn'){UNLOCK=false;show('cover');return}
+  if(t.id==='setBtn'){openSettings();return}
+  if(t.id==='addC'){openClientForm(null);return}
+  if(t.id==='backBtn'){show('list');return}
+  if(t.dataset.tab2){TAB=t.dataset.tab2;renderClient();return}
+  if(t.id==='editC'){openClientForm(clientOf(CUR));return}
+  if(t.id==='newS'){openSessForm(clientOf(CUR),null);return}
+  if(t.id==='quickBtn'||t.id==='newQ'){openSessForm(QUICKC,null);return}
+  if(t.id==='pubBtn'){show('pub');return}
+  if(t.id==='statBtn'){show('stats');return}
+  if(t.id==='newPub'){openPubForm(null);return}
+  if(t.dataset.sf){SF=t.dataset.sf;renderStats();return}
+  if(t.dataset.editp){openPubForm(PUBS.find(p=>p.id===t.dataset.editp));return}
+  if(t.dataset.delp){document.querySelector(`[data-confirmp="${t.dataset.delp}"]`).innerHTML=`<div class="confirm">確定刪除這篇大眾占卜？<button class="btn sm danger" data-delpok="${t.dataset.delp}">刪除</button></div>`;return}
+  if(t.dataset.delpok){t.disabled=true;try{await col('publics').doc(t.dataset.delpok).delete();toast('已刪除')}catch(err){toast('刪除失敗');t.disabled=false}return}
+  if(t.dataset.conv){const s=SESS.find(x=>x.id===t.dataset.conv);if(s)openClientForm(null,{convert:s.id,name:s.guestName||''});return}
+  if(t.id==='unarch'){t.disabled=true;try{await col('clients').doc(CUR).update({archived:false});toast('已恢復')}catch(err){toast('儲存失敗');t.disabled=false}return}
+  if(t.dataset.edits){const s=SESS.find(x=>x.id===t.dataset.edits);if(s)openSessForm(clientForS(s),s);return}
+  if(t.dataset.done){t.disabled=true;try{await col('sessions').doc(t.dataset.done).update({followDone:true});toast('已標記追蹤完成')}catch(err){toast('儲存失敗，請再試一次');t.disabled=false}return}
+  if(t.dataset.dels){const box=document.querySelector(`[data-confirm="${t.dataset.dels}"]`);box.innerHTML=`<div class="confirm">確定刪除這筆紀錄？<button class="btn sm danger" data-delok="${t.dataset.dels}">刪除</button><button class="btn sm ghost" data-delno="${t.dataset.dels}">取消</button></div>`;return}
+  if(t.dataset.delno){document.querySelector(`[data-confirm="${t.dataset.delno}"]`).innerHTML='';return}
+  if(t.dataset.delok){t.disabled=true;try{await col('sessions').doc(t.dataset.delok).delete();toast('已刪除')}catch(err){toast('刪除失敗');t.disabled=false}return}
+});
+
+/* ===== 表單共用 ===== */
+const sheet=$('sheet');
+function openSheet(html){sheet.innerHTML=html;sheet.hidden=false;sheet.scrollTop=0;document.body.style.overflow='hidden'}
+function closeSheet(){sheet.hidden=true;sheet.innerHTML='';document.body.style.overflow=''}
+const listOpts=arr=>(arr||[]).map(x=>`<option value="${esc(x)}">`).join('');
+const quick=(arr,target)=>(arr||[]).length?`<div class="chips" style="margin-top:6px">${arr.map(x=>`<button type="button" class="chip" data-fill="${target}" data-v="${esc(x)}">${esc(x)}</button>`).join('')}</div>`:'';
+sheet.addEventListener('click',e=>{const b=e.target.closest('[data-fill]');if(b){const i=$(b.dataset.fill);i.value=b.dataset.v;i.dispatchEvent(new Event('input'))}});
+async function remember(key,v){v=(v||'').trim();if(!v)return;const arr=SET[key]||[];if(arr.includes(v))return;const n=[v,...arr].slice(0,20);SET[key]=n;try{await col('meta').doc('settings').set(Object.assign({},SET,{[key]:n}))}catch(e){}}
+
+/* ===== 個案表單 ===== */
+function openClientForm(c,opts){
+  opts=opts||{};const isNew=!c;c=c||{name:opts.name||''};
+  const L=c.lunar||{};
+  openSheet(`<div class="wrap"><div class="sh"><h2>${isNew?'新增個案':'編輯基本資料'}</h2><button class="iconbtn" id="cx">✕</button></div>
+  ${opts.convert?'<p class="hint">把這筆快速占卜轉成正式個案，紀錄會一起搬過來。</p>':isNew?'<p class="hint">現場很趕的話，填姓名就能先開始，其他之後再補。</p>':''}
+  <div class="panel fs">
+    <div class="f"><label class="l" for="fName">姓名 *</label><input id="fName" value="${esc(c.name||'')}" autocomplete="off"></div>
+    <div class="f"><label class="l" for="fSolar">國曆生日</label><input id="fSolar" type="date" value="${esc(c.solar||'')}"><p class="hint" id="fAuto"></p></div>
+    <div class="f"><label class="l">農曆生日（自動換算，可修改）</label><div class="grid3"><input id="fLy" type="number" inputmode="numeric" placeholder="年" value="${L.y||''}"><input id="fLm" type="number" inputmode="numeric" placeholder="月" value="${L.m||''}"><input id="fLd" type="number" inputmode="numeric" placeholder="日" value="${L.d||''}"></div>
+      <label class="ck" style="margin-top:8px"><input id="fLeap" type="checkbox"${L.leap?' checked':''}> 閏月</label></div>
+    <div class="grid2 st"><div class="f"><label class="l" for="fAge">年紀（沒有生日時填）</label><input id="fAge" type="number" inputmode="numeric" value="${esc(c.age||'')}"></div>
+    <div class="f"><label class="l" for="fJob">職業</label><input id="fJob" value="${esc(c.job||'')}"></div></div>
+    <div class="f"><label class="l" for="fCity">縣市</label><input id="fCity" list="dlCity" value="${esc(c.city||'')}"><datalist id="dlCity">${listOpts(SET.cities)}</datalist></div>
+    <div class="f"><label class="l" for="fContact">聯絡方式</label><input id="fContact" value="${esc(c.contact||'')}" placeholder="LINE、IG、電話…"></div>
+    <div class="f"><label class="l" for="fChannel">認識管道</label><input id="fChannel" value="${esc(c.channel||'')}" placeholder="擺攤、IG、朋友介紹…">${quick(SET.channels||['擺攤','IG','朋友介紹'],'fChannel')}</div>
+    <div class="f"><label class="l" for="fFirst">在哪裡遇到（地點）</label><input id="fFirst" value="${esc(c.firstPlace||'')}">${quick(SET.places,'fFirst')}</div>
+  </div>
+  <div class="panel fs">
+    <div class="f"><label class="l" for="fComp">主訴</label><textarea id="fComp">${esc(c.complaint||'')}</textarea></div>
+    <div class="f"><label class="l" for="fFam">家庭背景／概況</label><textarea id="fFam">${esc(c.family||'')}</textarea></div>
+    <div class="f"><label class="l" for="fMemo">其他備註</label><textarea id="fMemo">${esc(c.memo||'')}</textarea></div>
+  </div>
+  ${isNew||c.self?'':`<div class="panel fs"><h3>📦 封存</h3>${c.archived?`<p class="hint">已封存${c.archiveNote?'：'+esc(c.archiveNote):''}。恢復後會回到列表。</p><button class="btn sm" id="arcOff" style="align-self:flex-start">恢復這位個案</button>`:`<p class="hint">例如已經封鎖你、不再聯絡。封存後不會出現在列表、壽星、待追蹤，但紀錄還在、復盤統計照算。</p><input id="arcNote" placeholder="原因（可不填），例：LINE@ 封鎖"><button class="btn sm" id="arcOn" style="align-self:flex-start">封存</button>`}</div>
+  <div class="panel"><button class="btn sm ghost" id="delC">刪除這位個案</button><div id="delCBox"></div></div>`}
+  <div class="err" id="fErr"></div>
+  <div class="bar">${opts.convert?'<button class="btn pri" id="fSave">建立並搬入紀錄</button>':isNew?'<button class="btn" id="fSave">建立</button><button class="btn pri" id="fSaveGo">建立並開始占卜</button>':'<button class="btn pri" id="fSave">儲存</button>'}</div></div>`);
+  const upd=()=>{const v=$('fSolar').value;if(!v){$('fAuto').textContent='';return}const l=lunarOf(v);if(l){$('fLy').value=l.y;$('fLm').value=l.m;$('fLd').value=l.d;$('fLeap').checked=l.leap}
+    $('fAuto').textContent=`${zodiac(v)}座${l?'・屬'+SX[((l.y-4)%12+12)%12]:''}・${ageOf({solar:v})} 歲${l?'':'（農曆換算工具還沒載入，可手動填）'}`;};
+  $('fSolar').addEventListener('change',upd);if(c.solar){const v=c.solar;const l=lunarOf(v);$('fAuto').textContent=`${zodiac(v)}座${(c.lunar&&c.lunar.y)||l?'・屬'+shengxiao(Object.assign({},c,{lunar:c.lunar&&c.lunar.y?c.lunar:l})):''}・${ageOf({solar:v})} 歲`}
+  $('cx').onclick=closeSheet;
+  const save=async go=>{
+    const name=$('fName').value.trim();if(!name){$('fErr').textContent='請填姓名';$('fName').focus();return}
+    const ly=+$('fLy').value,lm=+$('fLm').value,ld=+$('fLd').value;
+    const d=Object.assign({},c,{id:c.id||uid(),name,solar:$('fSolar').value,lunar:ly&&lm&&ld?{y:ly,m:lm,d:ld,leap:$('fLeap').checked}:null,age:$('fAge').value,job:$('fJob').value.trim(),city:$('fCity').value.trim(),contact:$('fContact').value.trim(),channel:$('fChannel').value.trim(),firstPlace:$('fFirst').value.trim(),complaint:$('fComp').value,family:$('fFam').value,memo:$('fMemo').value,updated:Date.now()});
+    if(!d.created)d.created=Date.now();
+    sheet.querySelectorAll('.bar .btn').forEach(b=>b.disabled=true);
+    try{await col('clients').doc(d.id).set(d);remember('channels',d.channel);remember('places',d.firstPlace);remember('cities',d.city);
+      const i=CLIENTS.findIndex(x=>x.id===d.id);i<0?CLIENTS.push(d):CLIENTS[i]=d;
+      if(opts.convert){try{await col('sessions').doc(opts.convert).update({clientId:d.id,kind:'client'});const s=SESS.find(x=>x.id===opts.convert);if(s){s.clientId=d.id;s.kind='client'}}catch(e){}go=false}
+      if(opts.goSpread)go=true;
+      closeSheet();CUR=d.id;TAB=go||opts.convert?'rec':(isNew?'info':TAB);show('client');if(go)openSessForm(d,null,{spread:opts.goSpread});toast('已儲存');}
+    catch(err){$('fErr').textContent='儲存失敗，請檢查網路再試一次。';sheet.querySelectorAll('.bar .btn').forEach(b=>b.disabled=false)}
+  };
+  $('fSave').onclick=()=>save(false);if($('fSaveGo'))$('fSaveGo').onclick=()=>save(true);
+  if($('arcOn'))$('arcOn').onclick=async()=>{$('arcOn').disabled=true;try{await col('clients').doc(c.id).update({archived:true,archiveNote:$('arcNote').value.trim(),archivedAt:Date.now()});closeSheet();show('list');toast('已封存')}catch(e){$('fErr').textContent='封存失敗，請再試一次。';$('arcOn').disabled=false}};
+  if($('arcOff'))$('arcOff').onclick=async()=>{$('arcOff').disabled=true;try{await col('clients').doc(c.id).update({archived:false});closeSheet();renderClient();toast('已恢復')}catch(e){$('fErr').textContent='恢復失敗，請再試一次。';$('arcOff').disabled=false}};
+  if($('delC'))$('delC').onclick=()=>{const n=sessOf(c.id).length;$('delCBox').innerHTML=`<div class="confirm" style="margin-top:8px">會一起刪掉 ${n} 筆諮詢紀錄，確定嗎？<button class="btn sm danger" id="delCOk">確定刪除</button></div>`;
+    $('delCOk').onclick=async()=>{$('delCOk').disabled=true;try{for(const s of sessOf(c.id))await col('sessions').doc(s.id).delete();await col('clients').doc(c.id).delete();closeSheet();show('list');toast('已刪除')}catch(err){$('fErr').textContent='刪除失敗，請再試一次。'}}};
+}
+
+/* ===== 占卜紀錄表單 ===== */
+let F=null;
+function spreadOptions(cur){return SPREADS.filter(p=>!p.hidden||p.id===cur).map(p=>`<option value="${p.id}"${p.id===cur?' selected':''}>${esc(p.name)}${p.count?'（'+p.count+'）':''}</option>`).join('')}
+function drawSectionHTML(){return `<div class="panel fs">
+    <div class="f"><label class="l" for="sSpread">牌陣</label><select id="sSpread">${spreadOptions(F.spread)}</select></div>
+    <div id="liveBox" class="live"></div>
+    <div id="mindBox"></div>
+    <div id="posBox" class="fs"></div>
+  </div>
+  <div class="panel fs">
+    <h3>插牌</h3><p class="hint" style="margin-top:-6px">從牌面推出的隱藏訊息，例如有寶劍三和寶劍五，中間的寶劍四就是插牌。左右兩張都正位，插牌才是正位；只要有一張逆位，插牌就是逆位。</p>
+    <div id="insBox" class="fs"></div>
+  </div>`}
+function bindDrawSection(){if(isDesk()&&$('sLeft'))$('sLeft').appendChild($('liveBox'));$('sSpread').onchange=()=>{F.spread=$('sSpread').value;fitCards();drawPos()};drawPos()}
+function blankDraw(spread){return {spread:spread||'time',cards:[],labels:[],mind:{c:'',r:false},ins:[]}}
+function normDraw(o){if(!o.mind)o.mind={c:'',r:false};if(!o.labels)o.labels=[];if(!o.ins)o.ins=[];if(!o.cards)o.cards=[];return o}
+function cleanDraw(o){const sp=spreadOf(o.spread);
+  o.cards=o.cards.map(c=>({c:c.c,r:!!c.r,aux:(c.aux||[]).filter(a=>a.c).map(a=>({c:a.c,r:!!a.r}))}));
+  if(sp.id!=='self')o.labels=[];
+  o.ins=(o.ins||[]).filter(x=>x.c).map(x=>{insOrient(o,x);return {c:x.c,r:!!x.r,from:x.from||[],fromR:x.fromR||null,auto:!!x.auto}});
+  o.posNames=sp.id==='self'?o.labels.map((l,i)=>l||('第 '+(i+1)+' 張')):(o.posNames&&o.posNames.length&&sp.hidden?o.posNames:sp.pos.slice());
+  delete o._excl;return o}
+function openSessForm(c,s,opts){
+  if(!c)return;const isNew=!s;opts=opts||{};const me=!!c.self,qk=!!c.quick;
+  F=s?JSON.parse(JSON.stringify(s)):Object.assign(blankDraw(opts.spread),{id:uid(),clientId:c.id||'',kind:me?'self':qk?'quick':'client',date:today(),photos:[],place:me?'':(SET.places||[])[0]||''});
+  normDraw(F);if(!F.photos)F.photos=[];
+  fitCards();
+  const RL=me?SELFR:REACT;
+  const sel=(id,arr,v,ph)=>`<select id="${id}"><option value="">${ph}</option>${arr.map(x=>`<option${x===v?' selected':''}>${esc(x)}</option>`).join('')}</select>`;
+  openSheet(`<div class="wrap"><div class="sh"><h2>${isNew?(qk?'⚡ 快速占卜':'這次占卜'):'編輯紀錄'}${qk?'':'・'+esc(c.name)}</h2><button class="iconbtn" id="sx">✕</button></div>
+  <div class="sgrid"><div id="sLeft"></div><div id="sRight">
+  <div class="panel fs">
+    ${qk?`<div class="f"><label class="l" for="sGuest">稱呼（可不填）</label><input id="sGuest" value="${esc(F.guestName||'')}" placeholder="例：穿綠衣服的姐姐"></div>`:''}
+    <div class="grid2 st"><div class="f"><label class="l" for="sDate">日期</label><input id="sDate" type="date" value="${esc(F.date)}"></div>
+    <div class="f"><label class="l" for="sType">問題類型</label>${sel('sType',QTYPES,F.qtype,'—')}</div></div>
+    ${me?'':`<div class="f"><label class="l" for="sPlace">地點</label><input id="sPlace" value="${esc(F.place||'')}" placeholder="市集名稱、線上…">${quick(SET.places,'sPlace')}</div>`}
+    <div class="f"><label class="l" for="sQ">問塔羅的句子（一字不差）</label><textarea id="sQ" placeholder="例：我未來半年內會換到理想的工作嗎？">${esc(F.question||'')}</textarea></div>
+  </div>
+  ${drawSectionHTML()}
+  <div class="panel fs" id="phPanel"${ASSETS?'':' hidden'}>
+    <label class="l">牌面照片</label><div class="photos" id="phList"></div>
+    <label class="btn sm" style="align-self:flex-start">📷 上傳照片<input id="phIn" type="file" accept="image/*" multiple hidden></label><p class="hint" id="phNote"></p>
+  </div>
+  <div class="panel fs">
+    <div class="f"><label class="l" for="sRead">解讀筆記</label><textarea id="sRead">${esc(F.reading||'')}</textarea></div>
+    <div class="f"><label class="l" for="sFix">問句修正（復盤時覺得可以問得更好）</label><textarea id="sFix" placeholder="例：在未來半年，我換工作的關鍵是什麼？">${esc(F.questionFix||'')}</textarea></div>
+    ${me?'':`<div class="f"><label class="l">收費</label>
+      <div class="seg" id="feeU">${[['q','依題數'],['t','依時間'],['','其他／免費']].map(([v,l])=>`<button type="button" data-v="${v}" aria-pressed="${(F.feeUnit||'')===v}">${l}</button>`).join('')}</div>
+      <div id="feeOpt" style="margin-top:8px"></div>
+      <div class="feerow" style="margin-top:8px"><span>$</span><input id="sFee" type="number" inputmode="numeric" value="${esc(F.fee||'')}" placeholder="金額"></div>
+      <p class="hint">選題數或時間會自動帶入價目，有優惠可以直接改金額。</p></div>`}
+  </div>
+  <div class="panel fs">
+    <h3>${me?'當下感受':'當下反饋'}</h3><div class="seg" id="sReact">${RL.map(x=>`<button type="button" aria-pressed="${F.react===x}" data-v="${x}">${x}</button>`).join('')}</div>
+    <textarea id="sReactN" placeholder="${me?'當時的心情？':'客人說了什麼？'}">${esc(F.reactNote||'')}</textarea>
+    <h3>事後驗證</h3><div class="seg" id="sVer">${VERIFY.map(x=>`<button type="button" aria-pressed="${F.verify===x}" data-v="${x}">${x}</button>`).join('')}</div>
+    <textarea id="sVerN" placeholder="後來發生了什麼？">${esc(F.verifyNote||'')}</textarea>
+  </div>
+  <div class="panel fs">
+    <h3>備註／下次追蹤</h3>
+    <textarea id="sFol" placeholder="${me?'例：一個月後回來看有沒有應驗':'例：三個月後問面試結果'}">${esc(F.follow||'')}</textarea>
+    <div class="f"><label class="l" for="sFolD">追蹤日期</label><input id="sFolD" type="date" value="${esc(F.followDate||'')}"></div>
+    <label class="ck"><input id="sFolDone" type="checkbox"${F.followDone?' checked':''}> 已追蹤完成</label>
+  </div>
+  <div class="err" id="sErr"></div></div></div>
+  <div class="bar"><button class="btn ghost" id="sCancel">取消</button><button class="btn pri" id="sSave">儲存</button></div></div>`);
+  bindDrawSection();drawPhotos();
+  if($('feeU')){drawFee();$('feeU').onclick=e=>{const b=e.target.closest('button');if(!b)return;F.feeUnit=b.dataset.v;F.feeN='';drawFee();$('feeU').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===F.feeUnit))}}
+  $('sx').onclick=$('sCancel').onclick=closeSheet;
+  [['sReact','react'],['sVer','verify']].forEach(([id,k])=>$(id).onclick=e=>{const b=e.target.closest('button');if(!b)return;F[k]=F[k]===b.dataset.v?'':b.dataset.v;$(id).querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===F[k]))});
+  if($('phIn'))$('phIn').onchange=async e=>{const fs=[...e.target.files];e.target.value='';for(const f of fs){$('phNote').textContent='上傳中…';try{const r=await ASSETS.upload(f);F.photos.push(r.id);drawPhotos();$('phNote').textContent=''}catch(err){$('phNote').textContent='上傳失敗：'+(err&&err.message||'請再試一次')}}};
+  $('sSave').onclick=async()=>{
+    const v=id=>$(id)?$(id).value:'';
+    Object.assign(F,{date:v('sDate')||today(),qtype:v('sType'),place:v('sPlace').trim(),question:v('sQ').trim(),reading:v('sRead'),questionFix:v('sFix').trim(),fee:me?'':v('sFee'),feeN:(!me&&F.feeUnit?(+v('feeN')||''):''),reactNote:v('sReactN'),verifyNote:v('sVerN'),follow:v('sFol').trim(),followDate:v('sFolD'),followDone:$('sFolDone').checked,updated:Date.now()});
+    if(qk)F.guestName=v('sGuest').trim();
+    if(!F.ts)F.ts=Date.now();
+    cleanDraw(F);
+    $('sSave').disabled=true;
+    const saved=JSON.parse(JSON.stringify(F));
+    try{await col('sessions').doc(saved.id).set(saved);if(saved.place)remember('places',saved.place);const i=SESS.findIndex(x=>x.id===saved.id);i<0?SESS.push(saved):SESS[i]=saved;closeSheet();CUR=saved.clientId||'__quick';TAB='rec';show('client');toast('已儲存')}
+    catch(err){$('sErr').textContent='儲存失敗，請檢查網路再試一次。';$('sSave').disabled=false}
+  };
+}
+function fitCards(){const sp=spreadOf(F.spread);const n=sp.id==='self'?Math.max(F.cards.length,F.labels.length,1):sp.pos.length;
+  while(F.cards.length<n)F.cards.push({c:'',r:false,aux:[]});if(sp.id!=='self')F.cards.length=n;F.cards.forEach(c=>{if(!c.aux)c.aux=[]});
+  if(sp.id==='self')while(F.labels.length<F.cards.length)F.labels.push('');}
+function picker(c,attrs,noRev){return `<div class="pick" ${attrs}>${face(c)}<select data-k="c"></select>${noRev?'':`<button type="button" class="rv" data-k="r" aria-pressed="${!!c.r}">逆位</button>`}</div>`}
+function drawPos(){
+  const sp=spreadOf(F.spread),self=sp.id==='self',labels=self?F.labels:(F.posNames&&F.posNames.length&&sp.hidden?F.posNames:sp.pos);
+  $('mindBox').innerHTML=sp.noMind?'<p class="hint">四季牌陣以正位解釋，不抽心態牌。</p>':`<div class="pos"><div class="ph2"><b>◎</b><span>心態牌（問問題當下的心態，可不填）</span></div>${picker(F.mind,'data-m="1"')}</div>`;
+  let h=F.cards.map((c,i)=>`<div class="pos" data-i="${i}"><div class="ph2"><b>${i+1}</b>${self?`<input data-lbl="${i}" value="${esc(labels[i]||'')}" placeholder="這個位置代表什麼">`:`<span>${esc(labels[i]||'')}${sp.tips&&sp.tips[i]?`<small class="tip">💡 馬蹄鐵：${esc(sp.tips[i])}</small>`:''}</span>`}${self&&F.cards.length>1?`<button type="button" class="x" data-rmpos="${i}" aria-label="移除位置">✕</button>`:''}</div>
+    ${picker(c,`data-i="${i}"`)}
+    ${(c.aux||[]).map((a,j)=>`<div class="auxrow"><div class="row" style="justify-content:space-between"><span class="t">輔助牌 ${j+1}</span><button type="button" class="x" data-rmaux="${i}-${j}" aria-label="移除輔助牌">✕</button></div>${picker(a,`data-i="${i}" data-a="${j}"`)}</div>`).join('')}
+    <button type="button" class="btn sm ghost" data-addaux="${i}" style="align-self:flex-start">＋ 輔助牌</button></div>`).join('');
+  if(self)h+=`<button type="button" class="btn sm" id="addPos" style="align-self:flex-start">＋ 新增位置</button>`;
+  $('posBox').innerHTML=h;
+  drawIns();
+}
+function insInfo(x){if(x.auto&&x.from&&x.from.length===2)return `<span class="from">從 ${esc(x.from[0])}${x.fromR?(x.fromR[0]?'（逆）':'（正）'):''}、${esc(x.from[1])}${x.fromR?(x.fromR[1]?'（逆）':'（正）'):''} 推出 → 自動判斷為<b class="insr">${x.r?'逆位':'正位'}</b></span>`;return '<span class="from">手動加入，正逆位自己選</span>'}
+function drawIns(){const el=$('insBox');if(!el)return;
+  F.ins.forEach(x=>insOrient(F,x));
+  let h=F.ins.map((x,i)=>`<div class="insrow" data-insrow="${i}"><div class="row" style="justify-content:space-between"><b style="color:var(--accent)">插牌 ${i+1}</b><button type="button" class="x" data-rmins="${i}" aria-label="移除插牌">✕</button></div>${picker(x,`data-n="${i}"`,!!x.auto)}<div class="insinfo">${insInfo(x)}</div></div>`).join('');
+  h+=`<div id="suggBox"></div><button type="button" class="btn sm ghost" id="addIns" style="align-self:flex-start">＋ 手動加插牌</button>`;
+  el.innerHTML=h;refreshOpts();drawLive();}
+function drawSugg(){const el=$('suggBox');if(!el)return;const s=insSuggest(F);el.innerHTML=s.length?`<div class="hint" style="margin-bottom:4px">可能的插牌（點一下加入）：</div><div class="sugg">${s.map((x,i)=>`<button type="button" data-sugg="${i}">＋ ${esc(x.c)}${x.r?'（逆）':'（正）'}<small style="color:var(--muted)">（${esc(x.from[0])}、${esc(x.from[1])}）</small></button>`).join('')}</div>`:''}
+function usedCards(){const u=[];if(!spreadOf(F.spread).noMind&&F.mind)u.push(F.mind.c);F.cards.forEach(c=>{u.push(c.c);(c.aux||[]).forEach(a=>u.push(a.c))});(F.ins||[]).forEach(x=>u.push(x.c));(F._excl||[]).forEach(x=>u.push(x));return new Set(u.filter(Boolean))}
+function refreshOpts(){const used=usedCards();sheet.querySelectorAll('.pick').forEach(p=>{const tg=target(p);if(!tg)return;const own=tg.c||'';const sel=p.querySelector('select');let g='',h='<option value="">— 選牌 —</option>';CARDS.forEach(c=>{if(used.has(c.n)&&c.n!==own)return;if(c.s!==g){if(g)h+='</optgroup>';h+=`<optgroup label="${SUITN[c.s]}">`;g=c.s}h+=`<option>${esc(c.n)}</option>`});sel.innerHTML=h+'</optgroup>';sel.value=own})}
+function syncInsUI(){F.ins.forEach((x,i)=>{const before=x.r;insOrient(F,x);const row=sheet.querySelector(`[data-insrow="${i}"]`);if(!row)return;row.querySelector('.insinfo').innerHTML=insInfo(x);if(before!==x.r){const p=row.querySelector('.pick');p.querySelector('.face').outerHTML=face(x)}})}
+function drawLive(){syncInsUI();drawSugg();const el=$('liveBox');if(!el)return;const n=F.cards.filter(c=>c.c).length;const sp=spreadOf(F.spread);let r=sp.lay?String(sp.lay[0]).split('/').reduce((x,y)=>x/ +y):1.4;el.innerHTML=F.cards.length?`<div style="max-width:min(100%,${Math.round((isDesk()?440:300)*r)+50}px);margin:0 auto">`+boardHTML(F)+'</div>'+`<div class="cap">已選 ${n}／${F.cards.length} 張${F.cards.reduce((a,c)=>a+(c.aux||[]).filter(x=>x.c).length,0)?'・含輔助牌':''}</div>`:''}
+const PRICE={q:{1:300,2:500},t:{60:1000,90:1200}};
+function feeTxt(s){if(!s.feeUnit||!s.feeN)return '';return (s.feeUnit==='q'?s.feeN+' 題':(s.feeN%60?(s.feeN/60).toFixed(1).replace('.0',''):s.feeN/60)+' 小時')+'・'}
+function drawFee(){const el=$('feeOpt');if(!el)return;const u=F.feeUnit;if(!u){el.innerHTML='';return}
+  const opts=u==='q'?[[1,'1 題'],[2,'2 題'],[3,'3 題']]:[[30,'30 分'],[60,'1 小時'],[90,'1.5 小時'],[120,'2 小時']];
+  el.innerHTML=`<div class="seg" id="feeQ">${opts.map(([v,l])=>`<button type="button" data-v="${v}" aria-pressed="${+F.feeN===v}">${l}${PRICE[u][v]?'・$'+PRICE[u][v]:''}</button>`).join('')}</div><div class="feerow" style="margin-top:8px"><input id="feeN" type="number" inputmode="numeric" value="${esc(F.feeN||'')}" placeholder="${u==='q'?'題數':'分鐘'}"><span>${u==='q'?'題':'分鐘'}</span></div>`;
+  $('feeQ').onclick=e=>{const b=e.target.closest('button');if(!b)return;F.feeN=+b.dataset.v;$('feeN').value=F.feeN;const p=PRICE[u][F.feeN];if(p)$('sFee').value=p;$('feeQ').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',+x.dataset.v===F.feeN))};
+  $('feeN').oninput=()=>{F.feeN=+$('feeN').value||'';const p=PRICE[u][F.feeN];if(p)$('sFee').value=p;$('feeQ').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',+x.dataset.v===F.feeN))};}
+function target(p){if(!F)return null;if(p.dataset.m)return F.mind;if(p.dataset.n!=null)return F.ins[+p.dataset.n];const i=+p.dataset.i;const c=F.cards[i];if(!c)return null;return p.dataset.a!=null?c.aux[+p.dataset.a]:c}
+sheet.addEventListener('change',e=>{const s=e.target;if(s.matches('.pick select')){const p=s.closest('.pick'),c=target(p);if(!c)return;c.c=s.value;if(p.dataset.n!=null){c.from=[];c.fromR=null;if(c.auto){c.auto=false;drawIns();return}}p.querySelector('.face').outerHTML=face(c);refreshOpts();drawLive()}});
+sheet.addEventListener('input',e=>{const s=e.target;if(F&&s.dataset&&s.dataset.lbl!=null)F.labels[+s.dataset.lbl]=s.value});
+sheet.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!F)return;
+  if(b.classList.contains('rv')){const p=b.closest('.pick'),c=target(p);if(!c)return;c.r=!c.r;b.setAttribute('aria-pressed',c.r);p.querySelector('.face').outerHTML=face(c);drawLive();return}
+  if(b.dataset.addaux!=null){F.cards[+b.dataset.addaux].aux.push({c:'',r:false});drawPos();return}
+  if(b.dataset.rmaux){const [i,j]=b.dataset.rmaux.split('-').map(Number);F.cards[i].aux.splice(j,1);drawPos();return}
+  if(b.dataset.sugg!=null){const s=insSuggest(F)[+b.dataset.sugg];if(s){F.ins.push(s);drawIns()}return}
+  if(b.id==='addIns'){F.ins.push({c:'',r:false,from:[],auto:false});drawIns();return}
+  if(b.dataset.rmins!=null){F.ins.splice(+b.dataset.rmins,1);drawIns();return}
+  if(b.id==='addPos'){F.cards.push({c:'',r:false,aux:[]});F.labels.push('');drawPos();return}
+  if(b.dataset.rmpos!=null){const i=+b.dataset.rmpos;F.cards.splice(i,1);F.labels.splice(i,1);drawPos();return}
+  if(b.dataset.rmph!=null){F.photos.splice(+b.dataset.rmph,1);drawPhotos();return}
+});
+function drawPhotos(){const el=$('phList');if(!el||!F||!F.photos)return;el.innerHTML=F.photos.map((p,i)=>`<div class="ph"><img src="/_blob/${esc(p)}" alt="牌面照片"><button type="button" data-rmph="${i}" aria-label="移除照片">✕</button></div>`).join('')}
+
+/* ===== 大眾占卜 ===== */
+let P=null;
+const optLabel=i=>String.fromCharCode(65+i);
+function pubCards(p){const u=[];(p.options||[]).forEach(o=>{const s=spreadOf(o.spread);if(!s.noMind&&o.mind&&o.mind.c)u.push(o.mind.c);(o.cards||[]).forEach(c=>{if(c.c)u.push(c.c);(c.aux||[]).forEach(a=>a.c&&u.push(a.c))});(o.ins||[]).forEach(x=>x.c&&u.push(x.c))});return u}
+function renderPub(){
+  const L=[...PUBS].sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.ts||0)-(a.ts||0));
+  let h=`<div class="top"><button class="iconbtn" id="backBtn" aria-label="返回列表">←</button><h1>📣 大眾占卜</h1><button class="btn sm pri" id="newPub">＋ 新增</button></div>`;
+  if(!L.length)h+=`<div class="panel note">還沒有大眾占卜紀錄。按「＋ 新增」記下你發的第一篇。</div>`;
+  h+=`<div class="tl">${L.map((p,i)=>pubHTML(p,i===0)).join('')}</div>`;
+  $('pub').innerHTML=h;
+}
+function pubHTML(p,open){
+  const opts=p.options||[];const m=[['❤️',p.likes],['💬',p.comments],['🔁',p.shares],['🔖',p.saves]].filter(x=>x[1]!==''&&x[1]!=null);
+  let h=`<details class="ss"${open?' open':''}><summary><div class="h"><span class="d">${fmtD(p.date)}</span>${p.platform?`<span class="tag">${esc(p.platform)}</span>`:''}${p.qtype?`<span class="tag">${esc(p.qtype)}</span>`:''}<span class="tag">${opts.length} 個選項</span>${p.verify?`<span class="tag ${p.verify==='應驗'?'ok':p.verify==='沒有應驗'?'warn':'gold'}">${esc(p.verify)}</span>`:''}</div>
+  <div class="q"><b>${esc(p.topic||'（沒有主題）')}</b></div>${m.length?`<div class="hint">${m.map(x=>x[0]+' '+esc(x[1])).join('　')}</div>`:''}</summary><div class="bd">`;
+  if(p.link)h+=`<div class="hint">🔗 <a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.link)}</a></div>`;
+  opts.forEach((o,i)=>{const labels=posLabels(o);h+=`<div class="optv"><div class="opth"><span class="ol">${esc(o.label||optLabel(i))}</span><span class="tag">${esc(spreadOf(o.spread).name)}</span></div>
+    ${(o.cards||[]).some(c=>c.c)||(o.mind&&o.mind.c)?boardHTML(o):''}
+    ${(o.ins||[]).some(x=>x.c)?`<div class="hint">插牌：${o.ins.filter(x=>x.c).map(insTxt).join('、')}</div>`:''}
+    <ul class="plist">${(o.cards||[]).map((c,k)=>c.c?`<li><span class="pn">${k+1}</span>${face(c)}<div class="pt">${cname(c)}<small>${esc(labels[k]||'')}</small>${(c.aux||[]).length?`<div class="aux">${c.aux.map(a=>`<span>${face(a)}輔助：${cname(a)}</span>`).join('')}</div>`:''}</div></li>`:'').join('')}</ul>
+    ${o.reading?`<div class="box">${esc(o.reading)}</div>`:''}</div>`});
+  if(p.feedback)h+=`<div><div class="lbl">網友回饋</div><div class="box">${esc(p.feedback)}</div></div>`;
+  if(p.verify||p.verifyNote)h+=`<div><div class="lbl">事後驗證${p.verify?'：'+esc(p.verify):''}</div>${p.verifyNote?`<div class="box">${esc(p.verifyNote)}</div>`:''}</div>`;
+  if(p.review)h+=`<div><div class="lbl">復盤：下次可以怎麼改</div><div class="box">${esc(p.review)}</div></div>`;
+  h+=`<div class="row"><button class="btn sm" data-editp="${p.id}">編輯／補成效</button><button class="btn sm ghost" data-delp="${p.id}">刪除</button></div><div data-confirmp="${p.id}"></div></div></details>`;
+  return h;
+}
+function openPubForm(p){
+  P=p?JSON.parse(JSON.stringify(p)):{id:uid(),date:today(),topic:'',qtype:'',platform:'',link:'',options:[Object.assign(blankDraw('time'),{id:uid(),label:'A',reading:''})],likes:'',comments:'',shares:'',saves:'',feedback:'',verify:'',verifyNote:'',review:''};
+  drawPubForm();
+}
+function syncP(){const v=id=>$(id)?$(id).value:undefined;if(!$('pTopic'))return;
+  Object.assign(P,{date:v('pDate')||today(),topic:v('pTopic').trim(),qtype:v('pType'),platform:v('pPlat').trim(),link:v('pLink').trim(),likes:v('pLike'),comments:v('pCom'),shares:v('pShare'),saves:v('pSave'),feedback:v('pFb'),verifyNote:v('pVerN'),review:v('pRev')});
+  P.options.forEach((o,i)=>{const el=$('oLbl'+i);if(el)o.label=el.value.trim()||optLabel(i)})}
+function drawPubForm(){F=null;
+  const sel=(id,arr,v,ph)=>`<select id="${id}"><option value="">${ph}</option>${arr.map(x=>`<option${x===v?' selected':''}>${esc(x)}</option>`).join('')}</select>`;
+  const num=(id,l,v)=>`<div class="f"><label class="l" for="${id}">${l}</label><input id="${id}" type="number" inputmode="numeric" value="${esc(v)}"></div>`;
+  openSheet(`<div class="wrap"><div class="sh"><h2>📣 大眾占卜</h2><button class="iconbtn" id="px">✕</button></div>
+  <div class="panel fs">
+    <div class="f"><label class="l" for="pTopic">主題</label><input id="pTopic" value="${esc(P.topic)}" placeholder="例：他現在對你的想法"></div>
+    <div class="grid2 st"><div class="f"><label class="l" for="pDate">日期</label><input id="pDate" type="date" value="${esc(P.date)}"></div><div class="f"><label class="l" for="pType">問題類型</label>${sel('pType',QTYPES,P.qtype,'—')}</div></div>
+    <div class="f"><label class="l" for="pPlat">發布平台</label><input id="pPlat" value="${esc(P.platform)}">${quick(PLATFORMS,'pPlat')}</div>
+    <div class="f"><label class="l" for="pLink">貼文連結</label><input id="pLink" type="url" value="${esc(P.link)}" placeholder="https://"></div>
+  </div>
+  <div class="panel fs"><h3>選項</h3><p class="hint" style="margin-top:-6px">每個選項各自抽牌，所有選項的牌都不會重複。</p>
+    ${P.options.map((o,i)=>{const n=(o.cards||[]).filter(c=>c.c).length;return `<div class="optrow"><input id="oLbl${i}" value="${esc(o.label||optLabel(i))}" aria-label="選項名稱" class="olbl"><div class="osum"><b>${esc(spreadOf(o.spread).name)}</b><span class="hint">已選 ${n}／${(o.cards||[]).length||spreadOf(o.spread).pos.length} 張</span><div class="mini">${pubCards({options:[o]}).map(nm=>face({c:nm})).join('')}</div></div><div class="ob"><button type="button" class="btn sm pri" data-eopt="${i}">選牌</button>${P.options.length>1?`<button type="button" class="btn sm ghost" data-ropt="${i}">刪除</button>`:''}</div></div>`}).join('')}
+    <button type="button" class="btn sm" id="addOpt" style="align-self:flex-start">＋ 新增選項</button>
+  </div>
+  <div class="panel fs"><h3>成效（之後可以再補）</h3><div class="grid2">${num('pLike','❤️ 按讚',P.likes)}${num('pCom','💬 留言',P.comments)}${num('pShare','🔁 分享',P.shares)}${num('pSave','🔖 收藏',P.saves)}</div></div>
+  <div class="panel fs">
+    <div class="f"><label class="l" for="pFb">網友回饋（回報準的留言重點）</label><textarea id="pFb">${esc(P.feedback)}</textarea></div>
+    <h3>事後驗證</h3><div class="seg" id="pVer">${VERIFY.map(x=>`<button type="button" aria-pressed="${P.verify===x}" data-v="${x}">${x}</button>`).join('')}</div>
+    <textarea id="pVerN" placeholder="後來的回報">${esc(P.verifyNote)}</textarea>
+    <div class="f"><label class="l" for="pRev">復盤：這次主題下次可以怎麼改</label><textarea id="pRev">${esc(P.review)}</textarea></div>
+  </div>
+  <div class="err" id="pErr"></div>
+  <div class="bar"><button class="btn ghost" id="pCancel">取消</button><button class="btn pri" id="pSaveB">儲存</button></div></div>`);
+  $('px').onclick=$('pCancel').onclick=()=>{P=null;closeSheet()};
+  $('pVer').onclick=e=>{const b=e.target.closest('button');if(!b)return;P.verify=P.verify===b.dataset.v?'':b.dataset.v;$('pVer').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.v===P.verify))};
+  $('addOpt').onclick=()=>{syncP();P.options.push(Object.assign(blankDraw(P.options[P.options.length-1].spread),{id:uid(),label:optLabel(P.options.length),reading:''}));drawPubForm()};
+  sheet.querySelectorAll('[data-ropt]').forEach(b=>b.onclick=()=>{syncP();P.options.splice(+b.dataset.ropt,1);drawPubForm()});
+  sheet.querySelectorAll('[data-eopt]').forEach(b=>b.onclick=()=>{syncP();openOptEditor(+b.dataset.eopt)});
+  $('pSaveB').onclick=async()=>{syncP();if(!P.topic){$('pErr').textContent='請填主題';$('pTopic').focus();return}
+    P.options=P.options.map(o=>cleanDraw(normDraw(o)));if(!P.ts)P.ts=Date.now();P.updated=Date.now();
+    const saved=JSON.parse(JSON.stringify(P));$('pSaveB').disabled=true;
+    try{await col('publics').doc(saved.id).set(saved);const i=PUBS.findIndex(x=>x.id===saved.id);i<0?PUBS.push(saved):PUBS[i]=saved;P=null;closeSheet();show('pub');toast('已儲存')}
+    catch(err){$('pErr').textContent='儲存失敗，請檢查網路再試一次。';$('pSaveB').disabled=false}};
+}
+function openOptEditor(i){
+  const o=normDraw(P.options[i]);F=JSON.parse(JSON.stringify(o));
+  F._excl=P.options.filter((_,k)=>k!==i).reduce((a,x)=>a.concat(pubCards({options:[x]})),[]);
+  fitCards();
+  openSheet(`<div class="wrap"><div class="sh"><h2>選項 ${esc(o.label||optLabel(i))} 的牌</h2><button class="iconbtn" id="ox">✕</button></div>
+  <div class="sgrid"><div id="sLeft"></div><div id="sRight">
+  ${drawSectionHTML()}
+  <div class="panel fs"><div class="f"><label class="l" for="oRead">這個選項的解讀</label><textarea id="oRead">${esc(F.reading||'')}</textarea></div></div>
+  </div></div>
+  <div class="bar"><button class="btn ghost" id="oBack">返回</button><button class="btn pri" id="oDone">完成</button></div></div>`);
+  bindDrawSection();
+  $('ox').onclick=$('oBack').onclick=()=>{F=null;drawPubForm()};
+  $('oDone').onclick=()=>{F.reading=$('oRead').value;const keep=F;delete keep._excl;P.options[i]=keep;F=null;drawPubForm()};
+}
+
+/* ===== 復盤統計 ===== */
+let SF='all';
+function statRows(){const rows=[];
+  SESS.forEach(s=>{const kind=isSelfS(s)?'self':'client';const cards=tableCards(s).concat((s.ins||[]).map(x=>x.c).filter(Boolean));rows.push({kind,date:s.date||'',qtype:s.qtype||'未分類',react:s.react,verify:s.verify,cards,q:s.question,fix:s.questionFix,who:kind==='self'?'我自己':(s.clientId?((clientOf(s.clientId)||{}).name||''):(s.guestName||'快速占卜'))})});
+  PUBS.forEach(p=>rows.push({kind:'public',date:p.date||'',qtype:p.qtype||'未分類',react:'',verify:p.verify,cards:pubCards(p),q:p.topic,fix:'',who:'大眾占卜'}));
+  return rows}
+function pct(a,b){return b?Math.round(a/b*100)+'%':'—'}
+function renderStats(){
+  const all=statRows();const R=SF==='all'?all:all.filter(r=>r.kind===SF);
+  const vr=r=>r.verify&&r.verify!=='還不知道',hit=r=>r.verify==='應驗'||r.verify==='部分應驗';
+  const types=[...QTYPES,'未分類'].filter(t=>R.some(r=>r.qtype===t));
+  const col=t=>QCOL[QTYPES.indexOf(t)]||'#9a96aa';
+  let h=`<div class="top"><button class="iconbtn" id="backBtn" aria-label="返回列表">←</button><h1>📊 復盤統計</h1><span style="width:38px"></span></div>
+  <div class="seg sfilter">${[['all','全部'],['client','客人'],['self','我自己'],['public','大眾占卜']].map(([v,l])=>`<button type="button" data-sf="${v}" aria-pressed="${SF===v}">${l}（${v==='all'?all.length:all.filter(r=>r.kind===v).length}）</button>`).join('')}</div>`;
+  if(!R.length){$('stats').innerHTML=h+`<div class="panel note">這個分類還沒有紀錄。</div>`;return}
+  const reacted=R.filter(r=>r.react),ym=today().slice(0,7);
+  h+=`<div class="stat"><div><b>${R.length}</b><span>場次</span></div><div><b>${R.filter(r=>r.date.startsWith(ym)).length}</b><span>本月</span></div><div><b>${pct(reacted.filter(r=>r.react==='很有共鳴').length,reacted.length)}</b><span>很有共鳴</span></div><div><b>${pct(R.filter(hit).length,R.filter(vr).length)}</b><span>應驗率</span></div></div>`;
+  const cnt=t=>R.filter(r=>r.qtype===t).length,mx=Math.max(...types.map(cnt));
+  h+=`<div class="panel"><h2>各類問題分布</h2>${SF==='self'?'<p class="hint">你最近最常問自己的，可能就是當下最在意的課題。</p>':''}<div class="bars">${types.map(t=>`<div class="bar1"><span class="bl">${esc(t)}</span><span class="bt"><i style="width:${cnt(t)/mx*100}%;background:${col(t)}"></i></span><span class="bn">${cnt(t)}・${pct(cnt(t),R.length)}</span></div>`).join('')}</div></div>`;
+  const months=[...new Set(R.map(r=>r.date.slice(0,7)).filter(Boolean))].sort().slice(-6);
+  if(months.length)h+=`<div class="panel"><h2>每月變化</h2><p class="hint">近 ${months.length} 個月，各類問題的比例</p><div class="bars">${months.map(m=>{const mr=R.filter(r=>r.date.startsWith(m));return `<div class="bar1"><span class="bl">${m.slice(2).replace('-','/')}</span><span class="bt stack">${types.map(t=>{const n=mr.filter(r=>r.qtype===t).length;return n?`<i style="width:${n/mr.length*100}%;background:${col(t)}" title="${esc(t)} ${n}"></i>`:''}).join('')}</span><span class="bn">${mr.length} 場</span></div>`}).join('')}</div><div class="legend2">${types.map(t=>`<span><i style="background:${col(t)}"></i>${esc(t)}</span>`).join('')}</div></div>`;
+  h+=`<div class="panel"><h2>各類問題的表現</h2><div class="tblw"><table class="tbl"><tr><th>問題類型</th><th>場次</th><th>很有共鳴</th><th>應驗率</th><th>常出現的牌</th></tr>${types.map(t=>{const tr=R.filter(r=>r.qtype===t),re=tr.filter(r=>r.react);const cc=new Map();tr.forEach(r=>r.cards.forEach(c=>cc.set(c,(cc.get(c)||0)+1)));const top=[...cc.entries()].sort((a,b)=>b[1]-a[1]).slice(0,3);
+    return `<tr><td><i class="dot" style="background:${col(t)}"></i>${esc(t)}</td><td>${tr.length}</td><td>${pct(re.filter(r=>r.react==='很有共鳴').length,re.length)}</td><td>${pct(tr.filter(hit).length,tr.filter(vr).length)}</td><td class="tc">${top.map(([c,n])=>`${esc(c)}${n>1?'×'+n:''}`).join('、')||'—'}</td></tr>`}).join('')}</table></div></div>`;
+  const cc=new Map();R.forEach(r=>r.cards.forEach(c=>cc.set(c,(cc.get(c)||0)+1)));const topc=[...cc.entries()].sort((a,b)=>b[1]-a[1]).slice(0,10);
+  if(topc.length)h+=`<div class="panel"><h2>最常出現的牌</h2><div class="topc">${topc.map(([c,n])=>`<div>${face({c})}<small>${esc(c)}<br>×${n}</small></div>`).join('')}</div></div>`;
+  const fx=R.filter(r=>r.fix);
+  if(fx.length)h+=`<div class="panel"><h2>✏️ 問句修正回顧</h2>${types.filter(t=>fx.some(r=>r.qtype===t)).map(t=>`<h3 class="fxh"><i class="dot" style="background:${col(t)}"></i>${esc(t)}</h3>${fx.filter(r=>r.qtype===t).map(r=>`<div class="fx"><div class="hint">${fmtD(r.date)}・${esc(r.who)}</div><div class="fo">原本：${esc(r.q||'（沒記）')}</div><div class="fn">修正：${esc(r.fix)}</div></div>`).join('')}`).join('')}</div>`;
+  $('stats').innerHTML=h;
+}
+
+/* ===== 從手冊帶牌陣過來：選記錄對象 ===== */
+let PEND_SP=null;
+function readHash(){const m=(location.hash||'').match(/^#rec-([a-z0-9]+)$/);if(m&&SPREADS.some(s=>s.id===m[1]))PEND_SP=m[1]}
+function openChooser(sp){const s=spreadOf(sp);const me=selfC();const cs=activeClients().sort((a,b)=>(b.updated||0)-(a.updated||0));
+  openSheet(`<div class="wrap"><div class="sh"><h2>用「${esc(s.name)}」記錄給誰？</h2><button class="iconbtn" id="chx">✕</button></div>
+  <div class="panel fs"><div class="chooser">${me?`<button class="cc" data-pick="${me.id}"><span class="av me">我</span><span class="t"><b>我自己</b></span></button>`:''}<button class="cc" data-pick="__quick"><span class="av">⚡</span><span class="t"><b>快速占卜（路人）</b><div class="s">不用建檔</div></span></button></div></div>
+  <div class="panel fs"><h3>客人</h3><input id="chq" type="search" placeholder="搜尋姓名"><div class="chooser" id="chl"></div><button class="btn sm" id="chNew" style="align-self:flex-start">＋ 新增個案</button></div></div>`);
+  const draw=()=>{const q=$('chq').value.trim().toLowerCase();$('chl').innerHTML=cs.filter(c=>!q||c.name.toLowerCase().includes(q)).slice(0,30).map(c=>`<button class="cc" data-pick="${c.id}"><span class="av">${esc(c.name.slice(0,1))}</span><span class="t"><b>${esc(c.name)}</b><div class="s">${esc([c.solar?md(c.solar):'',c.city].filter(Boolean).join('・'))}</div></span></button>`).join('')||'<p class="hint">沒有符合的客人</p>'};draw();$('chq').oninput=draw;
+  $('chx').onclick=closeSheet;$('chNew').onclick=()=>{closeSheet();openClientForm(null,{goSpread:sp})};
+  sheet.querySelectorAll('.chooser').forEach(el=>el.onclick=e=>{const b=e.target.closest('[data-pick]');if(!b)return;const id=b.dataset.pick;closeSheet();const c=id==='__quick'?QUICKC:clientOf(id);CUR=id;TAB='rec';show('client');openSessForm(c,null,{spread:sp})});
+}
+function consumePend(){if(!PEND_SP||!UNLOCK)return;const sp=PEND_SP;PEND_SP=null;try{history.replaceState(null,'',location.pathname+location.search)}catch(e){try{location.hash=''}catch(_){}}openChooser(sp)}
+window.addEventListener('hashchange',()=>{readHash();consumePend()});
+
+/* ===== 設定 ===== */
+function openSettings(){
+  openSheet(`<div class="wrap"><div class="sh"><h2>設定</h2><button class="iconbtn" id="tx">✕</button></div>
+  <div class="panel fs"><h3>封面密碼</h3><p class="hint">${SET.pin?'目前有設定密碼。':'目前沒有密碼，按「開始」就能進入。'}資料本來就只有你登入的帳號看得到，密碼是防止手機放桌上時被旁人點開。</p>
+    <input id="pin1" type="password" inputmode="numeric" maxlength="8" placeholder="新密碼（4–8 位數字）"><div class="row"><button class="btn sm pri" id="pinSave">設定密碼</button>${SET.pin?'<button class="btn sm ghost" id="pinDel">取消密碼</button>':''}</div><p class="hint" id="pinMsg"></p></div>
+  <div class="panel fs"><h3>常用地點</h3><p class="hint">填過的地點會自動記住，點 ✕ 可以移除。</p><div class="chips" id="plc">${(SET.places||[]).map((p,i)=>`<span class="chip">${esc(p)} <button type="button" class="x" data-rmset="places-${i}" style="padding:0 2px">✕</button></span>`).join('')||'<span class="hint">還沒有</span>'}</div></div>
+  <div class="panel fs"><h3>💾 備份</h3><p class="hint">資料只存在這台裝置的瀏覽器裡。換手機、換瀏覽器或清除瀏覽資料就會不見，記得定期匯出。換裝置時，在新裝置匯入備份檔就能接著用。</p>
+    <div class="row"><button class="btn sm pri" id="bkOut">匯出備份</button><label class="btn sm">匯入備份<input id="bkIn" type="file" accept=".json,application/json" hidden></label></div><p class="hint" id="bkMsg"></p></div>
+  <div class="panel fs"><h3>📖 塔羅牌義手冊</h3><a class="btn sm" href="index.html" style="align-self:flex-start;text-decoration:none">打開牌義手冊</a></div>
+  <div class="panel fs"><h3>認識管道</h3><div class="chips">${(SET.channels||[]).map((p,i)=>`<span class="chip">${esc(p)} <button type="button" class="x" data-rmset="channels-${i}" style="padding:0 2px">✕</button></span>`).join('')||'<span class="hint">還沒有</span>'}</div></div>
+  </div>`);
+  $('tx').onclick=closeSheet;
+  $('bkOut').onclick=()=>{try{exportBackup();$('bkMsg').textContent='已匯出，請把檔案存到雲端硬碟或傳給自己保存。'}catch(e){$('bkMsg').textContent='匯出失敗'}};
+  $('bkIn').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{await importBackup(f);$('bkMsg').textContent='已匯入備份。'}catch(err){$('bkMsg').textContent='匯入失敗：'+(err&&err.message||'檔案格式不對')}};
+  $('pinSave').onclick=async()=>{const v=$('pin1').value.trim();if(!/^\d{4,8}$/.test(v)){$('pinMsg').textContent='請輸入 4–8 位數字';return}SET.pin=await sha(v);try{await col('meta').doc('settings').set(SET);$('pinMsg').textContent='已設定，下次回到封面要輸入密碼。';$('pin1').value=''}catch(e){$('pinMsg').textContent='儲存失敗'}};
+  if($('pinDel'))$('pinDel').onclick=async()=>{delete SET.pin;try{await col('meta').doc('settings').set(SET);openSettings();toast('已取消密碼')}catch(e){}};
+  sheet.onclick=async e=>{const b=e.target.closest('[data-rmset]');if(!b)return;const [k,i]=b.dataset.rmset.split('-');SET[k]=(SET[k]||[]).filter((_,j)=>j!==+i);try{await col('meta').doc('settings').set(SET)}catch(err){}openSettings()};
+}
+const _close=closeSheet;closeSheet=function(){sheet.onclick=null;F=null;_close()};
+
+/* ===== 本機儲存（朋友版） ===== */
+const LDB=(()=>{const K='zxcase:';const subs={};
+  const load=c=>{try{return JSON.parse(localStorage.getItem(K+c)||'{}')}catch(e){return {}}};
+  const save=(c,m)=>{try{localStorage.setItem(K+c,JSON.stringify(m))}catch(e){throw {message:'瀏覽器空間不足或無法儲存'}}};
+  const fire=c=>{const m=load(c);const snap={docs:Object.entries(m).map(([id,d])=>({id,data:()=>JSON.parse(JSON.stringify(d))})),metadata:{fromCache:false}};(subs[c]||[]).forEach(f=>{try{f(snap)}catch(e){console.error(e)}})};
+  return {collection:c=>({onSnapshot:(f)=>{(subs[c]=subs[c]||[]).push(f);setTimeout(()=>fire(c),0)},
+    doc:id=>({set:async d=>{const m=load(c);m[id]=JSON.parse(JSON.stringify(d));save(c,m);fire(c)},update:async d=>{const m=load(c);m[id]=Object.assign(m[id]||{},JSON.parse(JSON.stringify(d)));save(c,m);fire(c)},delete:async()=>{const m=load(c);delete m[id];save(c,m);fire(c)}})}),
+    dump:()=>{const o={};['clients','sessions','publics','meta'].forEach(c=>o[c]=load(c));return o},
+    restore:o=>{['clients','sessions','publics','meta'].forEach(c=>{if(o&&o[c]&&typeof o[c]==='object')save(c,o[c])});['clients','sessions','publics','meta'].forEach(fire)}}})();
+function exportBackup(){const data={app:'芝心聊癒塔羅個案簿',version:1,exported:new Date().toISOString(),data:LDB.dump()};const blob=new Blob([JSON.stringify(data)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tarot-case-backup-'+today()+'.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}
+async function importBackup(file){const txt=await file.text();const o=JSON.parse(txt);if(!o||!o.data||!o.data.clients)throw new Error('這不是個案簿的備份檔');LDB.restore(o.data)}
+
+/* ===== 連線 ===== */
+function refresh(){if(!sheet.hidden){coverState();return}if(VIEW==='list')renderList();else if(VIEW==='client')renderClient();else if(VIEW==='pub')renderPub();else if(VIEW==='stats')renderStats();coverState()}
+(async()=>{
+  DB=LDB;ASSETS=null;try{localStorage.setItem('zxcase:test','1');localStorage.removeItem('zxcase:test')}catch(e){$('coverNote').textContent='這個瀏覽器不能儲存資料（可能是無痕模式），請換一般模式開啟。';return}
+  coverState();
+  const t=setTimeout(()=>{if(!(READY.c&&READY.s&&READY.m&&READY.p))$('coverNote').textContent='連線比較慢，請稍等或重新整理。'},10000);
+  const fail=e=>{clearTimeout(t);$('coverNote').textContent='讀取失敗（'+(e&&e.code||e&&e.message||'未知錯誤')+'），請重新整理。'};
+  col('clients').onSnapshot(s=>{CLIENTS=s.docs.map(d=>d.data());READY.c=true;ensureSelf();refresh()},fail);
+  col('publics').onSnapshot(s=>{PUBS=s.docs.map(d=>d.data());READY.p=true;refresh()},fail);
+  col('sessions').onSnapshot(s=>{SESS=s.docs.map(d=>d.data());READY.s=true;refresh()},fail);
+  col('meta').onSnapshot(s=>{const d=s.docs.find(x=>x.id==='settings');SET=d?d.data():{};READY.m=true;refresh()},fail);
+})();
+window.addEventListener('lunarready',()=>{});
+let SELF_TRIED=false;
+async function ensureSelf(){if(SELF_TRIED||selfC())return;SELF_TRIED=true;const d={id:'self',name:'我自己',self:true,created:Date.now(),updated:Date.now()};try{await col('clients').doc('self').set(d)}catch(e){SELF_TRIED=false}}
+readHash();
+</script>
+</body>
+</html>
