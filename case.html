@@ -176,6 +176,8 @@ dl.kv dd{margin:0;white-space:pre-wrap;word-break:break-word}
 .sugg button{border:1.5px dashed var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:.82rem}
 .laybar{display:flex;align-items:center;justify-content:center;gap:8px;font-size:.82rem;color:var(--muted)}
 /* 新增 */
+.tohb{align-self:flex-start;font-size:.85rem;font-weight:700;color:var(--line);border:1px solid var(--rule);border-radius:999px;padding:5px 14px;text-decoration:none;background:var(--panel);margin-top:-6px}
+.cv .tohb{align-self:center;margin-top:4px}
 .view{display:flex;flex-direction:column;gap:14px}
 .nav3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .nav3 button{border:1px solid var(--rule);background:var(--panel);border-radius:14px;padding:10px 4px;font-weight:700;font-size:.88rem;display:flex;flex-direction:column;align-items:center;gap:2px}
@@ -334,6 +336,7 @@ details.fold>summary{cursor:pointer;font-weight:700;font-family:var(--display)}
       <button class="btn pri go" id="goBtn" disabled>開始</button>
       <div class="err" id="coverErr"></div>
       <div class="note" id="coverNote">連線中…</div>
+      <a class="tohb" href="index.html">📖 回到牌義手冊</a>
     </div>
   </section>
 
@@ -501,6 +504,7 @@ function renderList(){
   const bdays=act.filter(c=>c.solar&&+c.solar.slice(5,7)===cm).sort((a,b)=>a.solar.slice(8).localeCompare(b.solar.slice(8)));
   const qs=sessOf('__quick');
   let h=`<div class="top"><button class="iconbtn" id="lockBtn" aria-label="回到封面">🔒</button><h1>塔羅個案簿</h1><button class="iconbtn" id="setBtn" aria-label="設定">⚙︎</button></div>
+  <a class="tohb" href="index.html">📖 回到牌義手冊</a>
   <div class="stat"><div><b>${act.length}</b><span>位個案</span></div><div><b>${mon.length}</b><span>本月占卜</span></div><div><b>${fee?'$'+fee.toLocaleString():'—'}</b><span>本月收入</span></div></div>
   <div class="nav3"><button id="quickBtn"><b>⚡</b>快速占卜</button><button id="pubBtn"><b>📣</b>大眾占卜</button><button id="statBtn"><b>📊</b>復盤統計</button></div>`;
   if(me&&!q){const ms=sessOf(me.id);h+=`<button class="cc mecard" data-open="${me.id}"><span class="av me">我</span><span class="t"><b>${esc(me.name)}</b><div class="s">我自己的占卜・${ms.length} 次${ms.length?`・上次 ${fmtD(ms[0].date)}`:''}</div></span><span class="tags">${ms.some(s=>(s.follow||s.followDate)&&!s.followDone)?'<span class="tag warn">待追蹤</span>':''}</span></button>`}
