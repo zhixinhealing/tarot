@@ -200,6 +200,9 @@ mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
 #bd2 .bslot{border-width:1px;background:var(--panel)}
 #bd2 .baux{position:absolute;transform:translate(-50%,-50%) rotate(16deg);aspect-ratio:5/7;z-index:3;border:1.5px solid var(--hl);border-radius:6px;overflow:hidden;box-shadow:0 2px 5px rgba(0,0,0,.3);background:var(--panel)}
 #bd2 .baux .face{position:absolute;inset:0}
+#bd2 .baux.bmind{transform:translate(-50%,-50%) rotate(-8deg);border-color:#b0833f;z-index:2}
+.rrow .pl b.mk2{background:#b0833f;font-family:var(--body);font-size:.62rem}
+.rmind{padding-left:18px}
 .pcw{position:relative}
 .pc.pax{position:absolute;width:56px;transform:rotate(16deg);border:1.5px solid var(--hl);z-index:2;box-shadow:0 2px 5px rgba(0,0,0,.3)}
 .pvl.in{color:var(--accent,#b0833f)}
@@ -329,6 +332,34 @@ html.wide #rvBody>.kpi,html.wide #rvBody>.panel:last-child{grid-column:1/-1}
 html.wide #rvBody .list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
 html.wide #diaryBody{display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);align-items:start}
 html.wide #dRest{position:sticky;top:70px}
+#dRest{order:-1}
+html.wide #dEd{grid-column:1;grid-row:1}html.wide #dRest{grid-column:2;grid-row:1;order:0}
+.drestd>summary{cursor:pointer;list-style:none;background:var(--panel);border:1px solid var(--rule);border-radius:14px;padding:10px 14px;font-weight:700;color:var(--line)}
+.drestd>summary::-webkit-details-marker{display:none}
+.drestd>summary::after{content:' ▾';color:var(--muted)}
+.drestd[open]>summary{margin-bottom:10px}
+html.wide .drestd>summary{display:none}
+.drestb{display:flex;flex-direction:column;gap:12px}
+.dtabs{display:flex;gap:6px;margin-top:10px;background:var(--bg,#f3f1f6);border-radius:999px;padding:4px}
+.dtabs button{flex:1;border:0;background:transparent;border-radius:999px;padding:8px 4px;font:inherit;font-weight:700;color:var(--muted);cursor:pointer}
+.dtabs button[aria-selected="true"]{background:var(--line);color:var(--panel)}
+.dgsum{margin-top:10px;background:var(--bg,#f3f1f6);border-radius:10px;padding:8px 12px}
+.dgsum summary{cursor:pointer;font-weight:700;color:var(--line)}
+.gptv{white-space:pre-wrap;font-size:.88rem;margin-top:6px}
+.dgrp2 textarea{min-height:96px}
+.dsavebar .btns{align-items:center}
+.dchip{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--panel);border:1px solid var(--rule);color:var(--muted);border-radius:999px;padding:6px 14px;font-size:.82rem;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.dchip.ok{color:#2f8a55;border-color:#2f8a55}
+.dchip.bad{color:#d0427f;border-color:#d0427f;font-weight:700}
+.dbar{display:flex;height:14px;border-radius:999px;overflow:hidden;background:var(--rule);margin-top:12px}
+.dbar i{display:block;height:100%}
+.dleg{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:8px;font-size:.82rem;color:var(--muted)}
+.dleg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.dleg b{color:var(--ink)}
+.drep{display:flex;flex-wrap:wrap;gap:8px}
+.drep>span{display:flex;align-items:center;gap:6px;font-size:.82rem;background:var(--bg,#f3f1f6);border-radius:10px;padding:4px 8px 4px 4px}
+.drep .pc.mini{width:22px}
+.kpi.dkpi{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:440px){.pos{grid-template-columns:1fr}.ctab .row{grid-template-columns:64px 1fr 1fr}.els{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 .syfold{border:1px solid var(--rule);border-radius:14px;background:var(--panel);padding:0}
@@ -395,6 +426,7 @@ html.wide .syin>*{break-inside:avoid;margin-bottom:12px}
     <div class="rintro"><b>每日抽牌日記</b>　一早睡醒先翻日記牌，再抽今日運勢、建議、心態。晚上有空再回來復盤；平淡的日子只記牌也算數。</div>
     <p class="rnote" id="dNote" role="status"></p>
     <div id="diaryBody" style="display:flex;flex-direction:column;gap:12px"><div id="dEd"></div><div id="dRest" style="display:flex;flex-direction:column;gap:12px"></div></div>
+    <div id="dChip" class="dchip" role="status" hidden></div>
   </section>
   <section id="tips" hidden>
   <details class="guide" id="guide" open>
@@ -1605,7 +1637,7 @@ clr.onclick=()=>{q.value='';Q='';PIN=null;render();q.focus()};
 render();
 
 // ===== 牌陣選牌＋復盤（紀錄存在這個網頁自己的資料庫，只有你看得到）=====
-const RSPR=[{"id": "time", "name": "時間之流", "count": "三張", "pos": ["過去發生了什麼", "現在發生什麼（是提問者本身，還是他在問的對象？）", "依前兩張的因果關係，未來會如何"], "lay": ["3/1.15", 22, [[1, 20, 50], [2, 50, 50], [3, 80, 50]]]}, {"id": "prob", "name": "解決問題", "count": "三張", "pos": ["原因：為何有這個問題", "狀況：當前的實際情境", "建議：如何解決問題"], "lay": ["3/1.15", 22, [[1, 20, 50], [2, 50, 50], [3, 80, 50]]]}, {"id": "bms", "name": "身心靈", "count": "四張", "pos": ["身", "心：情緒、心情", "靈：內心狀態", "心聲"], "lay": ["2.6", 18, [[1, 14, 50], [2, 38, 50], [3, 62, 50], [4, 86, 50]]]}, {"id": "yuan", "name": "元辰宮", "count": "十一張", "pos": ["本命樹：生命根基、元神狀態、目前生命的主調（整個牌陣的核心）", "屋外：外在呈現、別人眼中的你", "管家：自我管理、照顧自己的能力", "客廳：人際關係、家庭互動", "書房：事業、學業、思考方向", "臥室：感情、親密關係、休息與休養", "灶房：賺錢能力、行動力、身體的火力", "米缸：財庫、存款、福報的存量", "隱藏課題：宮中還沒被看見、需要面對的部分", "調整方向：現在可以整理、修補的地方", "元辰宮指引：給你的一句話或下一步"], "lay": ["0.85", 13, [[1, 50, 10], [2, 30, 30], [3, 70, 30], [4, 20, 50], [5, 50, 50], [6, 80, 50], [7, 30, 70], [8, 70, 70], [9, 20, 90], [10, 50, 90], [11, 80, 90]]]}, {"id": "relation", "name": "關係牌陣", "count": "四張", "pos": ["個案的狀態", "對方狀態", "過程", "結果"], "lay": ["1.15", 13, [[1, 28, 82], [2, 72, 82], [3, 50, 48], [4, 50, 17]]]}, {"id": "cross6", "name": "人際十字", "count": "六張", "pos": ["個案的狀態", "對方狀態", "困難", "現況", "過程", "結果"], "lay": ["1.35", 12, [[1, 50, 17], [2, 50, 83], [3, 14, 50], [4, 32, 50], [5, 68, 50], [6, 86, 50]]]}, {"id": "love", "name": "感情", "count": "八張", "pos": ["提問者現在對這段關係的看法", "對方現在對這段關係的看法", "這段關係的現狀", "提問者過去的感情狀態", "對方過去的感情狀態", "提問者未來對這段關係的看法", "對方未來對這段關係的看法", "這段關係的未來"], "lay": ["1.05", 15, [[1, 20, 15], [4, 20, 50], [6, 20, 85], [3, 50, 33], [8, 50, 85], [2, 80, 15], [5, 80, 50], [7, 80, 85]]]}, {"id": "deep", "name": "深入關係", "count": "八張", "pos": ["提問者最深層的恐懼", "提問者對這段關係的期待", "提問者對這段關係的表面態度", "對方對這段關係的表面態度", "對方對這段關係的期待", "對方對這段關係最深層的恐懼", "這段關係的現狀", "對這段關係的建議"], "lay": ["2.3", 10, [[1, 8, 50], [2, 21, 50], [3, 34, 50], [7, 50, 20], [8, 50, 80], [4, 66, 50], [5, 79, 50], [6, 92, 50]]]}, {"id": "ushape", "name": "U 型陣", "count": "七張", "pos": ["問題的過去狀況（半年前）", "問題的現在狀況（前後一個月）", "問題的未來狀況（近未來，約三個月內）", "慣性調整", "問題的環境、資源", "困難", "問題的結果"], "tips": [null, null, null, "此問題當前的境況", "相關人士怎麼看提問者，或環境、資源", "提問者內心真正的渴望或擔憂", "此事件的結果（更遠的未來，通常半年到一年）"], "lay": ["1.15", 13, [[1, 22, 18], [2, 22, 50], [3, 22, 82], [4, 50, 82], [5, 78, 82], [6, 78, 50], [7, 78, 18]]]}, {"id": "celtic", "name": "塞爾特十字", "count": "十張", "pos": ["提問者在當下時刻的狀態", "問題現狀（橫在你眼前的事）", "問題的基本狀況或隱藏的人事物", "過去如何影響了當前的情況", "懸在你頭上可能發生的事（加冕還是破壞）", "未來三個月的進展", "你內在的擔憂或期待", "外在影響與環境、資源", "建議", "結果：考量目前的一切，此事的可能結果（半年到一年）"], "lay": ["1.25", 12, [[5, 32, 13], [4, 12, 48], [1, 32, 43], [2, 32, 57, 1], [6, 52, 48], [3, 32, 87], [10, 82, 11], [9, 82, 37], [8, 82, 63], [7, 82, 89]]]}, {"id": "choice", "name": "二選一", "count": "七張", "pos": ["提問者的現狀", "A 選擇的現狀", "B 選擇的現狀", "A 選擇隱藏的狀態", "B 選擇隱藏的狀態", "A 選擇的發展", "B 選擇的發展"], "lay": ["1.55", 13, [[6, 10, 22], [4, 24, 42], [2, 38, 66], [1, 50, 84], [3, 62, 66], [5, 76, 42], [7, 90, 22]]]}, {"id": "season", "noMind": true, "name": "四季", "count": "五張", "pos": ["大牌：未來三個月主要會經歷的主題", "寶劍牌：知識的追求，這季思考與溝通的狀態", "聖杯牌：情緒感受，這季情感連結或內在追求是否滿足", "權杖牌：熱情與意志，這季行動力與慾望能否好好展現", "錢幣牌：物質世界與顯化，這季成就的呈現、是否達到目標"], "lay": ["1.3", 15, [[2, 50, 15], [5, 22, 50], [1, 50, 50], [3, 78, 50], [4, 50, 85]]]}, {"id": "year", "name": "十二宮流年", "count": "十二張", "pos": ["未來這一年的主題（自己）", "正財與物質運用", "短途交通、溝通，與鄰居、同事的關係", "居家、原生家庭、心靈家園", "創造力、戀愛、偏財投資", "日常習慣、工作型態、健康", "商業與愛情上的人際關係、契約", "合夥的資產、稅務、遺產或債務", "長途旅行、人生哲學、宗教", "公眾形象與職業、與權威人士的關係", "事業的財、社群、朋友的朋友", "可能需要做的犧牲、隱藏的敵人"], "lay": ["1.15", 10, [["01", 8, 49.99999999999999], ["02", 13.626933041053576, 70.5], ["03", 28.999999999999982, 85.50704155516198], ["04", 49.99999999999999, 91], ["05", 71, 85.50704155516198], ["06", 86.37306695894641, 70.50000000000001], ["07", 92, 50.00000000000001], ["08", 86.37306695894644, 29.50000000000003], ["09", 70.99999999999999, 14.49295844483801], ["10", 50.000000000000014, 9], ["11", 29.000000000000032, 14.492958444837996], ["12", 13.626933041053569, 29.50000000000001]]]}, {"id": "self", "name": "自由牌陣", "count": "", "pos": [], "lay": null}];
+const RSPR=[{"id": "time", "name": "時間之流", "count": "三張", "pos": ["過去發生了什麼", "現在發生什麼（是提問者本身，還是他在問的對象？）", "依前兩張的因果關係，未來會如何"], "lay": ["3/1.15", 22, [[1, 20, 50], [2, 50, 50], [3, 80, 50]]]}, {"id": "prob", "name": "解決問題", "count": "三張", "pos": ["原因：為何有這個問題", "狀況：當前的實際情境", "建議：如何解決問題"], "lay": ["3/1.15", 22, [[1, 20, 50], [2, 50, 50], [3, 80, 50]]]}, {"id": "bms", "name": "身心靈", "count": "三張", "pos": ["身：物質身體、外在行為與實際行動，也包含健康、日常生活和安全感", "心：理智與情緒、潛意識、感受、慾望與恐懼，以及和人互動的模式", "靈：高我與直覺、精神追求、人生目標，以及靈魂成長的方向"], "lay": ["1.3", 15, [[1, 22, 72], [2, 78, 72], [3, 50, 22]]], "use": "適合觀察自己目前的身心狀態，或看某件事對一個人的影響。"}, {"id": "yuan", "name": "元辰宮", "count": "十一張", "pos": ["本命樹：生命根基、元神狀態、目前生命的主調（整個牌陣的核心）", "屋外：外在呈現、別人眼中的你", "管家：自我管理、照顧自己的能力", "客廳：人際關係、家庭互動", "書房：事業、學業、思考方向", "臥室：感情、親密關係、休息與休養", "灶房：賺錢能力、行動力、身體的火力", "米缸：財庫、存款、福報的存量", "隱藏課題：宮中還沒被看見、需要面對的部分", "調整方向：現在可以整理、修補的地方", "元辰宮指引：給你的一句話或下一步"], "lay": ["0.85", 13, [[1, 50, 10], [2, 30, 30], [3, 70, 30], [4, 20, 50], [5, 50, 50], [6, 80, 50], [7, 30, 70], [8, 70, 70], [9, 20, 90], [10, 50, 90], [11, 80, 90]]]}, {"id": "relation", "name": "關係牌陣", "count": "四張", "pos": ["個案的狀態", "對方狀態", "過程", "結果"], "lay": ["1.15", 13, [[1, 28, 82], [2, 72, 82], [3, 50, 48], [4, 50, 17]]]}, {"id": "cross6", "name": "人際十字", "count": "六張", "pos": ["個案的狀態", "對方狀態", "困難", "現況", "過程", "結果"], "lay": ["1.35", 12, [[1, 50, 17], [2, 50, 83], [3, 14, 50], [4, 32, 50], [5, 68, 50], [6, 86, 50]]]}, {"id": "love", "name": "感情", "count": "八張", "pos": ["提問者現在對這段關係的看法", "對方現在對這段關係的看法", "這段關係的現狀", "提問者過去的感情狀態", "對方過去的感情狀態", "提問者未來對這段關係的看法", "對方未來對這段關係的看法", "這段關係的未來"], "lay": ["1.05", 15, [[1, 20, 15], [4, 20, 50], [6, 20, 85], [3, 50, 33], [8, 50, 85], [2, 80, 15], [5, 80, 50], [7, 80, 85]]]}, {"id": "deep", "name": "深入關係", "count": "八張", "pos": ["提問者最深層的恐懼", "提問者對這段關係的期待", "提問者對這段關係的表面態度", "對方對這段關係的表面態度", "對方對這段關係的期待", "對方對這段關係最深層的恐懼", "這段關係的現狀", "對這段關係的建議"], "lay": ["2.3", 10, [[1, 8, 50], [2, 21, 50], [3, 34, 50], [7, 50, 20], [8, 50, 80], [4, 66, 50], [5, 79, 50], [6, 92, 50]]]}, {"id": "ushape", "name": "U 型陣", "count": "七張", "pos": ["問題的過去狀況（半年前）", "問題的現在狀況（前後一個月）", "過程", "慣性調整", "問題的環境、資源", "困難", "問題的結果"], "tips": [null, null, "問題的未來狀況（近未來，約三個月內）", "此問題當前的境況", "相關人士怎麼看提問者，或環境、資源", "提問者內心真正的渴望或擔憂", "此事件的結果（更遠的未來，通常半年到一年）"], "lay": ["1.15", 13, [[1, 22, 18], [2, 22, 50], [3, 22, 82], [4, 50, 82], [5, 78, 82], [6, 78, 50], [7, 78, 18]]]}, {"id": "celtic", "name": "塞爾特十字", "count": "十張", "pos": ["提問者在當下時刻的狀態", "問題現狀（橫在你眼前的事）", "問題的基本狀況或隱藏的人事物", "過去如何影響了當前的情況", "懸在你頭上可能發生的事（加冕還是破壞）", "未來三個月的進展", "你內在的擔憂或期待", "外在影響與環境、資源", "建議", "結果：考量目前的一切，此事的可能結果（半年到一年）"], "lay": ["1.25", 12, [[5, 32, 13], [4, 12, 48], [1, 32, 43], [2, 32, 57, 1], [6, 52, 48], [3, 32, 87], [10, 82, 11], [9, 82, 37], [8, 82, 63], [7, 82, 89]]]}, {"id": "choice", "name": "二選一（進階）", "count": "七張", "pos": ["提問者的現狀", "A 選擇的現狀", "B 選擇的現狀", "A 選擇隱藏的狀態", "B 選擇隱藏的狀態", "A 選擇的發展", "B 選擇的發展"], "lay": ["1.55", 13, [[6, 10, 22], [4, 24, 42], [2, 38, 66], [1, 50, 84], [3, 62, 66], [5, 76, 42], [7, 90, 22]]]}, {"id": "choice2", "name": "二選一（基礎）", "count": "五張", "pos": ["本人現狀／問題現狀", "選擇 A 的現狀", "選擇 B 的現狀", "選擇 A 的影響", "選擇 B 的影響"], "lay": ["1.1", 14, [[1, 50, 82], [2, 32, 50], [3, 68, 50], [4, 22, 18], [5, 78, 18]]]}, {"id": "season", "noMind": true, "name": "四季", "count": "五張（各配一張心態牌，共十張）", "pos": ["權杖：行動、工作", "聖杯：情感、情緒", "寶劍：想法、思緒", "錢幣：財運、資源", "大牌：整體心靈的平均、心靈狀態"], "lay": ["1.3", 15, [[4, 50, 15], [1, 20, 50], [5, 50, 50], [3, 80, 50], [2, 50, 85]]], "perMind": true, "use": "四個節氣（春分、夏至、秋分、冬至）當天，分析未來三個月各方面的狀態，因為這天能量最滿、效果最好。先把牌分成五疊：大牌、權杖、聖杯、寶劍、錢幣。", "ex": "「請問塔羅牌，我未來三個月工作（行動、情緒、想法、財運、心靈）狀況會如何？」每個問題問三遍，共問 15 遍；每一疊抽 2 張（元素牌＋心態牌），共 10 張。問工作抽權杖、情緒抽聖杯、想法抽寶劍、財運抽錢幣、心靈抽大牌。"}, {"id": "talent", "name": "內在天賦", "count": "六張", "pos": ["我與生俱來的天賦", "如何使用我的天賦", "什麼環境能激發天賦", "如何發揚我的長處", "如何面對我的短板", "發展的綜合建議"], "lay": ["1.15", 13, [[1, 50, 82], [2, 20, 82], [3, 80, 82], [4, 34, 50], [5, 66, 50], [6, 50, 18]]]}, {"id": "tree", "name": "生命之樹", "count": "十一張＋指示牌", "pos": ["最高理念：這件事的理想、核心目的", "創造力：開創、創新的能量", "智慧：智慧在現實中的作用與位置", "機會：事件裡的積極因素、外來的幫助", "衝突：現實中可能的不和諧、阻礙", "個性：這件事和其他事不同的獨特之處", "愛好：吸引人的部分、喜歡它的原因", "表達：溝通、理解、學習相關的內容", "習慣：事情發展的慣性方向、固有模式", "現狀：當下真實的狀態、核心處境", "知識：處世需要的相關知識（前十張解完再抽）", "指示牌：問卜者自身的特質"], "lay": ["0.62", 11, [[1, 50, 8], [2, 36, 19], [3, 64, 19], [4, 25, 34], [6, 50, 35], [5, 75, 34], [7, 25, 50], [8, 50, 51], [9, 75, 50], [10, 50, 66], [11, 50, 88], [12, 86, 8]]], "use": "屬於進階牌陣，適合想深入看清一件事或自己的本質。解牌順序從 10 往回到 1：10→9→8→7→6→5→4→3→2→1，前十張解完再抽第 11 張「知識」，結合前面的解讀給建議。", "ex": "可以留意的組合：靈性三角（最高理念＋創造力＋智慧）、理性組合（機會＋衝突＋個性）、情緒組合（愛好＋表達＋習慣）、陽性之柱（創造力＋機會＋愛好）、陰性之柱（智慧＋衝突＋表達）、平衡之柱（最高理念＋個性＋習慣＋現狀）。"}, {"id": "year", "name": "十二宮流年", "count": "十二張", "pos": ["未來這一年的主題（自己）", "正財與物質運用", "短途交通、溝通，與鄰居、同事的關係", "居家、原生家庭、心靈家園", "創造力、戀愛、偏財投資", "日常習慣、工作型態、健康", "商業與愛情上的人際關係、契約", "合夥的資產、稅務、遺產或債務", "長途旅行、人生哲學、宗教", "公眾形象與職業、與權威人士的關係", "事業的財、社群、朋友的朋友", "可能需要做的犧牲、隱藏的敵人"], "lay": ["1.15", 10, [["01", 8, 49.99999999999999], ["02", 13.626933041053576, 70.5], ["03", 28.999999999999982, 85.50704155516198], ["04", 49.99999999999999, 91], ["05", 71, 85.50704155516198], ["06", 86.37306695894641, 70.50000000000001], ["07", 92, 50.00000000000001], ["08", 86.37306695894644, 29.50000000000003], ["09", 70.99999999999999, 14.49295844483801], ["10", 50.000000000000014, 9], ["11", 29.000000000000032, 14.492958444837996], ["12", 13.626933041053569, 29.50000000000001]]]}, {"id": "self", "name": "自由牌陣", "count": "", "pos": [], "lay": null}];
 const RQTYPES=['感情','事業工作','財運','人際','家庭','學業','自我成長','其他'];
 const RREACT=['很有共鳴','部分共鳴','沒有共鳴','不確定'];
 const rEsc=x=>esc(String(x==null?'':x));
@@ -1627,7 +1659,7 @@ function rFace(c){
 }
 const RDRAFT={};
 function rDraft(s){
-  if(!RDRAFT[s.id]){const n=s.pos.length;RDRAFT[s.id]={mind:{c:'',r:false},cards:Array.from({length:n||3},()=>({c:'',r:false,aux:[]})),ins:[],labels:n?null:['第 1 張','第 2 張','第 3 張'],f:{date:rToday(),place:'',qtype:'',question:'',reaction:'',score:'',reading:'',stuck:'',improve:''}}}
+  if(!RDRAFT[s.id]){const n=s.pos.length;RDRAFT[s.id]={mind:{c:'',r:false},cards:Array.from({length:n||3},()=>({c:'',r:false,aux:s.perMind?[{c:'',r:false,m:true}]:[]})),ins:[],labels:n?null:['第 1 張','第 2 張','第 3 張'],f:{date:rToday(),place:'',qtype:'',question:'',reaction:'',score:'',reading:'',stuck:'',improve:''}}}
   return RDRAFT[s.id];
 }
 const rPos=(s,dr,i)=>s.pos.length?String(s.pos[i]).replace(/<[^>]+>/g,''):(dr.labels[i]||('第 '+(i+1)+' 張'));
@@ -1635,7 +1667,7 @@ function rRow(i,label,cell,custom){
   return `<div class="rrow" data-i="${i}"><div class="pl">${i<0?'<b class="mk">心</b>':`<b>${i+1}</b>`}${custom?`<input class="lb" value="${rEsc(label)}" aria-label="第 ${i+1} 張的牌位名稱">`:`<span>${rEsc(label)}</span>`}</div><select class="cs" aria-label="${rEsc(label)}：選牌">${rCardOpts(cell.c,rUsed(RSPR.find(x=>x.id===RSP)))}</select><label class="rv"><input type="checkbox" class="rc"${cell.r?' checked':''}>逆位</label></div>`;
 }
 function rAuxRows(i,c){
-  return (c.aux||[]).map((a,j)=>`<div class="rrow raux" data-i="${i}" data-a="${j}"><div class="pl"><b class="ax">輔</b><span>輔助牌 ${j+1}</span><button type="button" class="xb" data-act="rmaux" aria-label="移除輔助牌">✕</button></div><select class="cs" aria-label="第 ${i+1} 張的輔助牌：選牌">${rCardOpts(a.c,rUsed(RSPR.find(x=>x.id===RSP)))}</select><label class="rv"><input type="checkbox" class="rc"${a.r?' checked':''}>逆位</label></div>`).join('')+
+  return (c.aux||[]).map((a,j)=>`<div class="rrow raux${a.m?' rmind':''}" data-i="${i}" data-a="${j}"><div class="pl">${a.m?'<b class="mk2">心</b><span>這一疊的心態牌</span>':`<b class="ax">輔</b><span>輔助牌 ${(c.aux||[]).slice(0,j).filter(x=>!x.m).length+1}</span><button type="button" class="xb" data-act="rmaux" aria-label="移除輔助牌">✕</button>`}</div><select class="cs" aria-label="第 ${i+1} 張的輔助牌：選牌">${rCardOpts(a.c,rUsed(RSPR.find(x=>x.id===RSP)))}</select><label class="rv"><input type="checkbox" class="rc"${a.r?' checked':''}>逆位</label></div>`).join('')+
   `<div class="auxadd"><button type="button" class="lnk" data-act="addaux" data-i="${i}">＋ 第 ${i+1} 張的輔助牌</button></div>`;
 }
 function rInsRows(dr){
@@ -1663,7 +1695,7 @@ function rBoard(id,ratio,w,slots){
 }
 function rForm(s){
   const dr=rDraft(s),f=dr.f,custom=!s.pos.length;
-  let h=`<div class="rec" id="rec"><h4>📝 記錄這次占卜</h4><p class="hint">${s.noMind?'這個牌陣不抽心態牌。':'切牌翻出的那張放在「心態牌」。'}選牌時，上面的牌面會即時照牌陣位置排出來；選過的牌不會再出現在其他位置的選單裡。輔助牌會疊在那張牌的右上角。</p>`;
+  let h=`<div class="rec" id="rec"><h4>📝 記錄這次占卜</h4><p class="hint">${s.perMind?'每一疊各抽一張元素牌和一張心態牌，心態牌放在每個位置下面的「這一疊的心態牌」。':s.noMind?'這個牌陣不抽心態牌。':'切牌翻出的那張放在「心態牌」。'}選牌時，上面的牌面會即時照牌陣位置排出來；選過的牌不會再出現在其他位置的選單裡。輔助牌會疊在那張牌的右上角。</p>`;
   h+=`<div class="pv"><h5>牌面（即時）</h5><div class="pvrow" id="pvside" style="align-self:flex-start"></div>${s.lay?'<div class="rboard" id="bd2"></div>':'<div class="pvrow" id="pvrow"></div>'}</div>`;
   if(!s.noMind)h+=rRow(-1,'心態牌（切牌）',dr.mind,false);
   dr.cards.forEach((c,i)=>{h+=rRow(i,rPos(s,dr,i),c,custom)+rAuxRows(i,c)});
@@ -1690,7 +1722,8 @@ function rPaint(s){
   const bd=document.getElementById('bd2');
   if(bd){bd.querySelectorAll('.baux').forEach(x=>x.remove());const w=+bd.dataset.w,rv=String(bd.dataset.r).split('/').reduce((a,b)=>a/ +b),hh=w*1.4*rv;let mx=0;
     bd.querySelectorAll('.bslot').forEach(sl=>{const c=dr.cards[+sl.dataset.n-1];sl.innerHTML=c&&c.c?rFace(c):`<span>${rEsc(sl.dataset.l)}</span>`;
-      const ax=(c&&c.aux||[]).filter(a=>a.c);mx=Math.max(mx,ax.length);const x=+sl.dataset.x,y=+sl.dataset.y;
+      const ax=(c&&c.aux||[]).filter(a=>a.c&&!a.m),mm=(c&&c.aux||[]).find(a=>a.m&&a.c);mx=Math.max(mx,ax.length);const x=+sl.dataset.x,y=+sl.dataset.y;
+      if(mm){const d=document.createElement('div');d.className='baux bmind';d.style.cssText=`left:${x-w*0.42}%;top:${y+hh*0.28}%;width:${w*0.62}%`;d.innerHTML=rFace(mm);bd.appendChild(d)}
       ax.forEach((a,j)=>{const d=document.createElement('div');d.className='baux';d.style.cssText=`left:${x+w*(0.32+j*0.16)}%;top:${y-hh*(0.3+j*0.12)}%;width:${w*0.8}%`;d.innerHTML=rFace(a);bd.appendChild(d)})});
     bd.style.marginTop=mx?Math.round(w*(0.45+0.2*mx))+'%':''}
   const side=document.getElementById('pvside');
@@ -1718,7 +1751,7 @@ function rBind(s){
       if(!dr.mind.c&&!dr.cards.some(c=>c.c)){msg.textContent='至少選一張牌再儲存喔。';return}
       if(!RSTORE){msg.textContent='紀錄功能還在準備中，請等幾秒再按一次。';return}
       const f=dr.f;
-      const rec={id:'r'+Date.now()+Math.floor(Math.random()*1e4),date:f.date||rToday(),place:f.place.trim(),spread:s.name,qtype:f.qtype,question:f.question.trim(),mind:{c:dr.mind.c,r:dr.mind.r},cards:dr.cards.map((c,i)=>({p:rPos(s,dr,i),c:c.c,r:c.r,aux:(c.aux||[]).filter(x=>x.c).map(x=>({c:x.c,r:!!x.r}))})),ins:(dr.ins||[]).filter(x=>x.c).map(x=>{rOrient(s,x);return {c:x.c,r:!!x.r,from:x.from||[],fromR:x.fromR||null,auto:!!x.auto}}),reaction:f.reaction,score:f.score?+f.score:null,reading:f.reading.trim(),stuck:f.stuck.trim(),improve:f.improve.trim(),feedback:'',created:Date.now()};
+      const rec={id:'r'+Date.now()+Math.floor(Math.random()*1e4),date:f.date||rToday(),place:f.place.trim(),spread:s.name,qtype:f.qtype,question:f.question.trim(),mind:{c:dr.mind.c,r:dr.mind.r},cards:dr.cards.map((c,i)=>({p:rPos(s,dr,i),c:c.c,r:c.r,aux:(c.aux||[]).filter(x=>x.c).map(x=>x.m?{c:x.c,r:!!x.r,m:true}:{c:x.c,r:!!x.r})})),ins:(dr.ins||[]).filter(x=>x.c).map(x=>{rOrient(s,x);return {c:x.c,r:!!x.r,from:x.from||[],fromR:x.fromR||null,auto:!!x.auto}}),reaction:f.reaction,score:f.score?+f.score:null,reading:f.reading.trim(),stuck:f.stuck.trim(),improve:f.improve.trim(),feedback:'',created:Date.now()};
       b.disabled=true;msg.textContent='儲存中…';
       try{await RSTORE.save(rec);delete RDRAFT[s.id];rDrawSpr();const m2=document.getElementById('recMsg');if(m2)m2.textContent='已儲存！到「復盤」分頁就看得到這筆紀錄。'}
       catch(err){b.disabled=false;msg.textContent='儲存失敗：'+((err&&(err.code||err.message))||'請再試一次')}}
@@ -1733,6 +1766,7 @@ function rDrawSpr(){
   let h=`<div class="panel"><h3>${s.name}${/陣$/.test(s.name)?'':'牌陣'}</h3>`;
   if(s.pos.length)h+=`<ol class="rpos">${s.pos.map((p,i)=>`<li><b>${i+1}</b><span>${p}${s.tips&&s.tips[i]?`<small class="tip">💡 馬蹄鐵：${rEsc(s.tips[i])}</small>`:''}</span></li>`).join('')}</ol>`;
   else h+='<p class="rnote">自己決定張數和每個牌位的名稱，適合自創牌陣或課程以外的牌陣。</p>';
+  if(s.use)h+=`<p class="rnote"><b>使用時機</b>：${rEsc(s.use)}</p>`;if(s.ex)h+=`<p class="rnote"><b>${s.id==='tree'?'可以留意的組合':'問題範例'}</b>：${rEsc(s.ex)}</p>`;
   h+=rForm(s);
   h+=`<div class="golink"><a class="btn" href="case.html#rec-${s.id}">📝 用這個牌陣到個案簿記錄</a><p class="hint">也可以到「塔羅個案簿」記錄：會幫你選好這個牌陣，再選記錄給我自己、快速占卜或客人（個案簿有客人資料、大眾占卜和復盤統計）。</p></div></div>`;
   document.getElementById('sprBody').innerHTML=h;
@@ -1769,7 +1803,7 @@ function rLocal(){
 })();
 
 function rRecCard(r){
-  const cs=[r.mind&&r.mind.c?`<li><b>心態牌</b>：${rEsc(r.mind.c)}${r.mind.r?'（逆位）':''}</li>`:''].concat((r.cards||[]).map((c,i)=>`<li><b>${i+1}. ${rEsc(c.p)}</b>：${c.c?rEsc(c.c)+(c.r?'（逆位）':''):'—'}${(c.aux||[]).length?`<br><span class="axl">輔助：${c.aux.map(a=>rEsc(a.c)+(a.r?'（逆位）':'')).join('、')}</span>`:''}</li>`)).concat((r.ins||[]).map(x=>`<li><b>插牌</b>：${rEsc(x.c)}${x.r?'（逆位）':''}${x.from&&x.from.length===2?`（${rEsc(x.from[0])}${x.fromR?(x.fromR[0]?' 逆':' 正'):''}、${rEsc(x.from[1])}${x.fromR?(x.fromR[1]?' 逆':' 正'):''}之間）`:''}</li>`)).join('');
+  const cs=[r.mind&&r.mind.c?`<li><b>心態牌</b>：${rEsc(r.mind.c)}${r.mind.r?'（逆位）':''}</li>`:''].concat((r.cards||[]).map((c,i)=>`<li><b>${i+1}. ${rEsc(c.p)}</b>：${c.c?rEsc(c.c)+(c.r?'（逆位）':''):'—'}${(c.aux||[]).length?`<br><span class="axl">${c.aux.map(a=>(a.m?'心態：':'輔助：')+rEsc(a.c)+(a.r?'（逆位）':'')).join('、')}</span>`:''}</li>`)).concat((r.ins||[]).map(x=>`<li><b>插牌</b>：${rEsc(x.c)}${x.r?'（逆位）':''}${x.from&&x.from.length===2?`（${rEsc(x.from[0])}${x.fromR?(x.fromR[0]?' 逆':' 正'):''}、${rEsc(x.from[1])}${x.fromR?(x.fromR[1]?' 逆':' 正'):''}之間）`:''}</li>`)).join('');
   const line=(k,v)=>v?`<p><b>${k}：</b>${rEsc(v)}</p>`:'';
   const imgs=[r.mind].concat(...(r.cards||[]).map(c=>[c].concat(c.aux||[])),r.ins||[]).filter(c=>c&&c.c).map(c=>`<div class="pc">${rFace(c)}</div>`).join('');
   return `<details class="card" data-id="${rEsc(r.id)}" style="--sc:var(--line)"><summary><span class="badge" title="自評">${r.score||'–'}</span><span class="ttl"><b>${rEsc(r.date)}｜${rEsc(r.spread)}</b><span class="kw">${rEsc([r.qtype,r.place,r.reaction].filter(Boolean).join('・'))}</span></span></summary><div class="cb">${line('問題',r.question)}<div class="rcimgs">${imgs}</div><ul>${cs}</ul>${line('我的解讀重點',r.reading)}${line('卡住的地方',r.stuck)}${line('下次可以改進',r.improve)}<label class="fl">後續回饋（準不準、客人後來怎麼說）<textarea rows="2" class="fb">${rEsc(r.feedback)}</textarea></label><div class="btns"><button type="button" class="btn ghost" data-act="fb">儲存回饋</button><button type="button" class="btn ghost" data-act="del">刪除這筆</button></div></div></details>`;
@@ -1812,6 +1846,7 @@ const DFP=['今日運勢','建議','心態'];
 const DK=[['diary','日記','對上今天哪件事？'],['fort','運勢','事情怎麼發展？對上哪件事？'],['adv','建議','我怎麼應對？這個建議有用嗎？'],['mind','心態','問這個問題的當下，我其實是用什麼心態面對今天？']];
 const DMATCH=['吻合','部分吻合','不吻合','還不確定'];
 var DSENSE={}; // 個人牌義：牌名 → [{date,pos,text}]
+let DTAB=null,DRESTOPEN=false;
 let DSTORE=null,DMAP={},DSEL=rToday(),DMONTH=rToday().slice(0,7),DDRAFT=null,DDIRTY=false,DMORN=null,DSAVING=false,DPEND=false,DTIMER=null;
 const dId=d=>'d'+String(d).replace(/-/g,'');
 const DTXT=['morning','act','me','feel','echo','hit','fread','freflect','fhit','ev_diary','ev_fort','ev_mind','ev_adv','story','ev1','ev2','ev3','sum1','sum2','sum3','sum4','rel1','rel2','rel3','rel4','best','forced','ask','gpt'];
@@ -1828,7 +1863,7 @@ function dNorm(e){
 }
 const dHas=e=>e&&((e.diary&&e.diary.c)||(e.fortune||[]).some(c=>c.c));
 const dCardOf=(d,k)=>k==='diary'?d.diary:(d.fortune.find(c=>c.p===({fort:'今日運勢',mind:'心態',adv:'建議'})[k])||null);
-function dLoad(date){if(DTIMER||DDIRTY)dFlush();DMORN=null;DSEL=date;DMONTH=date.slice(0,7);const e=DMAP[date];DDRAFT=e?dNorm(e):dBlank(date);DDIRTY=false;dDrawEd();dDrawRest()}
+function dLoad(date){if(DTIMER||DDIRTY)dFlush();DMORN=null;DTAB=null;DSEL=date;DMONTH=date.slice(0,7);const e=DMAP[date];DDRAFT=e?dNorm(e):dBlank(date);DDIRTY=false;dDrawEd();dDrawRest()}
 function dFUsed(){return new Set(((DDRAFT&&DDRAFT.fortune)||[]).map(x=>x.c).filter(Boolean))}
 function dFRefresh(){const u=dFUsed();document.querySelectorAll('[data-fi]').forEach(r=>{const c=DDRAFT.fortune[+r.dataset.fi],sel=r.querySelector('select.fcs');if(!c||!sel)return;sel.innerHTML=rCardOpts(c.c,u);sel.value=c.c||''})}
 function dRowF(i,c){
@@ -1839,21 +1874,26 @@ const dTa=(key,label,rows,ph)=>`<label class="fl">${label}<textarea rows="${rows
 const dCardTag=c=>c&&c.c?`${rEsc(c.c)}${c.r?'（逆）':''}`:'未選';
 const DINK={'今日運勢':'in_fort','建議':'in_adv','心態':'in_mind'};
 const dTrunc=t=>{t=String(t||'');return t.length>9?t.slice(0,9)+'…':t};
+function dEvList(d){return typeof d.evs==='string'?d.evs.split('\n'):[d.ev1||'',d.ev2||'',d.ev3||'']}
+function dEvText(d){if(typeof d.evs==='string')return d.evs;return [d.ev1||'',d.ev2||'',d.ev3||''].join('\n').replace(/\n+$/,'')}
 function dEvChips(k){
-  const d=DDRAFT,evs=[1,2,3].filter(i=>d['ev'+i]);
-  if(!evs.length)return '<span class="hint">先在上面寫今天發生的事，這裡就能直接點</span>';
-  return evs.map(i=>`<button type="button" class="mchip ev" data-ek="${k}" data-v="${i}" aria-pressed="${d['e_'+k]===String(i)}">第${i}件・${rEsc(dTrunc(d['ev'+i]))}</button>`).join('')+`<button type="button" class="mchip ev" data-ek="${k}" data-v="none" aria-pressed="${d['e_'+k]==='none'}">都沒有</button>`;
+  const d=DDRAFT,L=dEvList(d),evs=L.map((x,i)=>[i+1,String(x).trim()]).filter(([,x])=>x);
+  if(!evs.length)return '<span class="hint">先在上面寫今天發生的事（換行算一件），這裡就能直接點</span>';
+  return evs.map(([i,x])=>`<button type="button" class="mchip ev" data-ek="${k}" data-v="${i}" aria-pressed="${d['e_'+k]===String(i)}">${rEsc(dTrunc(x))}</button>`).join('')+`<button type="button" class="mchip ev" data-ek="${k}" data-v="none" aria-pressed="${d['e_'+k]==='none'}">都沒有</button>`;
 }
+function dDefTab(d){const saved=!!DMAP[d.date],full=d.diary.c&&d.fortune.slice(0,DFP.length).every(c=>c.c);
+  const eve=dEvList(d).some(x=>String(x).trim())||d.gpt||DK.some(([k])=>d['m_'+k]||d['e_'+k]);
+  if(!saved||!full)return 'am';if(eve||d.date<rToday()||new Date().getHours()>=15)return 'pm';return 'am'}
 function dMorningSummary(d){
   const rows=[['日記牌',d.diary,'in_diary']].concat(d.fortune.map(c=>[c.p,c,DINK[c.p]]));
-  return `<div class="panel"><div class="dmh2"><h3>🌙☀️ 早上的牌</h3><button type="button" class="btn ghost" id="dmopen">編輯早上</button></div>
+  return `<div class="panel"><div class="dmh2"><h3>🌙☀️ 早上的牌</h3><button type="button" class="btn ghost" data-dtab="am">編輯早上</button></div>
   <div class="pvrow">${rows.map(([p,c])=>`<div><div class="pc">${c&&c.c?rFace(c):'?'}</div><span class="pvl">${rEsc(p)}</span></div>`).join('')}</div>
   ${rows.some(([,,k])=>k&&d[k])?`<ul class="dmeans">${rows.filter(([,,k])=>k&&d[k]).map(([p,c,k])=>`<li><b>${rEsc(p)}・${dCardTag(c)}</b>：${rEsc(d[k])}</li>`).join('')}</ul>`:''}</div>`;
 }
+function dSaveBar(){return `<div class="panel dsavebar"><div class="btns"><button type="button" class="btn" id="dsave">💾 儲存</button>${DMAP[DDRAFT.date]?'<button type="button" class="btn ghost" id="ddel">刪除這天</button>':''}</div><p class="msg dsv" role="status"></p></div>`}
 function dEditor(){
   const d=DDRAFT,saved=!!DMAP[d.date];
-  const full=d.diary.c&&d.fortune.slice(0,DFP.length).every(c=>c.c);
-  const collapsed=DMORN===false||(DMORN===null&&saved&&full);
+  if(!DTAB)DTAB=dDefTab(d);
   const old=DQ.filter(([k])=>d[k]).map(([k,q])=>dTa(k,q)).join('')+(d.morning?dTa('morning','第一眼的直覺（舊欄位）'):'')+(d.fread?dTa('fread','今天的運勢、建議、心態在說什麼？（舊欄位）'):'')+(d.freflect?dTa('freflect','今天實際過得怎樣？（舊欄位）'):'')+(d.story?dTa('story','整合成今天的故事（舊欄位）'):'')
     +(d.sum1||d.sum2||d.sum3||d.sum4?dIn('sum1','今天發生了（舊欄位）')+dIn('sum2','事情的發展是（舊欄位）')+dIn('sum3','當時我的感受是（舊欄位）')+dIn('sum4','我可以採取的方向是（舊欄位）'):'')
     +(d.hit||d.fhit?`<p class="hint">舊的分數：日記牌呼應 ${rEsc(d.hit||'－')}／5、運勢準確度 ${rEsc(d.fhit||'－')}／5</p>`:'');
@@ -1861,7 +1901,14 @@ function dEditor(){
     <div class="mchips evc" data-evk="${k}" role="group" aria-label="${name}對上哪件事">${dEvChips(k)}</div>
     <div class="mchips" role="group" aria-label="${name}吻合程度">${DMATCH.map(m=>`<button type="button" class="mchip" data-m="${k}" data-v="${m}" aria-pressed="${d['m_'+k]===m}">${m}</button>`).join('')}</div>
     <input class="dnote" data-d="ev_${k}" value="${rEsc(d['ev_'+k])}" placeholder="補充（選填）" aria-label="${name}補充"></div></div>`};
-  const morning=collapsed?dMorningSummary(d):`<div class="panel"><div class="dmh2"><h3>🌙 早上・日記牌</h3>${saved&&full?'<button type="button" class="btn ghost" id="dmclose">收合早上</button>':''}</div><p class="hint">一早睡醒、還沒做任何事，直接翻的那一張：今天的主題。</p>
+  const head=`<div class="panel"><h3>${d.date===rToday()?'今天':rEsc(d.date.replace(/-/g,'/'))}</h3>
+  <label class="fl">日期<input type="date" id="ddate" value="${rEsc(d.date)}"></label>
+  <p class="hint">選好牌就會自動儲存，之後寫的每一格也會自動存；右下角會顯示儲存狀態，也可以隨時按「💾 儲存」。</p>
+  ${dBakOffer(d)}
+  ${saved&&d.gpt&&DTAB==='am'?`<details class="dgsum"><summary>💬 這天的統整</summary><div class="gptv">${rEsc(d.gpt)}</div></details>`:''}
+  <div class="dtabs" role="tablist"><button type="button" role="tab" data-dtab="am" aria-selected="${DTAB==='am'}">🌙 早上</button><button type="button" role="tab" data-dtab="pm" aria-selected="${DTAB==='pm'}">🌜 晚上</button></div>
+  </div>`;
+  if(DTAB==='am')return head+`<div class="panel"><h3>🌙 早上・日記牌</h3><p class="hint">一早睡醒、還沒做任何事，直接翻的那一張：今天的主題。</p>
   <div class="dtop"><div class="pc big" id="dface">${d.diary.c?rFace(d.diary):'?'}</div>
    <div class="dpick"><label class="fl">抽到的牌<select id="dcard">${rCardOpts(d.diary.c)}</select></label>
    <label class="rv"><input type="checkbox" id="drev"${d.diary.r?' checked':''}>逆位</label>
@@ -1874,26 +1921,20 @@ function dEditor(){
   <div class="pv"><div class="pvrow" id="fpv">${dFpv()}</div></div>
   <p class="dgrp">我認為這張牌的意思（早上先寫，幾個關鍵字也可以）</p>
   ${dIn('in_fort','運勢')}${dIn('in_adv','建議')}${dIn('in_mind','心態')}
-  <div class="btns"><button type="button" class="btn ghost" id="dquick">✓ 今天只記牌，先儲存</button></div><p class="msg" id="dqmsg" role="status"></p>
-  </div>`;
-  return `<div class="panel"><h3>${d.date===rToday()?'今天':rEsc(d.date)}</h3>
-  <label class="fl">日期<input type="date" id="ddate" value="${rEsc(d.date)}"></label>
-  <p class="hint">選好牌就會自動儲存，之後寫的每一格也會自動存。有抽牌就算記錄，其他都是選填。</p>
-  <p class="msg dsv" role="status"></p>
-  ${dBakOffer(d)}
   </div>
-  ${morning}
-  <div class="panel"><h3>🌜 晚上・復盤</h3>
-  <p class="dgrp">今天實際發生的事（一行一件）</p>
-  ${dIn('ev1','1.')}${dIn('ev2','2.')}${dIn('ev3','3.')}
+  <div class="panel dsavebar"><div class="btns"><button type="button" class="btn" id="dsave">💾 儲存</button><button type="button" class="btn ghost" data-dtab="pm">晚上復盤 →</button>${saved?'<button type="button" class="btn ghost" id="ddel">刪除這天</button>':''}</div><p class="msg dsv" role="status"></p></div>`;
+  return head+dMorningSummary(d)+`<div class="panel"><h3>🌜 晚上・復盤</h3>
+  <label class="fl dgrp2">今天實際發生的事<textarea rows="4" data-d="evs" placeholder="想到什麼就寫，換行就算一件事。&#10;例：對圖的廠商態度很差，我很生氣&#10;朋友來跟我說謝謝">${rEsc(dEvText(d))}</textarea></label>
   <p class="dgrp">今天的主題・日記牌</p>
   ${cardQ(DK[0])}
   <p class="dgrp">今天的運勢・運勢／建議／心態</p>
   ${cardQ(DK[1])}${cardQ(DK[2])}${cardQ(DK[3])}
-  <p class="dgrp">牌與牌之間的關聯</p>
+  <p class="dgrp">牌與牌之間的關聯（順便聯想）</p>
   ${dIn('rel1','日記牌 × 今天的運勢','同一件事？互補？對照？')}${dIn('rel2','建議 × 心態','建議怎麼回應我當下的心態？')}${dIn('rel3','其他值得注意的組合','例如重複的花色、數字、圖像')}${dIn('rel4','哪些牌其實對應不同的事？')}
-  <label class="fl">💬 GPT 的統整（討論完把【今日統整】貼回來）<textarea rows="6" data-d="gpt" placeholder="【今日統整】…">${rEsc(d.gpt)}</textarea></label>
-  <details class="dold"${['b_','u_','pm_'].some(p=>DK.some(([k])=>d[p+k]))||d.best||d.forced||d.ask?' open':''}><summary>深入練習（有空再寫）</summary>
+  </div>
+  <div class="panel"><div class="btns"><button type="button" class="btn" id="dmd">📋 複製去問 GPT</button></div><p class="msg" id="dmsg" role="status"></p><div id="dmdbox"></div>
+  <label class="fl" style="margin-top:8px">💬 GPT 的統整（討論完把【今日統整】貼回來）<textarea rows="7" data-d="gpt" placeholder="【今日統整】…">${rEsc(d.gpt)}</textarea></label>
+  <details class="dold"${['b_','u_','pm_'].some(p=>DK.some(([k])=>d[p+k]))||d.best||d.forced||d.ask?' open':''}><summary>深入練習＋我的牌感收穫（有空再寫）</summary>
    ${DK.map(([k,name])=>`<p class="dgrp">${name}・${dCardTag(dCardOf(d,k))}</p>${dIn('b_'+k,'圖像或牌義依據')}${dIn('u_'+k,'不吻合／尚未確認的地方')}`).join('')}
    <p class="dgrp">我的牌感收穫</p>
    <p class="hint">「個人牌義」會自動收進「牌義」分頁那張牌底下。</p>
@@ -1901,8 +1942,7 @@ function dEditor(){
    ${dIn('best','哪個聯想最有圖像依據？')}${dIn('forced','哪個聯想可能是硬套？')}${dIn('ask','還想釐清的問題')}
   </details>
   ${old?`<details class="dold"><summary>之前版本寫的內容</summary>${old}</details>`:''}
-  </div>
-  <div class="panel"><div class="btns"><button type="button" class="btn" id="dmd">📋 複製去問 GPT</button>${saved?'<button type="button" class="btn ghost" id="ddel">刪除這天</button>':''}</div><p class="msg dsv" role="status"></p><p class="msg" id="dmsg" role="status"></p><div id="dmdbox"></div></div>`;
+  </div>`+dSaveBar();
 }
 function dFpv(){return DDRAFT.fortune.map((c,i)=>`<div><div class="pc">${c.c?rFace(c):i+1}</div><span class="pvl">${rEsc(c.p)}</span></div>`).join('')}
 function dMd(){
@@ -1912,11 +1952,11 @@ function dMd(){
   order.forEach(([k,n])=>L.push(`- ${n}：${ct(dCardOf(d,k))}`));
   d.fortune.slice(DFP.length).filter(c=>c.c).forEach(c=>L.push(`- ${c.p}：${ct(c)}`));
   L.push('','（日記牌是一早睡醒直接翻的；運勢、建議、心態是針對今天一整天，心態指我問這個問題的當下，用什麼心態面對今天。）');
-  const evs=[d.ev1,d.ev2,d.ev3].filter(Boolean);
+  const evs=dEvList(d).map(x=>String(x).trim()).filter(Boolean);
   if(evs.length){L.push('','## 今天實際發生的事');evs.forEach((x,i)=>L.push(`${i+1}. ${x}`))}
   L.push('','## 單張牌');
   order.forEach(([k,n])=>{const c=dCardOf(d,k);if(!c||!c.c)return;
-    const ek=d['e_'+k],et=ek==='none'?'都沒有對上':(ek&&d['ev'+ek]?d['ev'+ek]:''),en=d['ev_'+k];
+    const ek=d['e_'+k],evl=dEvList(d),et=ek==='none'?'都沒有對上':(ek&&evl[+ek-1]?String(evl[+ek-1]).trim():''),en=d['ev_'+k];
     L.push('',`### ${n}：${ct(c)}`,`- 我認為的意思：${d['in_'+k]||''}`,`- 今天發生了什麼：${et}${en?(et?'（'+en+'）':en):''}`,`- 是否符合：${d['m_'+k]||''}`);
     if(d['b_'+k])L.push(`- 圖像或牌義依據：${d['b_'+k]}`);
     if(d['u_'+k])L.push(`- 不吻合／尚未確認：${d['u_'+k]}`);
@@ -1943,27 +1983,22 @@ function dCal(){
 }
 function dStats(){
   const es=Object.values(DMAP).filter(e=>dHas(e)&&String(e.date).startsWith(DMONTH));
-  if(!es.length)return '<div class="panel"><p class="rnote">這個月還沒有日記。</p></div>';
-  const top=m=>[...m.entries()].sort((a,b)=>b[1]-a[1]);
-  const add=(m,k)=>m.set(k,(m.get(k)||0)+1);
-  const grp=()=>({suit:{maj:0,wand:0,cup:0,sword:0,pent:0},n:0,rev:0});
-  const G={theme:grp(),fort:grp()},byPos=new Map([['日記牌',new Map()]]);
-  const put=(g,c)=>{g.n++;const k=NAMEIDX[c.c];if(k!=null)g.suit[CARDS[k].suit]++;if(c.r)g.rev++};
-  es.forEach(e=>{if(e.diary&&e.diary.c){put(G.theme,e.diary);add(byPos.get('日記牌'),e.diary.c)}
-    (e.fortune||[]).forEach(c=>{if(!c.c)return;put(G.fort,c);if(!byPos.has(c.p))byPos.set(c.p,new Map());add(byPos.get(c.p),c.c)})});
-  const mt=ks=>{let y=0,n=0;es.forEach(e=>ks.forEach(k=>{const v=e['m_'+k];if(v){n++;if(v==='吻合')y++}}));return n?`${y}<small>／${n}</small>`:'—'};
-  const gl=(name,g)=>g.n?`<p class="rnote"><b>${name}</b>（${g.n} 張）：大牌 ${g.suit.maj}、權杖 ${g.suit.wand}、聖杯 ${g.suit.cup}、寶劍 ${g.suit.sword}、錢幣 ${g.suit.pent}；逆位 ${g.rev}</p>`:'';
-  const match=DK.map(([k,name])=>{const v=es.map(e=>e['m_'+k]).filter(Boolean);if(!v.length)return '';const c=m=>v.filter(x=>x===m).length;return `<li><b>${name}</b>：吻合 ${c('吻合')}、部分 ${c('部分吻合')}、不吻合 ${c('不吻合')}、還不確定 ${c('還不確定')}</li>`}).join('');
-  const line=(name,m)=>{const t=top(m).filter(([,n])=>n>1).slice(0,4);return t.length?`<li><b>${rEsc(name)}</b>：${t.map(([k,n])=>rEsc(k)+' × '+n).join('、')}</li>`:''};
-  const rep=[...byPos.entries()].map(([p,m])=>line(p,m)).join('');
-  const written=es.filter(e=>e.ev1||e.sum1||e.gpt||DK.some(([k])=>e['ev_'+k]||e['e_'+k]||e['m_'+k])).length;
-  return `<div class="panel"><h3>這個月的牌</h3><div class="kpi"><div><b>抽牌天數</b><span>${es.length}</span></div><div><b>有寫復盤</b><span>${written}</span></div><div><b>日記牌吻合</b><span>${mt(['diary'])}</span></div><div><b>運勢三張吻合</b><span>${mt(['fort','adv','mind'])}</span></div></div>
-  ${gl('今天的主題・日記牌',G.theme)}${gl('今天的運勢・運勢／建議／心態',G.fort)}
-  ${match?`<p class="rnote">各牌位吻合程度：</p><ul class="rnote">${match}</ul>`:''}
-  ${rep?`<p class="rnote">這個月重複出現的牌：</p><ul class="rnote">${rep}</ul>`:''}</div>`;
+  if(!es.length)return '<div class="panel"><h3>📊 這個月的牌</h3><p class="rnote">這個月的統計會出現在這裡，寫完第一天日記就會開始累積。</p></div>';
+  const S={maj:0,wand:0,cup:0,sword:0,pent:0},cnt=new Map();let n=0,rev=0;
+  es.forEach(e=>[e.diary].concat(e.fortune||[]).forEach(c=>{if(!c||!c.c)return;n++;if(c.r)rev++;const k=NAMEIDX[c.c];if(k!=null)S[CARDS[k].suit]++;cnt.set(c.c,(cnt.get(c.c)||0)+1)}));
+  const L=[['maj','大牌','var(--s-maj,#b0833f)'],['wand','權杖（火）','var(--s-wand,#d4692a)'],['cup','聖杯（水）','var(--s-cup,#2f7fc1)'],['sword','寶劍（風）','var(--s-sword,#5a5f86)'],['pent','錢幣（土）','var(--s-pent,#2f8a55)']];
+  const rep=[...cnt.entries()].filter(([,v])=>v>1).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  return `<div class="panel"><h3>📊 這個月的牌</h3><div class="kpi dkpi"><div><b>抽牌天數</b><span>${es.length}</span></div><div><b>總張數</b><span>${n}</span></div><div><b>逆位</b><span>${rev}</span></div></div>
+  <div class="dbar" role="img" aria-label="這個月各元素比例">${L.map(([k,,c])=>S[k]?`<i style="width:${S[k]/n*100}%;background:${c}"></i>`:'').join('')}</div>
+  <div class="dleg">${L.map(([k,l,c])=>`<span><i style="background:${c}"></i>${l} <b>${S[k]}</b></span>`).join('')}</div>
+  ${rep.length?`<p class="rnote" style="margin-top:10px"><b>這個月重複出現的牌</b></p><div class="drep">${rep.map(([c,v])=>`<span><span class="pc mini">${rFace({c})}</span>${rEsc(c)} ×${v}</span>`).join('')}</div>`:''}</div>`;
 }
+function dDrawRest(){const el=document.getElementById('dRest');if(!el)return;const wide=document.documentElement.classList.contains('wide');
+  const n=Object.values(DMAP).filter(e=>dHas(e)&&String(e.date).startsWith(DMONTH)).length;
+  el.innerHTML=`<details class="drestd"${wide||DRESTOPEN?' open':''}><summary>📅 ${+DMONTH.slice(5)} 月月曆・本月統計（${n} 天）</summary><div class="drestb">${dCal()}${dStats()}</div></details>`;
+  const det=el.querySelector('details');det.addEventListener('toggle',()=>{if(!document.documentElement.classList.contains('wide'))DRESTOPEN=det.open})}
+
 function dDrawEd(){const el=document.getElementById('dEd');if(el)el.innerHTML=dEditor()}
-function dDrawRest(){const el=document.getElementById('dRest');if(el)el.innerHTML=dCal()+dStats()}
 function dRandIdx(n,exclude){const pool=CARDS.map((_,i)=>i).filter(i=>!exclude.has(CARDS[i].name));n=Math.min(n,pool.length);const a=new Uint32Array(n*2);crypto.getRandomValues(a);
   const out=[];for(let i=0;i<n;i++){const j=i+a[i]%(pool.length-i);[pool[i],pool[j]]=[pool[j],pool[i]];out.push({c:CARDS[pool[i]].name,r:a[n+i]%2===1})}return out}
 // 個人牌義收進「牌義」分頁
@@ -1975,7 +2010,7 @@ function dSenseHTML(c){
   const a=(typeof DSENSE==='object'&&DSENSE)?DSENSE[c.name]:null;if(!a||!a.length)return '';
   return `<div class="sec dsense"><h4>我的日記牌感</h4><ul>${a.map(x=>`<li><b>${rEsc(x.date)}</b>（${rEsc(x.pos)}${x.r?'・逆位':''}）${rEsc(x.text)}</li>`).join('')}</ul></div>`;
 }
-function dStatus(t){document.querySelectorAll('#dEd .dsv').forEach(m=>m.textContent=t)}
+function dStatus(t){document.querySelectorAll('#dEd .dsv').forEach(m=>m.textContent=t);const c=document.getElementById('dChip');if(c){c.textContent=t==='…'?'儲存中…':t;c.hidden=!t;c.classList.toggle('bad',/失敗/.test(t));c.classList.toggle('ok',/已/.test(t)&&!/失敗/.test(t))}}
 const DBAK='tarot-diary-bak';
 function dBakGet(date){try{const b=JSON.parse(localStorage.getItem(DBAK)||'null');return b&&b.date===date?b:null}catch(e){return null}}
 function dBakSet(){try{localStorage.setItem(DBAK,JSON.stringify(DDRAFT))}catch(e){}}
@@ -1997,7 +2032,7 @@ async function dFlush(){
   let ok=false;
   try{await DSTORE.save(doc);ok=true;DMAP[doc.date]=dNorm(doc);dBuildSense();if(!DTIMER&&!DPEND){DDIRTY=false;dBakDel(doc.date)}dDrawRest();
     if(!was&&DSEL===doc.date){const b=document.querySelector('#dEd #dmd');if(b&&!document.getElementById('ddel'))b.insertAdjacentHTML('afterend','<button type="button" class="btn ghost" id="ddel">刪除這天</button>')}
-    dStatus('已自動儲存 '+new Date().toTimeString().slice(0,5))}
+    dStatus('✓ 已自動儲存 '+new Date().toTimeString().slice(0,5))}
   catch(err){dStatus('自動儲存失敗（'+((err&&(err.code||err.message))||'請稍後再試')+'），稍後會再試一次');DDIRTY=true;DTIMER=setTimeout(dFlush,5000)}
   DSAVING=false;if(DPEND){DPEND=false;dFlush()}
   return ok
@@ -2013,11 +2048,16 @@ async function dFlush(){
     else if(fi&&t.classList.contains('frc')){DDRAFT.fortune[+fi.dataset.fi].r=t.checked;syncF()}
     else if(t.dataset.d){DDRAFT[t.dataset.d]=t.value;dQueue()}});
   box.addEventListener('input',e=>{const t=e.target,fi=t.closest('[data-fi]');
-    if(t.dataset.d){DDRAFT[t.dataset.d]=t.value;dQueue();if(/^ev[123]$/.test(t.dataset.d))document.querySelectorAll('#dEd .evc').forEach(c=>c.innerHTML=dEvChips(c.dataset.evk))}
+    if(t.dataset.d){DDRAFT[t.dataset.d]=t.value;dQueue();if(/^ev(s|[123])$/.test(t.dataset.d))document.querySelectorAll('#dEd .evc').forEach(c=>c.innerHTML=dEvChips(c.dataset.evk))}
     else if(fi&&t.classList.contains('flb')){DDRAFT.fortune[+fi.dataset.fi].p=t.value;dQueue();document.getElementById('fpv').innerHTML=dFpv()}});
   box.addEventListener('click',async e=>{const t=e.target.closest('button');if(!t)return;
     if(t.dataset.m){const k=t.dataset.m;DDRAFT['m_'+k]=DDRAFT['m_'+k]===t.dataset.v?'':t.dataset.v;dQueue();t.parentNode.querySelectorAll('.mchip').forEach(b=>b.setAttribute('aria-pressed',DDRAFT['m_'+k]===b.dataset.v))}
     else if(t.dataset.ek){const k=t.dataset.ek;DDRAFT['e_'+k]=DDRAFT['e_'+k]===t.dataset.v?'':t.dataset.v;dQueue();t.parentNode.querySelectorAll('.mchip').forEach(b=>b.setAttribute('aria-pressed',DDRAFT['e_'+k]===b.dataset.v))}
+    else if(t.dataset.dtab){DTAB=t.dataset.dtab;dDrawEd();const ed=document.getElementById('dEd');if(ed)ed.scrollIntoView({block:'start'})}
+    else if(t.id==='dsave'){
+      if(!dHas(DDRAFT)){dStatus('先選今天抽到的牌再儲存喔。');return}
+      if(!DSTORE){dStatus('日記功能還在準備中，請等幾秒再按一次。');return}
+      t.disabled=true;dStatus('儲存中…');const ok=await dFlush();t.disabled=false;if(ok)dStatus('✓ 已儲存 '+new Date().toTimeString().slice(0,5))}
     else if(t.id==='dquick'){const m=document.getElementById('dqmsg');
       if(!dHas(DDRAFT)){if(m)m.textContent='先選今天抽到的牌再儲存喔。';return}
       if(!DSTORE){if(m)m.textContent='日記功能還在準備中，請等幾秒再按一次。';return}
@@ -2039,7 +2079,7 @@ async function dFlush(){
       if(!ok){mb.innerHTML=`<textarea class="dmdta" rows="12" readonly>${rEsc(txt)}</textarea>`;const ta=mb.querySelector('textarea');ta.focus();ta.select()}}
     else if(t.id==='ddel'){if(t.dataset.armed!=='1'){t.dataset.armed='1';t.textContent='確定刪除？再按一次';return}
       clearTimeout(DTIMER);DTIMER=null;DDIRTY=false;t.disabled=true;try{await DSTORE.del(DDRAFT.date);delete DMAP[DDRAFT.date];dBuildSense();DDRAFT=dBlank(DSEL);DMORN=null;dDrawEd();dDrawRest()}catch(err){t.disabled=false;t.textContent='刪除失敗，再試一次'}}
-    else if(t.dataset.day){dLoad(t.dataset.day)}
+    else if(t.dataset.day){dLoad(t.dataset.day);if(!document.documentElement.classList.contains('wide')){const ed=document.getElementById('dEd');if(ed)ed.scrollIntoView({block:'start',behavior:'smooth'})}}
     else if(t.dataset.mon){const [y,m]=DMONTH.split('-').map(Number),d=new Date(y,m-1+(+t.dataset.mon),1);DMONTH=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');dDrawRest()}
   });
   dLoad(rToday());
